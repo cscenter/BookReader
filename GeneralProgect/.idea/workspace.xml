@@ -4,26 +4,69 @@
     <list default="true" readonly="true" id="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" name="Default" comment="" />
     <ignored path="GeneralProgect.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Model.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383305425737" ignored="false" />
+    <file path="/Model.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383986374576" ignored="false" />
     <file path="/Reader.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383305408090" ignored="false" />
-    <file path="/Viewer.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383296603578" ignored="false" />
-    <file path="/SoundModel.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383305421477" ignored="false" />
+<<<<<<< HEAD
+    <file path="/Viewer.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383985453743" ignored="false" />
+    <file path="/SoundModel.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383991913818" ignored="false" />
     <file path="/SoundReader.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383305401245" ignored="false" />
     <file path="/TextRepresentation.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1382789979910" ignored="false" />
     <file path="/TextReader.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383305412411" ignored="false" />
+    <file path="/SoundLine.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383991830439" ignored="false" />
+    <file path="/SoundViewer.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383993789509" ignored="false" />
+=======
+    <file path="/Viewer.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383986432402" ignored="false" />
+    <file path="/SoundModel.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383930290201" ignored="false" />
+    <file path="/SoundReader.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383305401245" ignored="false" />
+    <file path="/TextRepresentation.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1382789979910" ignored="false" />
+    <file path="/TextReader.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383987343771" ignored="false" />
     <file path="/SoundLine.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383304167788" ignored="false" />
-    <file path="/SoundViewer.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383304276987" ignored="false" />
+    <file path="/SoundViewer.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383930245918" ignored="false" />
+>>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
     <file path="/fragment.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1382790278249" ignored="false" />
     <file path="/newTextPanel.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1382790551422" ignored="false" />
-    <file path="/TextViewer.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383236346262" ignored="false" />
+    <file path="/TextViewer.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383941717198" ignored="false" />
     <file path="/MainFrame.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1382791254787" ignored="false" />
-    <file path="/Main.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383240056509" ignored="false" />
+<<<<<<< HEAD
+    <file path="/Main.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383992144410" ignored="false" />
+=======
+    <file path="/Main.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383945049608" ignored="false" />
+>>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
     <file path="/Frame.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383236296858" ignored="false" />
-    <file path="$PROJECT_DIR$/.idea/workspace.xml" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383253973898" ignored="false" />
     <file path="$USER_HOME$/IdeaProjects/Line/src/LinePanel.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383293068080" ignored="false" />
     <file path="/LinePanel.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383292899187" ignored="false" />
     <file path="/SoundPlay.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383296795572" ignored="false" />
-    <file path="/TextModel.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383305417071" ignored="false" />
+    <file path="/TextModel.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383929121349" ignored="false" />
+    <file path="/AbstractViewer.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383940551858" ignored="false" />
+<<<<<<< HEAD
+    <file path="/AbstractModel.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383987849684" ignored="false" />
+    <file path="/Dummy.txt" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383944587305" ignored="false" />
+    <file path="$USER_HOME$/IdeaProjects/Practice/GeneralProgect/src/viewer/AbstractViewer.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383943852867" ignored="false" />
+    <file path="$USER_HOME$/IdeaProjects/Practice/GeneralProgect/src/Main.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383945244980" ignored="false" />
+    <file path="$USER_HOME$/IdeaProjects/Practice/GeneralProgect/src/viewer/TextViewer.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383943852867" ignored="false" />
+    <file path="$USER_HOME$/IdeaProjects/Practice/GeneralProgect/src/viewer/SoundViewer.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383943853253" ignored="false" />
+    <file path="$USER_HOME$/IdeaProjects/Practice/GeneralProgect/src/reader/SoundReader.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383943853253" ignored="false" />
+    <file path="$USER_HOME$/IdeaProjects/Practice/GeneralProgect/src/viewer/Viewer.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383943853253" ignored="false" />
+    <file path="$PROJECT_DIR$/.idea/workspace.xml" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383996631081" ignored="false" />
+    <file path="/SoundFindPauses.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383996450892" ignored="false" />
+    <file path="$USER_HOME$/IdeaProjects/TCHM_PrimeNumbers/Numbers.txt" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383990961806" ignored="false" />
+=======
+    <file path="/AbstractModel.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383939240624" ignored="false" />
+    <file path="/Dummy.txt" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383944587305" ignored="false" />
+    <file path="$USER_HOME$/IdeaProjects/Practice/GeneralProgect/src/viewer/AbstractViewer.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383985718383" ignored="false" />
+    <file path="$USER_HOME$/IdeaProjects/Practice/GeneralProgect/src/Main.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383985613291" ignored="false" />
+    <file path="$USER_HOME$/IdeaProjects/Practice/GeneralProgect/src/viewer/TextViewer.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383986073552" ignored="false" />
+    <file path="$USER_HOME$/IdeaProjects/Practice/GeneralProgect/src/viewer/SoundViewer.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383985936777" ignored="false" />
+    <file path="$USER_HOME$/IdeaProjects/Practice/GeneralProgect/src/reader/SoundReader.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383943853253" ignored="false" />
+    <file path="$USER_HOME$/IdeaProjects/Practice/GeneralProgect/src/viewer/Viewer.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383986435768" ignored="false" />
+    <file path="$USER_HOME$/IdeaProjects/Practice/GeneralProgect/src/reader/TextReader.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383985637911" ignored="false" />
+    <file path="$USER_HOME$/IdeaProjects/Practice/GeneralProgect/src/viewer/SoundLine.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383985637911" ignored="false" />
+    <file path="$USER_HOME$/IdeaProjects/Practice/GeneralProgect/src/model/SoundModel.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383986340014" ignored="false" />
+    <file path="$USER_HOME$/IdeaProjects/Practice/GeneralProgect/src/reader/Reader.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383985637911" ignored="false" />
+    <file path="$USER_HOME$/IdeaProjects/Practice/GeneralProgect/src/model/TextModel.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383986360589" ignored="false" />
+    <file path="$USER_HOME$/IdeaProjects/Practice/GeneralProgect/src/model/Model.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383986459483" ignored="false" />
+    <file path="$USER_HOME$/IdeaProjects/Practice/GeneralProgect/src/model/AbstractModel.java" changelist="9b75d38b-250b-4d0a-ba47-97c4cc8356f8" time="1383986270292" ignored="false" />
+>>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +81,6 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -75,6 +117,7 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -84,19 +127,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Main.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="38" selection-start="171" selection-end="171" vertical-scroll-proportion="0.2895377">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SoundLine.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/viewer/SoundLine.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="90" column="0" selection-start="2235" selection-end="2235" vertical-scroll-proportion="0.0">
+<<<<<<< HEAD
+            <state line="24" column="40" selection-start="628" selection-end="628" vertical-scroll-proportion="0.0">
+=======
+            <state line="23" column="20" selection-start="550" selection-end="550" vertical-scroll-proportion="0.0">
+>>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
               <folding />
             </state>
           </provider>
@@ -105,25 +143,74 @@
       <file leaf-file-name="TextReader.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/reader/TextReader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="0" selection-start="872" selection-end="872" vertical-scroll-proportion="0.0">
+            <state line="64" column="55" selection-start="2106" selection-end="2106" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
+      <file leaf-file-name="SoundFindPauses.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/viewer/SoundFindPauses.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="42" column="9" selection-start="1263" selection-end="1263" vertical-scroll-proportion="0.52">
+=======
       <file leaf-file-name="TextModel.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/TextModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="0" selection-start="281" selection-end="281" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="564" vertical-scroll-proportion="0.0">
+>>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
+      <file leaf-file-name="AbstractModel.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/model/AbstractModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="52" column="16" selection-start="1099" selection-end="1099" vertical-scroll-proportion="0.0">
+              <folding />
+=======
+      <file leaf-file-name="TextReader.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/reader/TextReader.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="60" column="40" selection-start="2042" selection-end="2042" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#1061#1069#0" expanded="true" />
+              </folding>
+>>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
+      <file leaf-file-name="Model.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/model/Model.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="18" column="54" selection-start="487" selection-end="487" vertical-scroll-proportion="0.0">
+=======
+      <file leaf-file-name="newTextReader.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/reader/newTextReader.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="26" selection-start="194" selection-end="194" vertical-scroll-proportion="0.44347826">
+>>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
       <file leaf-file-name="SoundModel.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/SoundModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="0" selection-start="602" selection-end="602" vertical-scroll-proportion="0.0">
+            <state line="54" column="0" selection-start="963" selection-end="963" vertical-scroll-proportion="0.0">
+=======
+      <file leaf-file-name="AbstractModel.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/model/AbstractModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="2067" vertical-scroll-proportion="0.0">
+>>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
               <folding />
             </state>
           </provider>
@@ -132,8 +219,29 @@
       <file leaf-file-name="Model.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/Model.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="0" selection-start="704" selection-end="704" vertical-scroll-proportion="0.0">
+<<<<<<< HEAD
+            <state line="57" column="77" selection-start="2058" selection-end="2058" vertical-scroll-proportion="0.0">
+=======
+            <state line="34" column="52" selection-start="706" selection-end="706" vertical-scroll-proportion="0.0">
+>>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SoundModel.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/model/SoundModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state line="91" column="25" selection-start="2740" selection-end="2740" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="class#prevActionListener#0;class#SoundViewer#0" expanded="false" />
+                <element signature="class#playActionListener#0;class#SoundViewer#0" expanded="false" />
+              </folding>
+=======
+            <state line="58" column="52" selection-start="0" selection-end="938" vertical-scroll-proportion="0.0">
+              <folding />
+>>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
             </state>
           </provider>
         </entry>
@@ -141,34 +249,27 @@
       <file leaf-file-name="Viewer.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/viewer/Viewer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="0" selection-start="872" selection-end="872" vertical-scroll-proportion="0.0">
+<<<<<<< HEAD
+            <state line="43" column="24" selection-start="1513" selection-end="1513" vertical-scroll-proportion="0.0">
+=======
+            <state line="0" column="0" selection-start="0" selection-end="2681" vertical-scroll-proportion="0.0">
+>>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SoundViewer.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/viewer/SoundViewer.java">
+<<<<<<< HEAD
+      <file leaf-file-name="SoundLine.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/viewer/SoundLine.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="67" column="0" selection-start="2012" selection-end="2012" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
+            <state line="57" column="0" selection-start="1258" selection-end="1258" vertical-scroll-proportion="0.0">
+=======
       <file leaf-file-name="TextViewer.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/viewer/TextViewer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="66" column="0" selection-start="2231" selection-end="2231" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Reader.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/reader/Reader.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="0" selection-start="192" selection-end="192" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="3901" vertical-scroll-proportion="0.0">
+>>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
               <folding />
             </state>
           </provider>
@@ -184,30 +285,54 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/Model/Model.java" />
-        <option value="$PROJECT_DIR$/src/Viewer/Viewer.java" />
+<<<<<<< HEAD
+        <option value="$PROJECT_DIR$/src/Viewer/SoundViewer.java" />
+        <option value="$PROJECT_DIR$/src/reader/SoundReader.java" />
+        <option value="$PROJECT_DIR$/src/reader/Reader.java" />
+        <option value="$PROJECT_DIR$/src/reader/TextReader.java" />
+        <option value="$PROJECT_DIR$/src/model/Model.java" />
+        <option value="$PROJECT_DIR$/src/model/TextModel.java" />
+        <option value="$PROJECT_DIR$/src/viewer/AbstractViewer.java" />
+        <option value="$PROJECT_DIR$/src/viewer/TextViewer.java" />
+        <option value="$PROJECT_DIR$/src/SoundFindPauses.java" />
+        <option value="$PROJECT_DIR$/src/model/SoundModel.java" />
+        <option value="$PROJECT_DIR$/src/viewer/SoundLine.java" />
+        <option value="$PROJECT_DIR$/src/viewer/Viewer.java" />
+        <option value="$PROJECT_DIR$/src/model/AbstractModel.java" />
+        <option value="$PROJECT_DIR$/src/viewer/SoundViewer.java" />
+        <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/viewer/SoundFindPauses.java" />
+=======
         <option value="$PROJECT_DIR$/src/Viewer/SoundPlay.java" />
         <option value="$PROJECT_DIR$/src/Viewer/SoundLine.java" />
         <option value="$PROJECT_DIR$/src/Viewer/SoundViewer.java" />
         <option value="$PROJECT_DIR$/src/reader/SoundReader.java" />
         <option value="$PROJECT_DIR$/src/reader/Reader.java" />
-        <option value="$PROJECT_DIR$/src/reader/TextReader.java" />
-        <option value="$PROJECT_DIR$/src/model/TextModel.java" />
-        <option value="$PROJECT_DIR$/src/model/SoundModel.java" />
         <option value="$PROJECT_DIR$/src/model/Model.java" />
         <option value="$PROJECT_DIR$/src/viewer/SoundLine.java" />
+        <option value="$PROJECT_DIR$/src/model/SoundModel.java" />
+        <option value="$PROJECT_DIR$/src/model/TextModel.java" />
+        <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/model/AbstractModel.java" />
+        <option value="$PROJECT_DIR$/src/viewer/AbstractViewer.java" />
         <option value="$PROJECT_DIR$/src/viewer/SoundViewer.java" />
         <option value="$PROJECT_DIR$/src/viewer/TextViewer.java" />
         <option value="$PROJECT_DIR$/src/viewer/Viewer.java" />
-        <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/reader/TextReader.java" />
+>>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
+<<<<<<< HEAD
     <option name="width" value="1320" />
-    <option name="height" value="784" />
+    <option name="height" value="780" />
+=======
+    <option name="width" value="1382" />
+    <option name="height" value="744" />
+>>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -237,7 +362,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -280,34 +404,111 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="viewer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GeneralProgect" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GeneralProgect" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="reader" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GeneralProgect" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GeneralProgect" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+<<<<<<< HEAD
+=======
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GeneralProgect" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GeneralProgect" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="resource" />
+>>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GeneralProgect" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GeneralProgect" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value=".idea" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="project.structure.last.edited" value="Modules" />
     <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="OverrideImplement.combined" value="true" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="options.lastSelected" value="appearance" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="options.lastSelected" value="settings.github" />
+<<<<<<< HEAD
+    <property name="last_opened_file_path" value="$USER_HOME$/IdeaProjects/Practice" />
+=======
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../GeneralProgect" />
+>>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="MemberChooser.showClasses" value="true" />
     <property name="FullScreen" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="dynamic.classpath" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -331,7 +532,13 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="GeneralProgect" />
       <envs />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
       <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
@@ -347,19 +554,6 @@
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -388,6 +582,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -460,7 +667,7 @@
     <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
     <option name="FORCE_UPDATE" value="false" />
     <option name="IGNORE_EXTERNALS" value="false" />
-    <configuration useDefault="true">C:\Users\Olga\AppData\Roaming\Subversion</configuration>
+    <configuration useDefault="true">C:\Users\Лиза\AppData\Roaming\Subversion</configuration>
     <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
     <supportedVersion>125</supportedVersion>
   </component>
@@ -473,35 +680,58 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1320" height="784" extended-state="7" />
+<<<<<<< HEAD
+    <frame x="-8" y="-8" width="1320" height="780" extended-state="1" />
     <editor active="true" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32961783" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+=======
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32991454" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+>>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
+      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2284345" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+=======
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+>>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32820514" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+=======
+>>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
+      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.73333335" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24960254" sideWeight="0.7316294" order="1" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2683706" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="88" y="311" width="1120" height="584" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24960254" sideWeight="0.870607" order="8" side_tool="false" content_ui="combo" />
+<<<<<<< HEAD
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24880762" sideWeight="0.75884247" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24115756" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+=======
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24924242" sideWeight="0.6700855" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16923077" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+>>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" x="46" y="372" width="1120" height="584" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24960254" sideWeight="0.870607" order="9" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32991454" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
+=======
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32820514" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+>>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -569,34 +799,27 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/reader/SoundReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="0" selection-start="1731" selection-end="1731" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/viewer/SoundLine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="29" selection-start="923" selection-end="923" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/viewer/TextViewer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="82" column="0" selection-start="2784" selection-end="2784" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/reader/SoundReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="0" selection-start="512" selection-end="512" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/viewer/SoundViewer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="0" selection-start="287" selection-end="287" vertical-scroll-proportion="0.0">
+<<<<<<< HEAD
+        <state line="72" column="0" selection-start="2170" selection-end="2170" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/TextModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="0" selection-start="562" selection-end="562" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-3.3580952">
+=======
+        <state line="16" column="0" selection-start="287" selection-end="287" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -608,69 +831,182 @@
     <entry file="file://$PROJECT_DIR$/src/reader/Reader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="12" column="0" selection-start="192" selection-end="192" vertical-scroll-proportion="0.0">
+>>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/viewer/AbstractViewer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="34" selection-start="585" selection-end="585" vertical-scroll-proportion="0.0">
+=======
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-3.3580952">
+>>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/reader/Reader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="0" selection-start="192" selection-end="192" vertical-scroll-proportion="0.0">
+=======
+    <entry file="file://$PROJECT_DIR$/src/viewer/AbstractViewer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="600" vertical-scroll-proportion="0.0">
+>>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/reader/TextReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="0" selection-start="872" selection-end="872" vertical-scroll-proportion="0.0">
+        <state line="64" column="55" selection-start="2106" selection-end="2106" vertical-scroll-proportion="0.0">
+=======
+    <entry file="file://$PROJECT_DIR$/src/viewer/SoundLine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="90" column="0" selection-start="2235" selection-end="2235" vertical-scroll-proportion="0.0">
+>>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/TextModel.java">
+<<<<<<< HEAD
+    <entry file="jar://C:/Program Files/Java/jdk1.7.0_40/src.zip!/java/lang/System.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="0" selection-start="281" selection-end="281" vertical-scroll-proportion="0.0">
+        <state line="54" column="19" selection-start="1243" selection-end="1243" vertical-scroll-proportion="0.33264464">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/SoundModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="0" selection-start="602" selection-end="602" vertical-scroll-proportion="0.0">
+        <state line="54" column="0" selection-start="963" selection-end="963" vertical-scroll-proportion="0.0">
+=======
+    <entry file="file://$PROJECT_DIR$/src/viewer/SoundViewer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="123" column="0" selection-start="0" selection-end="3557" vertical-scroll-proportion="0.90144926">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/viewer/TextViewer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="3901" vertical-scroll-proportion="0.0">
+>>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/model/Model.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="54" selection-start="487" selection-end="487" vertical-scroll-proportion="0.0">
+=======
+    <entry file="file://$PROJECT_DIR$/src/viewer/Viewer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="2681" vertical-scroll-proportion="0.0">
+>>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/viewer/TextViewer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="24" selection-start="1513" selection-end="1513" vertical-scroll-proportion="0.0">
+=======
+    <entry file="file://$PROJECT_DIR$/src/model/AbstractModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="2067" vertical-scroll-proportion="0.0">
+>>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/viewer/Viewer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="57" column="77" selection-start="2058" selection-end="2058" vertical-scroll-proportion="0.0">
+=======
+    <entry file="file://$PROJECT_DIR$/src/model/SoundModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="58" column="52" selection-start="0" selection-end="938" vertical-scroll-proportion="0.0">
+>>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/model/AbstractModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="16" selection-start="1099" selection-end="1099" vertical-scroll-proportion="0.0">
+=======
+    <entry file="file://$PROJECT_DIR$/src/model/TextModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="564" vertical-scroll-proportion="0.0">
+>>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/Model.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="0" selection-start="704" selection-end="704" vertical-scroll-proportion="0.0">
+<<<<<<< HEAD
+        <state line="91" column="25" selection-start="2740" selection-end="2740" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="class#prevActionListener#0;class#SoundViewer#0" expanded="false" />
+            <element signature="class#playActionListener#0;class#SoundViewer#0" expanded="false" />
+          </folding>
+=======
+        <state line="34" column="52" selection-start="706" selection-end="706" vertical-scroll-proportion="0.0">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/viewer/SoundLine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="90" column="0" selection-start="2235" selection-end="2235" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/viewer/SoundViewer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="0" selection-start="2012" selection-end="2012" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/viewer/TextViewer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="0" selection-start="2231" selection-end="2231" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/viewer/Viewer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="0" selection-start="872" selection-end="872" vertical-scroll-proportion="0.0">
-          <folding />
+>>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="38" selection-start="171" selection-end="171" vertical-scroll-proportion="0.2895377">
+<<<<<<< HEAD
+        <state line="24" column="40" selection-start="628" selection-end="628" vertical-scroll-proportion="0.0">
+=======
+        <state line="23" column="20" selection-start="550" selection-end="550" vertical-scroll-proportion="0.0">
+>>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/viewer/SoundLine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="57" column="0" selection-start="1258" selection-end="1258" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/viewer/SoundFindPauses.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="9" selection-start="1263" selection-end="1263" vertical-scroll-proportion="0.52">
+=======
+    <entry file="file://$PROJECT_DIR$/src/reader/TextReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="60" column="40" selection-start="2042" selection-end="2042" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#1061#1069#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/reader/newTextReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="26" selection-start="194" selection-end="194" vertical-scroll-proportion="0.44347826">
+>>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
           <folding />
         </state>
       </provider>

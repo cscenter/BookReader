@@ -8,9 +8,9 @@ package model;
  * To change this template use File | Settings | File Templates.
  */
 
-public class SoundModel {
+public class SoundModel extends AbstractModel{
     private short shortAmplitude[];
-    private boolean pauses[];
+    private boolean booleanPauses[];
     private int from;
     private int to;
 
@@ -46,13 +46,14 @@ public class SoundModel {
         to = value;
     }
 
-    public boolean[] getPauses(){
-        return pauses;
+    public boolean[] getBooleanPauses(){
+        return booleanPauses;
     }
 
-    public void setPauses(boolean arr[]){
-        pauses = arr;
+    public void setBooleanPauses(boolean arr[]){
+        booleanPauses = arr;
     }
+
 
 
 }

@@ -1,6 +1,10 @@
 package viewer;
 
 import javax.swing.*;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultHighlighter;
 import java.awt.*;
 
 /**
@@ -10,27 +14,38 @@ import java.awt.*;
  * Time: 16:16
  * To change this template use File | Settings | File Templates.
  */
-public class TextViewer  extends JPanel {
-        JTextArea Text;
-        JScrollPane Scroll;
-        int count ;
-        Object ob;
+public class TextViewer  extends AbstractViewer {
+    private JTextArea text;
+    private JScrollPane scroll;
+    private Object marker;
 
-        public TextViewer(String text){
-            super(null);
+        public TextViewer(String text, Viewer viewer){
+            super(viewer);
+            marker = null;
             this.setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
-            Text = new JTextArea();
-            Scroll = new JScrollPane(Text,
+            this.text = new JTextArea();
+            scroll = new JScrollPane(this.text,
                     JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                     JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
-            //Text.setLineWrap(true);
-            //Text.setWrapStyleWord(true);
-            Scroll.setPreferredSize(new Dimension(200, 250));
+            //text.setLineWrap(true);
+            //text.setWrapStyleWord(true);
+            scroll.setPreferredSize(new Dimension(300, 250));
 
-            this.add(Scroll);
+            this.add(scroll);
             this.add(Box.createRigidArea(new Dimension(5 ,0)));
-            Text.setText(text);
+            this.text.setText(text);
+
+            this.text.addCaretListener(new CaretListener() {
+                @Override
+                public void caretUpdate(CaretEvent e) {
+                    //To change body of implemented methods use File | Settings | File Templates.
+                    JTextArea editArea = (JTextArea) e.getSource();
+                    position = editArea.getCaretPosition();
+                    parent.update(TextViewer.this);
+                    //вызвать апдейт
+                }
+            });
 
           /*  count =0;
             ob = null;
@@ -77,6 +92,17 @@ public class TextViewer  extends JPanel {
 
         }
 
+    @Override
+    public void update(int position) {
+        try{
+            text.setCaretPosition(position);
+            scroll.getVerticalScrollBar().setValue(position);
+            if (marker == null)
+                marker = text.getHighlighter().addHighlight(position, position+10,
+                        new DefaultHighlighter.DefaultHighlightPainter(Color.RED));
+            else
+                text.getHighlighter().changeHighlight(marker,position, position+10);
+        }catch (BadLocationException exc){};
 
-
+    }
 }

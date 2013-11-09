@@ -2,22 +2,25 @@ package viewer;
 
 
 
+import model.SoundModel;
 import javax.swing.*;
 import java.awt.*;
 
 class SoundLine extends JPanel{
 
     private short shortAmplitudeArr[];
+    private SoundModel audioModel;
     private int start;
     private int end;
     private Graphics2D g2d;
     private int vertX;
     private boolean paintVert = false;
 
-    public SoundLine(short arr[], int i, int j){
-        shortAmplitudeArr = arr;
-        setStart(i);
-        setEnd(j);
+    public SoundLine(SoundModel model){
+        audioModel = model;
+        shortAmplitudeArr = model.getShortAmplitude();
+        setStart(model.getFrom());
+        setEnd(model.getTo());
     }
 
     public void setStart(int value){
@@ -51,7 +54,7 @@ class SoundLine extends JPanel{
         int i;
         int distance = 5;
         g2d = (Graphics2D) g;
-        //boolean pauses[] = SoundModel.getPauses();
+        boolean pauses[] = audioModel.getBooleanPauses();
         g2d.setColor(Color.RED);
         g2d.drawLine(0, 100, 10000, 100);
         if (paintVert) {
@@ -64,12 +67,12 @@ class SoundLine extends JPanel{
                 BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
         g2d.setColor(Color.BLUE);
         for (i = start; i < end - 1; i += 1){
-           /* if (pauses[i / SearchPauses.getLengthFrame()]) {
+            if (pauses[i / SoundFindPauses.getLengthFrame()]) {
                 g.setColor(Color.GREEN);
             }
             else {
                 g.setColor(Color.BLUE);
-            }    */
+            }
             g.drawLine(distance, ( (int)(shortAmplitudeArr[i]*0.001) + 100) ,
                     distance + 1, ((int)(shortAmplitudeArr[i + 1]*0.001) + 100));
             distance += 1;
