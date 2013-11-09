@@ -58,13 +58,9 @@ public class Viewer{
             currentPause = model.getAudioModel().findPause(viewer.position);
             model.getAudioModel().setCurrentPause(currentPause);
             model.getRusModel().setSentenceFromSound(currentPause);
-<<<<<<< HEAD
             currentSentence = model.getRusModel().getCurrentSentence();
             model.getEngModel().setSentenceFromText(currentSentence);
-=======
-            currentSentence = model.getRusModel().findSentence(viewer.position);
-            model.getRusModel().setSentenceFromText(currentSentence);
->>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
+
         }
 
         rusPanel.update(model.getRusModel().getSentencePosition(model.getRusModel().getCurrentSentence()));
