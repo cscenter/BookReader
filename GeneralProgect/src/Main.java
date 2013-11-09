@@ -22,8 +22,10 @@ public class Main {
 
 
         Model model = new Model(rusText, engText, audio);
-        model.getAudioModel().setFrom(12881);
+        model.getAudioModel().setFrom(13881);
         model.getAudioModel().setTo(60000);
+        SoundFindPauses.findPauses(model.getAudioModel());
+
         Viewer myViewer = new Viewer(model);
 
 

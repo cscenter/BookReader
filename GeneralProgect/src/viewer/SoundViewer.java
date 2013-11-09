@@ -14,7 +14,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class SoundViewer extends JPanel{
+public class SoundViewer extends AbstractViewer{
 
     private SoundModel audioModel;
     private JButton nextButton;
@@ -23,13 +23,12 @@ public class SoundViewer extends JPanel{
     private  SoundLine line;
 
     public void writeAmplitude(){
-        line = new SoundLine(audioModel.getShortAmplitude(), audioModel.getFrom(),
-                                                        audioModel.getTo());
+        line = new SoundLine(audioModel);
         this.add(line, BorderLayout.CENTER);
     }
 
-    public SoundViewer(SoundModel model){
-        super(null);
+    public SoundViewer(SoundModel model, Viewer viewer){
+        super(viewer);
         audioModel = model;
         this.setLayout(new BorderLayout());
         this.setPreferredSize(new Dimension(200, 250));
@@ -58,6 +57,8 @@ public class SoundViewer extends JPanel{
             public void mouseClicked(MouseEvent e) {
                 line.setVertX(getMousePosition().x);
                 line.repaint();
+                position = getMousePosition().x;
+                parent.update(SoundViewer.this);
             }
 
             @Override
@@ -84,6 +85,15 @@ public class SoundViewer extends JPanel{
 
         this.add(buttons, BorderLayout.NORTH);
         writeAmplitude();
+    }
+
+    @Override
+    public void update(int position) {
+        position += 14000;
+        line.setStart(position );
+        line.setEnd(position + 1800);
+        line.repaint();
+
     }
 
     public class nextActionListener implements ActionListener {
