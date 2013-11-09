@@ -89,11 +89,15 @@ public class SoundViewer extends AbstractViewer{
 
     @Override
     public void update(int position) {
+<<<<<<< HEAD
         position += 14000;
         line.setStart(position );
         line.setEnd(position + 1800);
         line.repaint();
 
+=======
+        //To change body of implemented methods use File | Settings | File Templates.
+>>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
     }
 
     public class nextActionListener implements ActionListener {
