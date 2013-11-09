@@ -1,4 +1,4 @@
-package model;
+﻿package model;
 
 /**
  * Created with IntelliJ IDEA.
@@ -7,20 +7,14 @@ package model;
  * Time: 20:24
  * To change this template use File | Settings | File Templates.
  */
-<<<<<<< HEAD
 public abstract class AbstractModel {
-=======
-public class AbstractModel {
->>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
+
 
     protected int currentSentence;
     protected int currentPause;
 
-<<<<<<< HEAD
     protected Integer[] pauses;
-=======
-    protected int[] pauses;
->>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
+
     protected int[] sentences;
 
 
@@ -100,13 +94,9 @@ public class AbstractModel {
     }
 
 
-<<<<<<< HEAD
     public  void setPauses(Integer[] arrPauses){
         pauses = arrPauses;
     }
 
 
-
-=======
->>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
 }

@@ -23,11 +23,7 @@ public class Viewer{
         this.model = model;
         rusPanel = new TextViewer(model.getRusModel().getText(),this);
         engPanel = new TextViewer(model.getEngModel().getText(),this);
-<<<<<<< HEAD
         audioPanel = new SoundViewer(model.getAudioModel(),this);
-=======
-        audioPanel = new SoundViewer(model.getAudioModel());
->>>>>>> 344fc0886d17ca8354bbae71819fb388b2693248
 
         frame.getContentPane().add(rusPanel, BorderLayout.CENTER);
         frame.getContentPane().add(engPanel, BorderLayout.EAST);
