@@ -1,14 +1,11 @@
-﻿package model;
+package model;
 
 /**
- * Created with IntelliJ IDEA.
- * User: Лиза
- * Date: 08.11.13
- * Time: 20:24
- * To change this template use File | Settings | File Templates.
+ * Oskina Olga
+ * SPBGPU
+ * 2013
  */
-public abstract class AbstractModel {
-
+public class AbstractModel {
 
     protected int currentSentence;
     protected int currentPause;
@@ -89,7 +86,7 @@ public abstract class AbstractModel {
     }
 
     public int getSentencePosition(int number){
-       // return this.sentences[number];
+        // return this.sentences[number];
         return 0;
     }
 
@@ -98,5 +95,5 @@ public abstract class AbstractModel {
         pauses = arrPauses;
     }
 
-
 }
+
