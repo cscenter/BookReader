@@ -7,7 +7,7 @@ package model;
  * Time: 16:09
  * To change this template use File | Settings | File Templates.
  */
-public class TextModel {
+public class TextModel extends AbstractModel{
     public String[] Arr;
 
     public TextModel(String[] text){
@@ -23,4 +23,5 @@ public class TextModel {
         }
         return sb.toString();
     }
+
 }

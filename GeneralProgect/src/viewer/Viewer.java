@@ -16,21 +16,55 @@ public class Viewer{
     private TextViewer rusPanel;
     private TextViewer engPanel;
     private SoundViewer audioPanel;
+    private Model model;
 
     public Viewer(Model model){
         frame = new JFrame("Name");
-        rusPanel = new TextViewer(model.getRusModel().getText());
-        engPanel = new TextViewer(model.getEngModel().getText());
+        this.model = model;
+        rusPanel = new TextViewer(model.getRusModel().getText(),this);
+        engPanel = new TextViewer(model.getEngModel().getText(),this);
         audioPanel = new SoundViewer(model.getAudioModel());
 
         frame.getContentPane().add(rusPanel, BorderLayout.CENTER);
         frame.getContentPane().add(engPanel, BorderLayout.EAST);
         frame.getContentPane().add(audioPanel, BorderLayout.SOUTH);
-        frame.setSize(600, 400);
+        frame.setSize(600, 600);
 
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+    }
+
+    public void update (AbstractViewer viewer){
+        int currentSentence;
+        int currentPause;
+        if(viewer == rusPanel) {
+            currentSentence = model.getRusModel().findSentence(viewer.position);
+            model.getRusModel().setCurrentSentence(currentSentence);
+            currentPause = model.getRusModel().findPause(viewer.position);
+            model.getEngModel().setSentenceFromText(currentSentence);
+            model.getAudioModel().setPauseFromText(currentPause);
+
+        }else if(viewer == engPanel){
+
+            currentSentence = model.getEngModel().findSentence(viewer.position);
+            model.getEngModel().setCurrentSentence(currentSentence);
+            model.getRusModel().setSentenceFromText(currentSentence);
+            currentPause = model.getRusModel().findPause(currentSentence);
+            model.getAudioModel().setPauseFromText(currentPause);
+
+
+        }else if(viewer == audioPanel){
+            currentPause = model.getAudioModel().findPause(viewer.position);
+            model.getAudioModel().setCurrentPause(currentPause);
+            model.getRusModel().setSentenceFromSound(currentPause);
+            currentSentence = model.getRusModel().findSentence(viewer.position);
+            model.getRusModel().setSentenceFromText(currentSentence);
+        }
+
+        rusPanel.update(model.getRusModel().getSentencePosition(model.getRusModel().getCurrentSentence()));
+        engPanel.update(model.getEngModel().getSentencePosition(model.getEngModel().getCurrentSentence()));
+        audioPanel.update(model.getAudioModel().getPausePosition(model.getAudioModel().getCurrentPause()));
     }
 
 }

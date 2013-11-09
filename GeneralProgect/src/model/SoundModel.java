@@ -8,7 +8,7 @@ package model;
  * To change this template use File | Settings | File Templates.
  */
 
-public class SoundModel {
+public class SoundModel extends AbstractModel{
     private short shortAmplitude[];
     private boolean pauses[];
     private int from;

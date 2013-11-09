@@ -14,7 +14,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class SoundViewer extends JPanel{
+public class SoundViewer extends AbstractViewer{
 
     private SoundModel audioModel;
     private JButton nextButton;
@@ -84,6 +84,11 @@ public class SoundViewer extends JPanel{
 
         this.add(buttons, BorderLayout.NORTH);
         writeAmplitude();
+    }
+
+    @Override
+    public void update(int position) {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     public class nextActionListener implements ActionListener {
