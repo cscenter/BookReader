@@ -3,6 +3,8 @@ package viewer;
 
 
 import model.SoundModel;
+import sound.SoundFindPauses;
+
 import javax.swing.*;
 import java.awt.*;
 

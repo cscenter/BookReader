@@ -18,6 +18,7 @@ public class SoundReader {
     private static byte[] audioBytes;
     private static short[] shortAmplitudeArr;
     private static AudioInputStream audioInputStream;
+    private static AudioFileFormat audioFileFormat;
 
     public static short[] readAudio(String nameOfFile){
 
@@ -27,12 +28,8 @@ public class SoundReader {
         try {
             audioInputStream =
                     AudioSystem.getAudioInputStream(fileIn);
-            AudioFileFormat audioFileFormat =  getAudioFileFormat(fileIn);
+            audioFileFormat =  getAudioFileFormat(fileIn);
             // load the sound into memory (a Clip)
-
-
-
-
 
             int bytesPerFrame = audioFileFormat.getFormat().getFrameSize();
             if (bytesPerFrame == AudioSystem.NOT_SPECIFIED) {
@@ -82,25 +79,13 @@ public class SoundReader {
             shortAmplitudeArr[j] = (short) aux;
         }
     }
-    public static void playClip(){
-        try {
-        DataLine.Info info = new DataLine.Info(Clip.class, audioInputStream.getFormat());
-        Clip clip = (Clip) AudioSystem.getLine(info);
-        clip.open(audioInputStream);
 
-        clip.addLineListener(new LineListener() {
-            public void update(LineEvent event) {
-                if (event.getType() == LineEvent.Type.STOP) {
-                    event.getLine().close();
-                    System.exit(0);
-                }
-            }
-        });
+    public static AudioFileFormat getFileFormat() {
+        return audioFileFormat;
+    }
 
-        clip.start();
-        } catch (Exception e) {
-            System.out.println("AudioReaderExeption!!!");
-        }
+    public static AudioInputStream getAudioInputStream() {
+        return audioInputStream;
     }
 
 }

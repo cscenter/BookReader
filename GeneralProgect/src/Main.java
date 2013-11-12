@@ -1,3 +1,5 @@
+import sound.PlayAudio;
+import sound.SoundFindPauses;
 import viewer.*;
 import model.*;
 import reader.*;
@@ -11,7 +13,7 @@ import reader.*;
  */
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         // createReader
         // createModels
@@ -24,7 +26,11 @@ public class Main {
         Model model = new Model(rusText, engText, audio);
         model.getAudioModel().setFrom(13881);
         model.getAudioModel().setTo(60000);
+        model.getAudioModel().setAudioFileFormat(SoundReader.getFileFormat());
+        model.getAudioModel().setNameOfFile("resource/Rey Bredbery.wav");
         SoundFindPauses.findPauses(model.getAudioModel());
+
+
 
         Viewer myViewer = new Viewer(model);
 

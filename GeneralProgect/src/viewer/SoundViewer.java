@@ -9,6 +9,7 @@ package viewer;
  */
 import model.*;
 import reader.SoundReader;
+import sound.PlayAudio;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,6 +21,7 @@ public class SoundViewer extends AbstractViewer{
     private JButton nextButton;
     private JButton prevButton;
     private JButton playButton;
+    private JButton stopButton;
     private  SoundLine line;
 
     public void writeAmplitude(){
@@ -29,6 +31,7 @@ public class SoundViewer extends AbstractViewer{
 
     public SoundViewer(SoundModel model, Viewer viewer){
         super(viewer);
+        position = 0;
         audioModel = model;
         this.setLayout(new BorderLayout());
         this.setPreferredSize(new Dimension(200, 250));
@@ -36,6 +39,7 @@ public class SoundViewer extends AbstractViewer{
         nextButton = new JButton("\u2192");
         prevButton = new JButton("\u2190");
         playButton = new JButton("Play");
+        stopButton = new JButton("Stop");
 
         ActionListener nextListener = new nextActionListener();
         nextButton.addActionListener(nextListener);
@@ -43,11 +47,13 @@ public class SoundViewer extends AbstractViewer{
         prevButton.addActionListener(prevListener);
         ActionListener playListener = new playActionListener();
         playButton.addActionListener(playListener);
+        ActionListener stopListener = new stopActionListener();
+        playButton.addActionListener(stopListener);
 
         buttons.add(prevButton, BorderLayout.EAST);
         buttons.add(playButton, BorderLayout.CENTER);
         buttons.add(nextButton, BorderLayout.WEST);
-
+        buttons.add(stopButton, BorderLayout.SOUTH);
 
 
 
@@ -58,7 +64,7 @@ public class SoundViewer extends AbstractViewer{
                 line.setVertX(getMousePosition().x);
                 line.repaint();
                 position = getMousePosition().x;
-                parent.update(SoundViewer.this);
+               // parent.update(SoundViewer.this);
             }
 
             @Override
@@ -113,10 +119,25 @@ public class SoundViewer extends AbstractViewer{
         }
     }
 
+    public class stopActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+        }
+    }
+
     public class playActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            SoundReader.playClip();
+
+            PlayAudio play;
+            try {
+                play = new PlayAudio(audioModel);
+                play.setStart(line.getStart() + position);
+                play.playClip();
+            } catch (InterruptedException e1) {
+                System.out.println("SoundViewer playActionListener");
+            }
+
         }
     }
 
