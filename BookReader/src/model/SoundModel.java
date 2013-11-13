@@ -1,15 +1,5 @@
 package model;
-
 import javax.sound.sampled.AudioFileFormat;
-import javax.sound.sampled.AudioInputStream;
-
-/**
- * Created with IntelliJ IDEA.
- * User: Olga
- * Date: 15.10.13
- * Time: 14:59
- * To change this template use File | Settings | File Templates.
- */
 
 public class SoundModel extends AbstractModel{
     private short shortAmplitude[];
@@ -22,7 +12,6 @@ public class SoundModel extends AbstractModel{
     public SoundModel(short[] audio){
         setShortAmplitude(audio);
     }
-
 
     public void setAudioFileFormat(AudioFileFormat value) {
         audioFileFormat = value;
@@ -71,7 +60,4 @@ public class SoundModel extends AbstractModel{
     public void setBooleanPauses(boolean arr[]){
         booleanPauses = arr;
     }
-
-
-
 }

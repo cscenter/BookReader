@@ -1,19 +1,11 @@
 package model;
 
-/**
- * Oskina Olga
- * SPBGPU
- * 2013
- */
 public class AbstractModel {
 
     protected int currentSentence;
     protected int currentPause;
-
     protected Integer[] pauses;
-
     protected int[] sentences;
-
 
     public int getCurrentSentence() {
         return currentSentence;
@@ -24,7 +16,6 @@ public class AbstractModel {
     }
 
     public int getCurrentPause() {
-
         return currentPause;
     }
 
@@ -90,10 +81,8 @@ public class AbstractModel {
         return 0;
     }
 
-
     public  void setPauses(Integer[] arrPauses){
         pauses = arrPauses;
     }
-
 }
 

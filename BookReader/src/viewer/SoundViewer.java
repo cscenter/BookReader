@@ -22,6 +22,8 @@ public class SoundViewer extends AbstractViewer{
     private JButton prevButton;
     private JButton playButton;
     private JButton stopButton;
+    private JButton plusButton;
+    private JButton minusButton;
     private  SoundLine line;
 
     public void writeAmplitude(){
@@ -40,6 +42,8 @@ public class SoundViewer extends AbstractViewer{
         prevButton = new JButton("\u2190");
         playButton = new JButton("Play");
         stopButton = new JButton("Stop");
+        plusButton = new JButton("+");
+        minusButton = new JButton("-");
 
         ActionListener nextListener = new nextActionListener();
         nextButton.addActionListener(nextListener);
@@ -48,13 +52,19 @@ public class SoundViewer extends AbstractViewer{
         ActionListener playListener = new playActionListener();
         playButton.addActionListener(playListener);
         ActionListener stopListener = new stopActionListener();
-        playButton.addActionListener(stopListener);
+        stopButton.addActionListener(stopListener);
+        ActionListener plusListener = new plusActionListener();
+        plusButton.addActionListener(plusListener);
+        ActionListener minusListener = new minusActionListener();
+        minusButton.addActionListener(minusListener);
 
-        buttons.add(prevButton, BorderLayout.EAST);
-        buttons.add(playButton, BorderLayout.CENTER);
-        buttons.add(nextButton, BorderLayout.WEST);
-        buttons.add(stopButton, BorderLayout.SOUTH);
 
+        buttons.add(prevButton);
+        buttons.add(nextButton);
+        buttons.add(playButton);
+        buttons.add(stopButton);
+        buttons.add(plusButton);
+        buttons.add(minusButton);
 
 
 
@@ -110,6 +120,20 @@ public class SoundViewer extends AbstractViewer{
         }
     }
 
+    public class plusActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            line.setScale(line.getScale() + 2);
+            line.repaint();
+        }
+    }
+    public class minusActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            line.setScale(line.getScale() - 2);
+            line.repaint();
+        }
+    }
     public class prevActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {

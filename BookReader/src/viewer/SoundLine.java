@@ -3,7 +3,7 @@ package viewer;
 
 
 import model.SoundModel;
-import sound.SoundFindPauses;
+import sound.SoundFindSilence;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,6 +17,8 @@ class SoundLine extends JPanel{
     private Graphics2D g2d;
     private int vertX;
     private boolean paintVert = false;
+    private int scale = 1;
+
 
     public SoundLine(SoundModel model){
         audioModel = model;
@@ -68,15 +70,30 @@ class SoundLine extends JPanel{
         g2d.setStroke(new BasicStroke(1,
                 BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
         g2d.setColor(Color.BLUE);
-        for (i = start; i < end - 1; i += 1){
-            if (pauses[i / SoundFindPauses.getLengthFrame()]) {
-                g.setColor(Color.GREEN);
+
+        for (i = start; i < end - (2 * scale); i += scale){
+            int countPause = 0;
+            for (int j = i; j < i + scale; j++) {
+                countPause = 0;
+                if (!pauses[i / SoundFindSilence.getLengthFrame()]) {
+                    countPause++;
+                }
             }
-            else {
+            if (countPause > scale/2) {
+                g.setColor(Color.GREEN);
+            } else {
                 g.setColor(Color.BLUE);
             }
-            g.drawLine(distance, ( (int)(shortAmplitudeArr[i]*0.001) + 100) ,
-                    distance + 1, ((int)(shortAmplitudeArr[i + 1]*0.001) + 100));
+            int y1 = 0;
+            int y2 = 0;
+
+            for (int j = i; j < i + scale; j++) {
+                y1 += shortAmplitudeArr[j];
+                y2 += shortAmplitudeArr[j + scale];
+            }
+
+            g.drawLine(distance, ( (int)(y1 * 0.001) + 100) ,
+                    distance + 1, ((int)(y2 * 0.001) + 100));
             distance += 1;
         }
     }
@@ -86,12 +103,14 @@ class SoundLine extends JPanel{
         paintVert = true;
     }
 
-    public boolean getPaintVert(){
-        return paintVert;
+    public void setScale(int value){
+        if (value < 1) {
+            value = 1;
+        }
+        scale = value;
     }
 
-    public int getVertX(){
-        return vertX;
+    public int getScale(){
+        return scale;
     }
-
 }

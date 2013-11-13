@@ -1,18 +1,8 @@
 package reader;
-
-
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Лиза
- * Date: 17.10.13
- * Time: 22:06
- * To change this template use File | Settings | File Templates.
- */
 public class TextReader {
 
     private static String[] beforeName = {"Mr", "Mrs", "St","г","ул","пр","ш"};

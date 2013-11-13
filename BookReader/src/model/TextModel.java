@@ -1,12 +1,5 @@
 package model;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Лиза
- * Date: 26.10.13
- * Time: 16:09
- * To change this template use File | Settings | File Templates.
- */
 public class TextModel extends AbstractModel{
     public String[] Arr;
 
@@ -23,5 +16,4 @@ public class TextModel extends AbstractModel{
         }
         return sb.toString();
     }
-
 }

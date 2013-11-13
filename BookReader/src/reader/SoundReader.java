@@ -1,17 +1,8 @@
 package reader;
-
 import javax.sound.sampled.*;
 import java.io.*;
 
 import static javax.sound.sampled.AudioSystem.getAudioFileFormat;
-
-/**
- * Created with IntelliJ IDEA.
- * User: Olga
- * Date: 15.10.13
- * Time: 14:59
- * To change this template use File | Settings | File Templates.
- */
 
 public class SoundReader {
 
@@ -21,16 +12,12 @@ public class SoundReader {
     private static AudioFileFormat audioFileFormat;
 
     public static short[] readAudio(String nameOfFile){
-
         int numBytesRead = 0;
         File fileIn = new File(nameOfFile);
-
         try {
             audioInputStream =
                     AudioSystem.getAudioInputStream(fileIn);
             audioFileFormat =  getAudioFileFormat(fileIn);
-            // load the sound into memory (a Clip)
-
             int bytesPerFrame = audioFileFormat.getFormat().getFrameSize();
             if (bytesPerFrame == AudioSystem.NOT_SPECIFIED) {
                 bytesPerFrame = 1;
@@ -46,7 +33,6 @@ public class SoundReader {
                 System.out.println("1AudioReaderExeption!!!");
             }
             shortAmplitudeArr =  new short[numBytesRead/bytesPerFrame];
-
             if (audioFileFormat.getFormat().isBigEndian()){
                 bigEndianOrder(shortAmplitudeArr);
             }
@@ -60,9 +46,7 @@ public class SoundReader {
     }
 
     private static void littleEndianOrder(short shortAmplitudeArr[]){
-
         for (int i = 0, j = 0; i < audioBytes.length - 1; i += 2, j++){
-
             int aux = audioBytes[i+1];
             int dop = audioBytes[i] & 0xFF;
             aux = aux << 8;
@@ -87,5 +71,4 @@ public class SoundReader {
     public static AudioInputStream getAudioInputStream() {
         return audioInputStream;
     }
-
 }
