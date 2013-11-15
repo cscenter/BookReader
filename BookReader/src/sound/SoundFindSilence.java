@@ -3,6 +3,9 @@ package sound;
 
 import model.SoundModel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SoundFindSilence {
     private static SoundModel audioModel;
     private static int lengthFrame = 1000;
@@ -16,9 +19,11 @@ public class SoundFindSilence {
     private static double threshold;
     private static boolean isVoice[];
 
+    private static List<Double> silence;
 
 
     public SoundFindSilence(SoundModel model, double minInit, double deltaInit) {
+        silence = new ArrayList<Double>();
         audioModel = model;
         isVoice = new boolean[audioModel.getShortAmplitude().length / lengthFrame + 1];
         minInitValue = minInit;
@@ -59,6 +64,18 @@ public class SoundFindSilence {
                 }
             }
         }
+
+        boolean currentStatus = false;
+        for (int i = 0; i < isVoice.length; i++) {
+            if (!isVoice[i] && currentStatus) {
+                currentStatus = false;
+                silence.add((double)i * lengthFrame / 8000);
+            } else if (isVoice[i] && !currentStatus){
+                currentStatus = true;
+            }
+        }
+
+        audioModel.setSilence(silence.toArray(new Double[silence.size()]));
         audioModel.setBooleanPauses(isVoice);
 
     }
