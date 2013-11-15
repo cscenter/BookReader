@@ -5,7 +5,6 @@ public class SoundModel extends AbstractModel{
     private short shortAmplitude[];
     private boolean booleanPauses[];
     private int from;
-    private int to;
     private AudioFileFormat audioFileFormat;
     private String nameOfFile;
     private Double[] silence;
@@ -46,20 +45,12 @@ public class SoundModel extends AbstractModel{
         from = value;
     }
 
-    public int getTo(){
-        return to;
-    }
-
     public void setSilence(Double arr[]){
         silence = arr;
     }
 
     public Double[] getSilence(){
         return silence;
-    }
-
-    public void setTo(int value){
-        to = value;
     }
 
     public boolean[] getBooleanPauses(){
