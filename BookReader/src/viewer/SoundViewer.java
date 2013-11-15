@@ -1,16 +1,7 @@
 package viewer;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Olga
- * Date: 15.10.13
- * Time: 15:00
- * To change this template use File | Settings | File Templates.
- */
 import model.*;
-import reader.SoundReader;
 import sound.PlayAudio;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -24,6 +15,8 @@ public class SoundViewer extends AbstractViewer{
     private JButton stopButton;
     private JButton plusButton;
     private JButton minusButton;
+    private int speedChangeScale = 8;
+    private int speedChangeY = 200;
     private  SoundLine line;
 
     public void writeAmplitude(){
@@ -38,36 +31,9 @@ public class SoundViewer extends AbstractViewer{
         this.setLayout(new BorderLayout());
         this.setPreferredSize(new Dimension(200, 250));
         JPanel buttons = new JPanel();
-        nextButton = new JButton("\u2192");
-        prevButton = new JButton("\u2190");
-        playButton = new JButton("Play");
-        stopButton = new JButton("Stop");
-        plusButton = new JButton("+");
-        minusButton = new JButton("-");
-
-        ActionListener nextListener = new nextActionListener();
-        nextButton.addActionListener(nextListener);
-        ActionListener prevListener = new prevActionListener();
-        prevButton.addActionListener(prevListener);
-        ActionListener playListener = new playActionListener();
-        playButton.addActionListener(playListener);
-        ActionListener stopListener = new stopActionListener();
-        stopButton.addActionListener(stopListener);
-        ActionListener plusListener = new plusActionListener();
-        plusButton.addActionListener(plusListener);
-        ActionListener minusListener = new minusActionListener();
-        minusButton.addActionListener(minusListener);
-
-
-        buttons.add(prevButton);
-        buttons.add(nextButton);
-        buttons.add(playButton);
-        buttons.add(stopButton);
-        buttons.add(plusButton);
-        buttons.add(minusButton);
-
-
-
+        initButtons();
+        addListenersToButtons();
+        addButtonsToJPanel(buttons);
         this.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -98,24 +64,56 @@ public class SoundViewer extends AbstractViewer{
                 //To change body of implemented methods use File | Settings | File Templates.
             }
         });
-
         this.add(buttons, BorderLayout.NORTH);
         writeAmplitude();
+    }
+
+    private void initButtons() {
+        nextButton = new JButton("\u2192");
+        prevButton = new JButton("\u2190");
+        playButton = new JButton("Play");
+        stopButton = new JButton("Stop");
+        plusButton = new JButton("+");
+        minusButton = new JButton("-");
+    }
+
+    private void addButtonsToJPanel(JPanel buttons) {
+        buttons.add(prevButton);
+        buttons.add(nextButton);
+        buttons.add(playButton);
+        buttons.add(stopButton);
+        buttons.add(plusButton);
+        buttons.add(minusButton);
+    }
+
+    private void addListenersToButtons() {
+        ActionListener nextListener = new nextActionListener();
+        nextButton.addActionListener(nextListener);
+        ActionListener prevListener = new prevActionListener();
+        prevButton.addActionListener(prevListener);
+        ActionListener playListener = new playActionListener();
+        playButton.addActionListener(playListener);
+        ActionListener stopListener = new stopActionListener();
+        stopButton.addActionListener(stopListener);
+        ActionListener plusListener = new plusActionListener();
+        plusButton.addActionListener(plusListener);
+        ActionListener minusListener = new minusActionListener();
+        minusButton.addActionListener(minusListener);
     }
 
     @Override
     public void update(int position) {
         position += 14000;
         line.setStart(position );
-        line.setEnd(position + 1800);
+//        line.setEnd(position + 1800);
         line.repaint();
     }
 
     public class nextActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            line.setStart(line.getStart() + 200);
-            line.setEnd(line.getEnd() + 200);
+            line.setStart(line.getStart() + speedChangeY);
+            //line.setEnd(line.getEnd() + speedChangeY);
             line.repaint();
         }
     }
@@ -123,23 +121,29 @@ public class SoundViewer extends AbstractViewer{
     public class plusActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            line.setScale(line.getScale() + 2);
+            speedChangeY -=  speedChangeScale * 10;
+            line.setScale(line.getScale() - speedChangeScale);
             line.repaint();
         }
     }
+
     public class minusActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            line.setScale(line.getScale() - 2);
+            speedChangeY += speedChangeScale * 10;
+            line.setScale(line.getScale() + speedChangeScale);
             line.repaint();
         }
     }
+
     public class prevActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            line.setStart(line.getStart() - 200);
-            line.setEnd(line.getEnd() - 200);
-            line.repaint();
+            if (line.getStart() - speedChangeY > 0) {
+                line.setStart(line.getStart() - speedChangeY);
+                //line.setEnd(line.getEnd() - speedChangeY);
+                line.repaint();
+            }
         }
     }
 
@@ -164,7 +168,6 @@ public class SoundViewer extends AbstractViewer{
 
         }
     }
-
 }
 
 

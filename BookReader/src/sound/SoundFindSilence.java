@@ -1,30 +1,46 @@
 package sound;
-
-
 import model.SoundModel;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SoundFindSilence {
-    private static SoundModel audioModel;
-    private static int lengthFrame = 1000;
-    private static int lengthSilense = 1;
-    private static int hangoverThreshold = 1;
-    private static double eMax;
-    private static double eMin;
-    private static double delta;
-    private static double minInitValue = 1;
-    private static double deltaInitValue = 1;
-    private static double threshold;
-    private static boolean isVoice[];
-
-
+    private SoundModel audioModel;
+    private static int lengthFrame = 240;
+    private int lengthSilence = 8;
+    private int hangoverThreshold = 1;
+    private double eMax;
+    private double eMin;
+    private double delta;
+    private double minInitValue = 1;
+    private double deltaInitValue = 1;
+    private double threshold;
+    private boolean isVoice[];
+    private List<Double> silence;
 
     public SoundFindSilence(SoundModel model, double minInit, double deltaInit) {
+        silence = new ArrayList<Double>();
         audioModel = model;
         isVoice = new boolean[audioModel.getShortAmplitude().length / lengthFrame + 1];
+
+        algorithmDLED(minInit, deltaInit);
+        checkIsSilence();
+        addSilence();
+
+        audioModel.setSilence(silence.toArray(new Double[silence.size()]));
+        audioModel.setBooleanPauses(isVoice);
+
+    }
+
+
+    public static int getLengthFrame() {
+        return lengthFrame;
+    }
+
+    private void algorithmDLED(double minInit, double deltaInit) {
         minInitValue = minInit;
         delta = deltaInit;
         for(int i = lengthFrame; i < audioModel.getShortAmplitude().length - lengthFrame;
-                i += lengthFrame) {
+            i += lengthFrame) {
             double currentEnergy = calculateEnergyOfFrame(i / lengthFrame);
             if (i/lengthFrame == 1) {
                 firstFrame(currentEnergy);
@@ -45,26 +61,34 @@ public class SoundFindSilence {
             }
             increaseEMin();
         }
+    }
 
-        for(int i = 0; i < isVoice.length - lengthSilense; i += lengthSilense) {
+    private void addSilence() {
+        boolean currentStatus = false;
+        for (int i = 0; i < isVoice.length; i++) {
+            if (!isVoice[i] && currentStatus) {
+                currentStatus = false;
+                silence.add((double)i * lengthFrame / 8000);
+            } else if (isVoice[i] && !currentStatus){
+                currentStatus = true;
+            }
+        }
+    }
+
+    private void checkIsSilence() {
+        for(int i = 0; i < isVoice.length - lengthSilence; i += lengthSilence) {
             int inactiveCount = 0;
-            for(int j = i; j < i + lengthSilense; j++) {
+            for(int j = i; j < i + lengthSilence; j++) {
                 if (!isVoice[j]) {
                     inactiveCount++;
                 }
             }
             if (inactiveCount > hangoverThreshold) {
-                for(int j = i; j < i + lengthSilense; j++) {
-                        isVoice[j] = false;
+                for(int j = i; j < i + lengthSilence; j++) {
+                    isVoice[j] = false;
                 }
             }
         }
-        audioModel.setBooleanPauses(isVoice);
-
-    }
-
-    public static int getLengthFrame() {
-        return lengthFrame;
     }
 
     private double calculateEnergyOfFrame(int j) {
@@ -116,10 +140,9 @@ public class SoundFindSilence {
         isVoice[j] = false;
     }
 
-    private static void increaseEMin() {
+    private void increaseEMin() {
         delta = delta * 1.0001;
         eMin = eMin * delta;
     }
-
 }
 

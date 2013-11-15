@@ -1,6 +1,5 @@
 package sound;
 import model.SoundModel;
-
 import javax.sound.sampled.*;
 import javax.sound.sampled.DataLine;
 import java.io.File;
@@ -36,7 +35,7 @@ public class PlayAudio {
                 line.close();
             }
         } catch (Exception e) {
-            System.out.println("AudioReaderExeption!!!");
+            System.out.println("AudioReaderException!!!");
         }
         line.close();
     }
