@@ -21,8 +21,8 @@ public class Viewer{
     public Viewer(Model model){
         frame = new JFrame("Name");
         this.model = model;
-        rusPanel = new TextViewer(model.getRusModel().getText(),this);
-        engPanel = new TextViewer(model.getEngModel().getText(),this);
+        rusPanel = new TextViewer(model.getRusModel().text,this);
+        engPanel = new TextViewer(model.getEngModel().text,this);
         audioPanel = new SoundViewer(model.getAudioModel(),this);
 
         frame.getContentPane().add(rusPanel, BorderLayout.CENTER);
@@ -63,8 +63,9 @@ public class Viewer{
 
         }
 
-        rusPanel.update(model.getRusModel().getSentencePosition(model.getRusModel().getCurrentSentence()));
         engPanel.update(model.getEngModel().getSentencePosition(model.getEngModel().getCurrentSentence()));
+        rusPanel.update(model.getRusModel().getSentencePosition(model.getRusModel().getCurrentSentence()));
+        //engPanel.update(model.getEngModel().getSentencePosition(model.getEngModel().getCurrentSentence()));
         audioPanel.update(model.getAudioModel().getPausePosition(model.getAudioModel().getCurrentPause()));
     }
 

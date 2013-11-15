@@ -28,8 +28,8 @@ public class TextViewer  extends AbstractViewer {
                     JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                     JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
-            //text.setLineWrap(true);
-            //text.setWrapStyleWord(true);
+            this.text.setLineWrap(true);
+            this.text.setWrapStyleWord(true);
             scroll.setPreferredSize(new Dimension(300, 250));
 
             this.add(scroll);
@@ -43,7 +43,6 @@ public class TextViewer  extends AbstractViewer {
                     JTextArea editArea = (JTextArea) e.getSource();
                     position = editArea.getCaretPosition();
                     parent.update(TextViewer.this);
-                    //вызвать апдейт
                 }
             });
 
@@ -95,8 +94,7 @@ public class TextViewer  extends AbstractViewer {
     @Override
     public void update(int position) {
         try{
-            text.setCaretPosition(position);
-            scroll.getVerticalScrollBar().setValue(position);
+            //scroll.getVerticalScrollBar().setValue(text.position);
             if (marker == null)
                 marker = text.getHighlighter().addHighlight(position, position+10,
                         new DefaultHighlighter.DefaultHighlightPainter(Color.RED));

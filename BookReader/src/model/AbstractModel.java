@@ -5,7 +5,7 @@ public class AbstractModel {
     protected int currentSentence;
     protected int currentPause;
     protected Integer[] pauses;
-    protected int[] sentences;
+    protected Integer[] sentences;
 
     public int getCurrentSentence() {
         return currentSentence;
@@ -29,8 +29,15 @@ public class AbstractModel {
      * @return
      */
     public int findSentence(int position){
-        //поиск
-        return 0;
+        int l = 0;
+        int r = sentences.length;
+        int j;
+        while(r-l>1){
+            j = (r+l)/2;
+            if(sentences[j]>=position) r = j;
+            else  l = j;
+        }
+        return l;
     }
 
     /**
@@ -77,8 +84,9 @@ public class AbstractModel {
     }
 
     public int getSentencePosition(int number){
-        // return this.sentences[number];
-        return 0;
+        if(this.sentences.length <= number)
+            return  this.sentences[sentences.length-1];
+        return this.sentences[number];
     }
 
     public  void setPauses(Integer[] arrPauses){
