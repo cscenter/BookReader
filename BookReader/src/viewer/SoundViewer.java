@@ -18,7 +18,7 @@ public class SoundViewer extends AbstractViewer{
     private int speedChangeScale = 8;
     private int speedChangeY = 200;
     private  SoundLine line;
-
+    private Thread thread = new Thread();
     public void writeAmplitude(){
         line = new SoundLine(audioModel);
         this.add(line, BorderLayout.CENTER);
@@ -147,27 +147,41 @@ public class SoundViewer extends AbstractViewer{
         }
     }
 
+
+
     public class stopActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            if (thread.isAlive()) {
+                thread.interrupt();
+            }
         }
     }
 
     public class playActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            if (!thread.isAlive()){
 
-            PlayAudio play;
-            try {
-                play = new PlayAudio(audioModel);
-                play.setStart(line.getStart() + position);
-                play.playClip();
-            } catch (InterruptedException e1) {
-                System.out.println("SoundViewer playActionListener");
+                thread = new Thread() {
+                    @Override
+                    public void run() {
+                        try{
+                            PlayAudio play;
+                            play = new PlayAudio(audioModel);
+                            play.setStart(line.getStart() + position);
+                            play.playClip();
+                        }catch (InterruptedException e){
+                            System.out.println("SoundViewer: run");
+                        }
+                    }
+                };
+                thread.start();
             }
-
         }
+
     }
+
 }
 
 

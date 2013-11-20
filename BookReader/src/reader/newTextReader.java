@@ -3,7 +3,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class NewTextReader {
+public class newTextReader {
 
     private static char[] endSymbols = {'.','!','?'};
     private static char[] pauseSymbols = {',',';',':'};
