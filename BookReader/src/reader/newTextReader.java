@@ -2,6 +2,8 @@ package reader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class newTextReader {
 
@@ -32,16 +34,16 @@ public class newTextReader {
                         listSentences.add(i);
                         listPauses.add(i);
                     }
-                else if(CheckPauseSymbol(text.charAt(i)))
-                        if(CheckPause(text, i)){
-                            listPauses.add(i);
-                        }
+                if(CheckPauseSymbol(text.charAt(i)))
+                    if(CheckPause(text, i)){
+                        listPauses.add(i);
+                    }
             }
             sb.append(text.charAt(i));
 
         }
         pauses = listPauses.toArray(new Integer[listPauses.size()]);
-        sentences = listSentences.toArray(new Integer[listPauses.size()]);
+        sentences = listSentences.toArray(new Integer[listSentences.size()]);
     }
 
     public static Integer[] getPauses(){
@@ -70,6 +72,9 @@ public class newTextReader {
     }
 
     private static boolean CheckPause (String text,int i){
+       // Pattern p = Pattern.compile(",|:|;|!|.|\\n|\\?\\s*\\w*,|:|;|!|.|\\?");
+       // Matcher m = p.matcher(text.substring(i-20, i+1));
+
         return true;
     }
 

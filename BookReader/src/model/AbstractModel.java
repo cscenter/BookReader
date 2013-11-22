@@ -46,8 +46,15 @@ public class AbstractModel {
      * @return
      */
     public int findPause(int position){
-        //поиск
-        return 0;
+        int l = 0;
+        int r = pauses.length;
+        int j;
+        while(r-l>1){
+            j = (r+l)/2;
+            if(pauses[j]>=position) r = j;
+            else  l = j;
+        }
+        return l;
     }
 
     /**
@@ -79,8 +86,9 @@ public class AbstractModel {
     }
 
     public int getPausePosition(int number){
-        //return this.pauses[number];
-        return 0;
+        if(this.pauses.length <= number)
+            return  this.pauses[pauses.length-1];
+        return this.pauses[number];
     }
 
     public int getSentencePosition(int number){
@@ -92,5 +100,16 @@ public class AbstractModel {
     public void setPauses(Integer[] arrPauses){
         pauses = arrPauses;
     }
+
+    public double findPercent(int sentence){
+        double position = getSentencePosition(sentence);
+        return position/this.sentences[this.sentences.length-1]*100;
+    }
+    public void setSentencesFromPercent(double percent){
+        int position = (int)percent*this.sentences[this.sentences.length-1]/100;
+        this.setCurrentSentence(findSentence(position));
+    }
+
+
 }
 

@@ -39,7 +39,6 @@ public class TextViewer  extends AbstractViewer {
             this.text.addCaretListener(new CaretListener() {
                 @Override
                 public void caretUpdate(CaretEvent e) {
-                    //To change body of implemented methods use File | Settings | File Templates.
                     JTextArea editArea = (JTextArea) e.getSource();
                     position = editArea.getCaretPosition();
                     parent.update(TextViewer.this);

@@ -91,12 +91,12 @@ public class SoundViewer extends AbstractViewer{
     @Override
     public void update(int value) {
 //        TODO: delete value += 5;
-        value += 5;
+/*        value += 5;
         int positionFromSilence =  audioModel.getSilence()[value];
         line.setStart(positionFromSilence);
         slider.setValue(positionFromSilence);
         line.setEnd(positionFromSilence + WIDTH * line.getScale());
-        line.repaint();
+        line.repaint(); */
     }
 
     public class nextActionListener implements ActionListener {

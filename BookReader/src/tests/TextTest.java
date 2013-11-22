@@ -23,6 +23,8 @@ public class TextTest {
 
         for(int i = 0; i < answer.length; i++){
             model.getEngModel().setSentenceFromText(rusQuestion[i]);
+          //  double percent = model.getRusModel().findPercent(rusQuestion[i]);
+          //  model.getEngModel().setSentencesFromPercent(percent);
             answer[i] = model.getEngModel().getCurrentSentence();
         }
 
