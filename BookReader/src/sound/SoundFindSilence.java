@@ -6,6 +6,8 @@ import java.util.List;
 public class SoundFindSilence {
     private SoundModel audioModel;
     private final static int LENGTH_FRAME = 240;
+    private final int LENGTH_SILENCE = 4;
+    private final int HANGOVER_THRESHOLD = 1;
     private double eMax;
     private double eMin;
     private double delta;
@@ -13,6 +15,8 @@ public class SoundFindSilence {
     private double deltaInitValue;
     private double threshold;
     private boolean isVoice[];
+    private final double CHANGE_DELTA = 1.0001;
+
     private List<Integer> silence;
 
     public SoundFindSilence(SoundModel model, double minInit, double deltaInit) {
@@ -21,20 +25,24 @@ public class SoundFindSilence {
         isVoice = new boolean[audioModel.getShortAmplitude().length / LENGTH_FRAME + 1];
         minInitValue = minInit;
         deltaInitValue = deltaInit;
-        algorithmDLED();
+        delta = deltaInit;
+
+        algorithmDLED(minInit, deltaInit);
         checkIsSilence();
         addSilence();
+
         audioModel.setSilence(silence.toArray(new Integer[silence.size()]));
         audioModel.setBooleanPauses(isVoice);
 
     }
 
-    public static int getLengthFrame() {
+
+    public static int getLENGTH_FRAME() {
         return LENGTH_FRAME;
     }
 
-    private void algorithmDLED() {
-        delta = deltaInitValue;
+    private void algorithmDLED(double minInit, double deltaInit) {
+
         for(int i = LENGTH_FRAME; i < audioModel.getShortAmplitude().length - LENGTH_FRAME;
             i += LENGTH_FRAME) {
             double currentEnergy = calculateEnergyOfFrame(i / LENGTH_FRAME);
@@ -72,8 +80,6 @@ public class SoundFindSilence {
     }
 
     private void checkIsSilence() {
-        final int LENGTH_SILENCE = 8;
-        final int hangoverThreshold = 1;
         for(int i = 0; i < isVoice.length - LENGTH_SILENCE; i += LENGTH_SILENCE) {
             int inactiveCount = 0;
             for(int j = i; j < i + LENGTH_SILENCE; j++) {
@@ -81,7 +87,7 @@ public class SoundFindSilence {
                     inactiveCount++;
                 }
             }
-            if (inactiveCount > hangoverThreshold) {
+            if (inactiveCount > HANGOVER_THRESHOLD) {
                 for(int j = i; j < i + LENGTH_SILENCE; j++) {
                     isVoice[j] = false;
                 }
@@ -139,11 +145,7 @@ public class SoundFindSilence {
     }
 
     private void increaseEMin() {
-        final double CHANGE_DELTA = 1.0001;
         delta = delta * CHANGE_DELTA;
         eMin = eMin * delta;
     }
-
-
 }
-

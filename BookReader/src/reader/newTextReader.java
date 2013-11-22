@@ -72,10 +72,9 @@ public class newTextReader {
     }
 
     private static boolean CheckPause (String text,int i){
-        Pattern p = Pattern.compile("(,|:|;|!|.|\\?)\\s*\\w*\\s*(,|:|;|!|.|\\?)");
-        Matcher m = p.matcher(text.substring(i-20, i+1));
-        if(m.find())
-            if(m.group(m.groupCount()).contains(lastWord)) return false;
+       // Pattern p = Pattern.compile(",|:|;|!|.|\\n|\\?\\s*\\w*,|:|;|!|.|\\?");
+       // Matcher m = p.matcher(text.substring(i-20, i+1));
+
         return true;
     }
 

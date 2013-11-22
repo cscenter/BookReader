@@ -91,7 +91,12 @@ public class SoundViewer extends AbstractViewer{
     @Override
     public void update(int value) {
 //        TODO: delete value += 5;
-        int positionFromSilence =  audioModel.getSilence()[value];
+
+        System.out.println(value);
+        if (value > audioModel.getShortAmplitude().length)
+            value = audioModel.getShortAmplitude().length - 1;
+
+        int positionFromSilence =  value;
         line.setStart(positionFromSilence);
         slider.setValue(positionFromSilence);
         line.setEnd(positionFromSilence + WIDTH * line.getScale());
@@ -126,20 +131,8 @@ public class SoundViewer extends AbstractViewer{
         public void mouseClicked(MouseEvent e) {
             line.setVertX(getMousePosition().x);
             line.repaint();
-            position = calculateNumberOfSilence((double) (line.getStart() + position));
+            position = line.getStart() + getMousePosition().x;
             parent.update(SoundViewer.this);
-
-
-        }
-
-        private int calculateNumberOfSilence(double time) {
-            Integer[] arrSilence = audioModel.getSilence();
-            for (int i = arrSilence.length - 1; i >= 0; i--) {
-                if (arrSilence[i] < time) {
-                    return i + 1;
-                }
-            }
-            return -1;
         }
     }
 

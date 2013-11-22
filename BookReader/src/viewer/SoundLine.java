@@ -45,10 +45,10 @@ class SoundLine extends JPanel{
     private void addSpectogram(Graphics2D g2d) {
         boolean pauses[] = audioModel.getBooleanPauses();
         int distance = 0;
-        for (int i = start; i < end; i += scale){
+        for (int i = start; i < end - scale; i += scale){
             int countPause = 0;
             for (int j = i; j < i + scale; j++) {
-                if (!pauses[i / SoundFindSilence.getLengthFrame()]) {
+                if (!pauses[i / SoundFindSilence.getLENGTH_FRAME()]) {
                     countPause++;
                 }
             }
