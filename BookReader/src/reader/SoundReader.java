@@ -68,7 +68,4 @@ public class SoundReader {
         return audioFileFormat;
     }
 
-    public static AudioInputStream getAudioInputStream() {
-        return audioInputStream;
-    }
 }

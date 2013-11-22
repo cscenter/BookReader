@@ -15,22 +15,20 @@ public class SoundFindSilence {
     private double deltaInitValue = 1;
     private double threshold;
     private boolean isVoice[];
-    private List<Double> silence;
+    private List<Integer> silence;
 
     public SoundFindSilence(SoundModel model, double minInit, double deltaInit) {
-        silence = new ArrayList<Double>();
+        silence = new ArrayList<Integer>();
         audioModel = model;
         isVoice = new boolean[audioModel.getShortAmplitude().length / lengthFrame + 1];
 
         algorithmDLED(minInit, deltaInit);
         checkIsSilence();
         addSilence();
-
-        audioModel.setSilence(silence.toArray(new Double[silence.size()]));
+        audioModel.setSilence(silence.toArray(new Integer[silence.size()]));
         audioModel.setBooleanPauses(isVoice);
 
     }
-
 
     public static int getLengthFrame() {
         return lengthFrame;
@@ -68,7 +66,7 @@ public class SoundFindSilence {
         for (int i = 0; i < isVoice.length; i++) {
             if (!isVoice[i] && currentStatus) {
                 currentStatus = false;
-                silence.add((double)i * lengthFrame / 8000);
+                silence.add(i * lengthFrame);
             } else if (isVoice[i] && !currentStatus){
                 currentStatus = true;
             }

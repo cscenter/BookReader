@@ -89,7 +89,7 @@ public class AbstractModel {
         return this.sentences[number];
     }
 
-    public  void setPauses(Integer[] arrPauses){
+    public void setPauses(Integer[] arrPauses){
         pauses = arrPauses;
     }
 }
