@@ -19,7 +19,7 @@ public class Viewer{
     private Model model;
 
     public Viewer(Model model){
-        frame = new JFrame("Name");
+        frame = new JFrame("BookReader");
         this.model = model;
         rusPanel = new TextViewer(model.getRusModel().text,this);
         engPanel = new TextViewer(model.getEngModel().text,this);

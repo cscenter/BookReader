@@ -17,9 +17,10 @@ public class SoundViewer extends AbstractViewer{
     private JButton stopButton;
     private JButton plusButton;
     private JButton minusButton;
-    private int speedChangeScale = 8;
+    private final int SPEED_CHANGE_SCALE = 80;
+    private final int WIDTH = 1800;
     private int speedChangeY = 2000;
-    private  SoundLine line;
+    private SoundLine line;
     private Thread thread = new Thread();
     private JSlider slider;
 
@@ -94,7 +95,7 @@ public class SoundViewer extends AbstractViewer{
         int positionFromSilence =  audioModel.getSilence()[value];
         line.setStart(positionFromSilence);
         slider.setValue(positionFromSilence);
-        line.setEnd(positionFromSilence + 1800 * line.getScale());
+        line.setEnd(positionFromSilence + WIDTH * line.getScale());
         line.repaint();
     }
 
@@ -104,7 +105,7 @@ public class SoundViewer extends AbstractViewer{
             System.out.println(line.getStart() + speedChangeY);
 
             line.setStart(line.getStart() + speedChangeY);
-            line.setEnd(line.getStart() + speedChangeY + 1600);
+            line.setEnd(line.getStart() + speedChangeY + WIDTH);
             //line.setEnd(line.getEnd() + speedChangeY);
             line.repaint();
         }
@@ -115,7 +116,7 @@ public class SoundViewer extends AbstractViewer{
         public void actionPerformed(ActionEvent e) {
             if (line.getStart() > speedChangeY) {
                 line.setStart(line.getStart() - speedChangeY);
-                line.setEnd(line.getStart() - speedChangeY + 1600);
+                line.setEnd(line.getStart() - speedChangeY + WIDTH);
                 //line.setEnd(line.getEnd() - speedChangeY);
                 line.repaint();
             }
@@ -128,11 +129,9 @@ public class SoundViewer extends AbstractViewer{
             parent.update(SoundViewer.this);
             line.setVertX(getMousePosition().x);
             line.repaint();
-//            printSilence();
         }
 
-
-        int calculateNumberOfSilence(double time) {
+        private int calculateNumberOfSilence(double time) {
             Integer[] arrSilence = audioModel.getSilence();
             for (int i = arrSilence.length - 1; i >= 0; i--) {
                 if (arrSilence[i] < time) {
@@ -141,23 +140,13 @@ public class SoundViewer extends AbstractViewer{
             }
             return -1;
         }
-
-        void printSilence() {
-
-            Integer[] arrSilence = audioModel.getSilence();
-            for (int i = 0; i < arrSilence.length; i++) {
-                System.out.println(arrSilence[i]);
-            }
-
-        }
-
     }
 
     public class plusActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            speedChangeY -=  speedChangeScale * 10;
-            line.setScale(line.getScale() - speedChangeScale);
+            speedChangeY -=  SPEED_CHANGE_SCALE;
+            line.setScale(line.getScale() - SPEED_CHANGE_SCALE);
             line.repaint();
         }
     }
@@ -167,7 +156,7 @@ public class SoundViewer extends AbstractViewer{
         public void stateChanged(ChangeEvent e) {
             JSlider source = (JSlider)e.getSource();
             line.setStart(source.getValue());
-            line.setEnd(source.getValue() + 1600);
+            line.setEnd(source.getValue() + WIDTH);
             line.repaint();
 
         }
@@ -176,8 +165,8 @@ public class SoundViewer extends AbstractViewer{
     public class minusActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            speedChangeY += speedChangeScale * 10;
-            line.setScale(line.getScale() + speedChangeScale);
+            speedChangeY += SPEED_CHANGE_SCALE;
+            line.setScale(line.getScale() + SPEED_CHANGE_SCALE);
             line.repaint();
         }
     }
