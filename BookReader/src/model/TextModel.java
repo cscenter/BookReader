@@ -1,7 +1,7 @@
 package model;
 
 import reader.Language;
-import reader.NewTextReader;
+import reader.newTextReader;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -30,9 +30,9 @@ public class TextModel extends AbstractModel{
 
     public TextModel(String pathToFile, Language language){
         text = fileRead(pathToFile);
-        NewTextReader.Tokenizer(text, language);
-        pauses = NewTextReader.getPauses();
-        sentences = NewTextReader.getSentences();
+        newTextReader.Tokenizer(text, language);
+        pauses = newTextReader.getPauses();
+        sentences = newTextReader.getSentences();
     }
 
     public String getText(){

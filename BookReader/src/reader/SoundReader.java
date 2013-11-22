@@ -30,7 +30,7 @@ public class SoundReader {
             try {
                 numBytesRead = audioInputStream.read(audioBytes);
             } catch (Exception ex) {
-                System.out.println("1AudioReaderException!!!");
+                System.out.println("1 AudioReaderException!!!");
             }
             shortAmplitudeArr =  new short[numBytesRead/bytesPerFrame];
             if (audioFileFormat.getFormat().isBigEndian()){
@@ -40,7 +40,7 @@ public class SoundReader {
                 littleEndianOrder(shortAmplitudeArr);
             }
         } catch (Exception e) {
-            System.out.println("2AudioReaderException!!!");
+            System.out.println("2 AudioReaderException!!!");
         }
         return shortAmplitudeArr;
     }
@@ -68,7 +68,4 @@ public class SoundReader {
         return audioFileFormat;
     }
 
-    public static AudioInputStream getAudioInputStream() {
-        return audioInputStream;
-    }
 }

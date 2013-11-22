@@ -6,9 +6,9 @@ import java.io.File;
 
 public class PlayAudio {
 
-    private static SoundModel audio;
-    private static Clip line = null;
-    private static int start = 0;
+    private SoundModel audio;
+    private Clip line = null;
+    private int start = 0;
 
     public PlayAudio(SoundModel model) throws InterruptedException {
         audio = model;
@@ -27,7 +27,6 @@ public class PlayAudio {
                 line.setFramePosition(start);
                 line.start();
 
-                // Why do I do it?
                 while (!line.isRunning())
                     Thread.sleep(10);
                 while (line.isRunning())
@@ -35,7 +34,6 @@ public class PlayAudio {
                 line.close();
             }
         } catch (Exception e) {
-            System.out.println("AudioReaderException!!!");
         }
         line.close();
     }

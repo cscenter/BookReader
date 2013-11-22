@@ -19,7 +19,7 @@ public class Viewer{
     private Model model;
 
     public Viewer(Model model){
-        frame = new JFrame("Name");
+        frame = new JFrame("BookReader");
         this.model = model;
         rusPanel = new TextViewer(model.getRusModel().text,this);
         engPanel = new TextViewer(model.getEngModel().text,this);
@@ -29,7 +29,6 @@ public class Viewer{
         frame.getContentPane().add(engPanel, BorderLayout.EAST);
         frame.getContentPane().add(audioPanel, BorderLayout.SOUTH);
         frame.setSize(600, 600);
-
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);

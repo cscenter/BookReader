@@ -7,7 +7,13 @@ import sound.SoundFindSilence;
 public class SoundTest {
 
     private static Model model;
-    private static Double silenceFromAlgorithm[];
+    private static Integer silenceFromAlgorithm[];
+    private static final int FREQUENCY = 8000;
+    private static final int MIN = 100;
+    private static final double LAMBDA = 0.995;
+    private static final double ACCURACY_BACK = 1.1;
+    private static final double ACCURACY_FORWARD = 0.5;
+
     private static Double silenceFromFile[] =
             {
                     0.0,
@@ -35,36 +41,32 @@ public class SoundTest {
         short[] audio = SoundReader.readAudio("resource/Rey Bredbery.wav");
 
         model = new Model(rusText, engText, audio);
-        model.getAudioModel().setFrom(13881);
+        model.getAudioModel().setStart(13881);
         model.getAudioModel().setAudioFileFormat(SoundReader.getFileFormat());
         model.getAudioModel().setNameOfFile("resource/Rey Bredbery.wav");
-        SoundFindSilence soundFindSilence = new SoundFindSilence(model.getAudioModel(), 100, 0.995);
+        SoundFindSilence soundFindSilence = new SoundFindSilence(model.getAudioModel(), MIN, LAMBDA);
+
         System.out.println(calculatePoints() + " points from " + silenceFromFile.length);
         System.out.println();
         printSilenceFromAlgorithm();
         System.out.println();
+
         printSilenceFromFile();
     }
 
     private static int calculatePoints() {
         silenceFromAlgorithm = model.getAudioModel().getSilence();
         int count = 0;
-        boolean flag;
         for (int i = 0; i < silenceFromFile.length; i++) {
-            flag = false;
             for (int j = 0; j < silenceFromAlgorithm.length; j++) {
-                if (silenceFromFile[i] + 1.1 > silenceFromAlgorithm[j] &&
-                        silenceFromFile[i] - 1.1 < silenceFromAlgorithm[j]) {
+                if (silenceFromFile[i] + ACCURACY_BACK > (double)silenceFromAlgorithm[j]/FREQUENCY &&
+                        silenceFromFile[i] - ACCURACY_FORWARD < (double)silenceFromAlgorithm[j]/FREQUENCY) {
                     count++;
-                    System.out.print(silenceFromFile[i] + "   " + silenceFromAlgorithm[j] + "   ");
-                    System.out.printf("%f", Math.abs(silenceFromFile[i] - silenceFromAlgorithm[j]));
+                    System.out.print(silenceFromFile[i] + "   " + (double) silenceFromAlgorithm[j] / FREQUENCY + "   ");
+                    System.out.printf("%f", Math.abs(silenceFromFile[i] - (double) silenceFromAlgorithm[j] / FREQUENCY));
                     System.out.println();
-                    flag = true;
                     break;
                 }
-            }
-            if (!flag) {
-                count--;
             }
         }
         return count;
@@ -74,7 +76,7 @@ public class SoundTest {
         silenceFromAlgorithm = model.getAudioModel().getSilence();
         System.out.println("Silence from algorithm");
         for (int i = 0; i < silenceFromAlgorithm.length; i++) {
-            System.out.println(i + ". " + silenceFromAlgorithm[i]);
+            System.out.println(i + ". " + (double) silenceFromAlgorithm[i] / FREQUENCY );
         }
     }
 
@@ -82,21 +84,6 @@ public class SoundTest {
         System.out.println("Silence from file");
         for (int i = 0; i < silenceFromFile.length; i++) {
             System.out.println(i + ". " + silenceFromFile[i]);
-        }
-    }
-
-    private static void printBothResult() {
-        System.out.println("Silence: ");
-        for (int i = 0; (i < silenceFromFile.length) || (i < silenceFromFile.length); i++) {
-            System.out.print(i + ". ");
-            if (i < silenceFromFile.length) {
-                System.out.print(silenceFromFile[i]);
-            }
-            System.out.print(" ");
-            if (i < silenceFromAlgorithm.length) {
-                System.out.print(silenceFromAlgorithm[i]);
-            }
-            System.out.println();
         }
     }
 }

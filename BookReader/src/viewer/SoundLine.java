@@ -9,26 +9,27 @@ class SoundLine extends JPanel{
     private short shortAmplitudeArr[];
     private SoundModel audioModel;
     private int start;
+    private int end;
     private Graphics2D g2d;
     private int vertX;
     private boolean paintVert = false;
     private int scale = 1;
+    private final double SCALE_Y = 0.005;
+    private final int OFFSET_Y = 100;
 
     public SoundLine(SoundModel model){
         audioModel = model;
         shortAmplitudeArr = model.getShortAmplitude();
-        setStart(model.getFrom());
+        setStart(model.getStart());
+        setEnd(model.getEnd());
     }
 
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        int i;
-
         g2d = (Graphics2D) g;
-
         g2d.setColor(Color.RED);
-        g2d.drawLine(0, 100, 10000, 100);
+        g2d.drawLine(0, 100, 10000, 100); // Draw the axis Y
         if (paintVert) {
             g2d.setStroke(new BasicStroke(4,
                     BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
@@ -39,35 +40,33 @@ class SoundLine extends JPanel{
                 BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
         g2d.setColor(Color.BLUE);
         addSpectogram(g2d);
-
-
     }
 
     private void addSpectogram(Graphics2D g2d) {
         boolean pauses[] = audioModel.getBooleanPauses();
-        int distance = 5;
-        for (int i = start; i < shortAmplitudeArr.length - (2 * scale); i += scale){
+        int distance = 0;
+        for (int i = start; i < end; i += scale){
             int countPause = 0;
             for (int j = i; j < i + scale; j++) {
                 if (!pauses[i / SoundFindSilence.getLengthFrame()]) {
                     countPause++;
                 }
             }
-            if (countPause > scale * 2 / 3) {
+            if (countPause > scale / 2) {
                 g2d.setColor(Color.GREEN);
             } else {
                 g2d.setColor(Color.BLUE);
             }
             int y1 = 0;
             int y2 = 0;
-
             for (int j = i; j < i + scale; j++) {
                 y1 += shortAmplitudeArr[j];
                 y2 += shortAmplitudeArr[j + scale];
             }
-
-            g2d.drawLine(distance, ((int) (y1 * 0.001) + 100),
-                    distance + 1, ((int) (y2 * 0.001) + 100));
+            y1 /= scale;
+            y2 /= scale;
+            g2d.drawLine(distance, ((int) (y1 * SCALE_Y) + OFFSET_Y),
+                    distance + 1, ((int) (y2 * SCALE_Y) + OFFSET_Y));
             distance += 1;
         }
     }
@@ -98,6 +97,14 @@ class SoundLine extends JPanel{
         }
         else{
             start = value;
+        }
+    }
+    public void setEnd(int value){
+        if ( (value < 0) || (value >= shortAmplitudeArr.length) ){
+            end = shortAmplitudeArr.length;
+        }
+        else{
+            end = value;
         }
     }
 }
