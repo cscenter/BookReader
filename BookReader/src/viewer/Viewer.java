@@ -36,7 +36,7 @@ public class Viewer{
     }
 
     public void update (AbstractViewer viewer){
-        int currentSentence;
+        int currentSentence = 0 ;
         int currentPause;
         if(viewer == rusPanel) {
             currentSentence = model.getRusModel().findSentence(viewer.position);
@@ -65,7 +65,6 @@ public class Viewer{
 
         engPanel.update(model.getEngModel().getSentencePosition(model.getEngModel().getCurrentSentence()));
         rusPanel.update(model.getRusModel().getSentencePosition(model.getRusModel().getCurrentSentence()));
-        //engPanel.update(model.getEngModel().getSentencePosition(model.getEngModel().getCurrentSentence()));
         audioPanel.update(model.getAudioModel().getPausePosition(model.getAudioModel().getCurrentPause()));
     }
 
