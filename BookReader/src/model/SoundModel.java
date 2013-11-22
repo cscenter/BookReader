@@ -8,7 +8,6 @@ public class SoundModel extends AbstractModel{
     private int end;
     private AudioFileFormat audioFileFormat;
     private String nameOfFile;
-    private Integer[] silence;
 
     public SoundModel(short[] audio){
         setShortAmplitude(audio);
@@ -55,11 +54,11 @@ public class SoundModel extends AbstractModel{
     }
 
     public void setSilence(Integer arr[]){
-        silence = arr;
+        pauses = arr;
     }
 
     public Integer[] getSilence(){
-        return silence;
+        return pauses;
     }
 
     public boolean[] getBooleanPauses(){

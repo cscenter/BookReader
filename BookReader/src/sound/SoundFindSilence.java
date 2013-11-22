@@ -143,5 +143,7 @@ public class SoundFindSilence {
         delta = delta * CHANGE_DELTA;
         eMin = eMin * delta;
     }
+
+
 }
 
