@@ -23,16 +23,19 @@ public class SoundViewer extends AbstractViewer{
     private SoundLine line;
     private Thread thread = new Thread();
     private JSlider slider;
+    private PlayAudio play;
+
 
     public void writeAmplitude(){
         line = new SoundLine(audioModel);
         this.add(line, BorderLayout.CENTER);
     }
 
-    public SoundViewer(SoundModel model, Viewer viewer){
+    public SoundViewer(SoundModel model, Viewer viewer) throws InterruptedException {
         super(viewer);
         position = 0;
         audioModel = model;
+        play = new PlayAudio(audioModel);
         this.setLayout(new BorderLayout());
         this.setPreferredSize(new Dimension(200, 250));
         JPanel buttons = new JPanel();
@@ -168,9 +171,7 @@ public class SoundViewer extends AbstractViewer{
     public class stopActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (thread.isAlive()) {
-                thread.interrupt();
-            }
+            play.setRun(false);
         }
     }
 
@@ -183,10 +184,14 @@ public class SoundViewer extends AbstractViewer{
                     @Override
                     public void run() {
                         try{
-                            PlayAudio play;
-                            play = new PlayAudio(audioModel);
-                            play.setStart(line.getStart() + position);
-                            play.playClip();
+                            System.out.println("Start play");
+                            play.setRun(true);
+                            while(play.getRun()) {
+                                play.setStart(line.getStart() + position);
+                                play.setEnd(line.getStart() + 160000 + position);
+                                play.playClip();
+                            }
+                            System.out.println("Stop play");
                         }catch (InterruptedException e){
                             System.out.println("SoundViewer: run");
                         }

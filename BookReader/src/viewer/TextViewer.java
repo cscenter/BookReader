@@ -67,7 +67,7 @@ public class TextViewer  extends AbstractViewer {
 
                         linenum += 1;
                     }
-                    catch(Exception ex) { }
+                    catch(exception ex) { }
 
                     try{
                         engText.setCaretPosition(engText.getLineStartOffset(linenum-1));

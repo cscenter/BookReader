@@ -1,9 +1,8 @@
 package tests;
 
+import exception.ReaderException;
 import model.Model;
 import reader.SoundReader;
-import sound.SoundFindSilence;
-import viewer.Viewer;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,8 +16,9 @@ public class TextTest {
     static int[] rightAnswer = {0, 1, 7, 30, 60, 67, 111, 188, 368, 748, 1256  };
     static int[] answer = new int[rightAnswer.length];
 
-    public static void main(String[] args) throws InterruptedException {
-        short[] audio = SoundReader.readAudio("resource/Rey Bredbery.wav");
+    public static void main(String[] args) throws InterruptedException, ReaderException {
+        SoundReader soundReader = new SoundReader("resource/Rey Bredbery.wav");
+        short[] audio = soundReader.getShortAmplitudeArr();
         Model model = new Model(audio,"resource/test1.txt","resource/test2.txt");
 
         for(int i = 0; i < answer.length; i++){
