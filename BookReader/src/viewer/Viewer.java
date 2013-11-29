@@ -2,6 +2,7 @@ package viewer;
 
 import model.*;
 import javax.swing.*;
+import javax.swing.plaf.multi.MultiSplitPaneUI;
 import java.awt.*;
 
 /**
@@ -24,11 +25,18 @@ public class Viewer{
         rusPanel = new TextViewer(model.getRusModel().text,this);
         engPanel = new TextViewer(model.getEngModel().text,this);
         audioPanel = new SoundViewer(model.getAudioModel(),this);
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,rusPanel,engPanel);
+        //JPanel panel = new JPanel();
+       // panel.add(splitPane);
 
-        frame.getContentPane().add(rusPanel, BorderLayout.CENTER);
-        frame.getContentPane().add(engPanel, BorderLayout.EAST);
-        frame.getContentPane().add(audioPanel, BorderLayout.SOUTH);
-        frame.setSize(600, 600);
+        splitPane.setDividerLocation(300);
+
+        JSplitPane verticalSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,splitPane,audioPanel);
+
+     //   frame.getContentPane().add(splitPane);
+      //  frame.getContentPane().add(engPanel, BorderLayout.EAST);
+        frame.getContentPane().add(verticalSplitPane);
+        frame.pack();
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);

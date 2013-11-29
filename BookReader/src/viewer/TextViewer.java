@@ -33,7 +33,7 @@ public class TextViewer  extends AbstractViewer {
             scroll.setPreferredSize(new Dimension(300, 250));
 
             this.add(scroll);
-            this.add(Box.createRigidArea(new Dimension(5 ,0)));
+            //this.add(Box.createRigidArea(new Dimension(5 ,0)));
             this.text.setText(text);
 
             this.text.addCaretListener(new CaretListener() {
