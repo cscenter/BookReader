@@ -2,22 +2,30 @@ package reader;
 import javax.sound.sampled.*;
 import java.io.*;
 
+import exception.ReaderException;
+
 import static javax.sound.sampled.AudioSystem.getAudioFileFormat;
 
 public class SoundReader {
 
-    private static byte[] audioBytes;
-    private static short[] shortAmplitudeArr;
-    private static AudioInputStream audioInputStream;
-    private static AudioFileFormat audioFileFormat;
+    private byte[] audioBytes;
+    private short[] shortAmplitudeArr;
+    private AudioFileFormat audioFileFormat;
+    private String nameOfFile;
 
-    public static short[] readAudio(String nameOfFile){
-        int numBytesRead = 0;
+    public SoundReader(String name) throws ReaderException {
+        nameOfFile = name;
+        readAudio();
+    }
+
+    private void readAudio() throws ReaderException {
+        int numBytesRead;
         File fileIn = new File(nameOfFile);
         try {
-            audioInputStream =
+            AudioInputStream audioInputStream =
                     AudioSystem.getAudioInputStream(fileIn);
             audioFileFormat =  getAudioFileFormat(fileIn);
+            int countOfChannel =  audioFileFormat.getFormat().getChannels();
             int bytesPerFrame = audioFileFormat.getFormat().getFrameSize();
             if (bytesPerFrame == AudioSystem.NOT_SPECIFIED) {
                 bytesPerFrame = 1;
@@ -27,45 +35,68 @@ public class SoundReader {
                 numBytes = 16000 * bytesPerFrame;
             }
             audioBytes = new byte[numBytes];
-            try {
-                numBytesRead = audioInputStream.read(audioBytes);
-            } catch (Exception ex) {
-                System.out.println("1 AudioReaderException!!!");
-            }
+            numBytesRead = audioInputStream.read(audioBytes);
             shortAmplitudeArr =  new short[numBytesRead/bytesPerFrame];
+
             if (audioFileFormat.getFormat().isBigEndian()){
-                bigEndianOrder(shortAmplitudeArr);
+                bigEndianOrder(shortAmplitudeArr, countOfChannel);
             }
             else {
-                littleEndianOrder(shortAmplitudeArr);
+                littleEndianOrder(shortAmplitudeArr, countOfChannel);
             }
+
         } catch (Exception e) {
-            System.out.println("2 AudioReaderException!!!");
+            throw new ReaderException("SoundReader", e);
         }
+    }
+
+    private void littleEndianOrder(short shortAmplitudeArr[], int countOfChannel){
+        if (countOfChannel == 1) {
+            for (int i = 0, j = 0; i < audioBytes.length - 1; i += 2, j++){
+                int aux = audioBytes[i+1];
+                int dop = audioBytes[i] & 0xFF;
+                aux = aux << 8;
+                aux = aux| dop;
+                shortAmplitudeArr[j] = (short) aux;
+            }
+        } else {
+            for (int i = 0, j = 0; i < audioBytes.length - 1; i += 4, j++){
+                int aux = audioBytes[i+1];
+                int dop = audioBytes[i] & 0xFF;
+                aux = aux << 8;
+                aux = aux| dop;
+                shortAmplitudeArr[j] = (short) aux;
+            }
+        }
+
+
+    }
+
+    private void bigEndianOrder(short shortAmplitudeArr[], int countOfChannel){
+        if (countOfChannel == 1) {
+            for (int i = 0, j = 0; i < shortAmplitudeArr.length; i += 2, j++){
+                int aux = audioBytes[i];
+                aux = aux << 8;
+                aux = aux| (audioBytes[i + 1] & 0xFF);
+                shortAmplitudeArr[j] = (short) aux;
+            }
+        } else{
+            for (int i = 0, j = 0; i < shortAmplitudeArr.length; i += 4, j++){
+                int aux = audioBytes[i];
+                aux = aux << 8;
+                aux = aux| (audioBytes[i + 1] & 0xFF);
+                shortAmplitudeArr[j] = (short) aux;
+            }
+        }
+    }
+
+    public AudioFileFormat getFileFormat() {
+        return audioFileFormat;
+    }
+
+    public short[] getShortAmplitudeArr() {
         return shortAmplitudeArr;
     }
 
-    private static void littleEndianOrder(short shortAmplitudeArr[]){
-        for (int i = 0, j = 0; i < audioBytes.length - 1; i += 2, j++){
-            int aux = audioBytes[i+1];
-            int dop = audioBytes[i] & 0xFF;
-            aux = aux << 8;
-            aux = aux| dop;
-            shortAmplitudeArr[j] = (short) aux;
-        }
-    }
-
-    private static void bigEndianOrder(short shortAmplitudeArr[]){
-        for (int i = 0, j = 0; i < shortAmplitudeArr.length; i += 2, j++){
-            int aux = audioBytes[i];
-            aux = aux << 8;
-            aux = aux| (audioBytes[i + 1] & 0xFF);
-            shortAmplitudeArr[j] = (short) aux;
-        }
-    }
-
-    public static AudioFileFormat getFileFormat() {
-        return audioFileFormat;
-    }
 
 }

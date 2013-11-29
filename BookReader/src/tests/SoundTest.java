@@ -1,5 +1,6 @@
 package tests;
 
+import exception.ReaderException;
 import model.Model;
 import reader.SoundReader;
 import sound.SoundFindSilence;
@@ -46,7 +47,7 @@ public class SoundTest {
                     2950.5
             };
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ReaderException {
         String[] rusText = {"SoundTest"};
         String[] engText = {"SoundTest"};
         short[] audio = SoundReader.readAudio("resource/Rey.wav");
