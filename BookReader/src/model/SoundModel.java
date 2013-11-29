@@ -1,13 +1,16 @@
 package model;
 import javax.sound.sampled.AudioFileFormat;
+import javax.sound.sampled.AudioFormat;
 
 public class SoundModel extends AbstractModel{
     private short shortAmplitude[];
     private boolean booleanPauses[];
+    private byte[] audioBytes;
     private int start;
     private int end;
     private AudioFileFormat audioFileFormat;
     private String nameOfFile;
+    private AudioFormat audioFormat;
 
     public SoundModel(short[] audio){
         setShortAmplitude(audio);
@@ -20,6 +23,15 @@ public class SoundModel extends AbstractModel{
     public AudioFileFormat getAudioFileFormat() {
         return audioFileFormat;
     }
+
+    public void setAudioFormat(AudioFormat value) {
+        audioFormat = value;
+    }
+
+    public AudioFormat getAudioFormat() {
+        return audioFormat;
+    }
+
 
     public void setNameOfFile(String value) {
         nameOfFile = value;
@@ -68,4 +80,14 @@ public class SoundModel extends AbstractModel{
     public void setBooleanPauses(boolean arr[]){
         booleanPauses = arr;
     }
+
+    public void setAudioBytes(byte[] arr) {
+        audioBytes = arr;
+    }
+
+    public byte[] getAudioBytes() {
+        return audioBytes;
+    }
+
+
 }

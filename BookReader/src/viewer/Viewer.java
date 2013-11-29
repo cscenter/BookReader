@@ -18,7 +18,7 @@ public class Viewer{
     private SoundViewer audioPanel;
     private Model model;
 
-    public Viewer(Model model){
+    public Viewer(Model model) throws InterruptedException {
         frame = new JFrame("BookReader");
         this.model = model;
         rusPanel = new TextViewer(model.getRusModel().text,this);

@@ -9,6 +9,9 @@ public class PlayAudio {
     private SoundModel audio;
     private Clip line = null;
     private int start = 0;
+    private int end = 0;
+    private boolean run = true;
+
 
     public PlayAudio(SoundModel model) throws InterruptedException {
         audio = model;
@@ -16,14 +19,15 @@ public class PlayAudio {
 
     public void playClip() throws InterruptedException {
         try {
-            AudioFileFormat audioFileFormat = audio.getAudioFileFormat();
-            AudioFormat audioFormat = audioFileFormat.getFormat();
-            File fileIn = new File(audio.getNameOfFile());
-            AudioInputStream stream = AudioSystem.getAudioInputStream(fileIn);
-            DataLine.Info info = new DataLine.Info(Clip.class, audioFormat);
+            DataLine.Info info = new DataLine.Info(Clip.class, audio.getAudioFormat());
+
             if (AudioSystem.isLineSupported(info)) {
                 line = (Clip)AudioSystem.getLine(info);
-                line.open(stream);
+                AudioFormat audioFormat = audio.getAudioFormat();
+                byte[] audioBytes = audio.getAudioBytes();
+                line.open(audioFormat, audioBytes, start, start - end);
+                System.out.println(line.isOpen());
+
                 line.setFramePosition(start);
                 line.start();
 
@@ -41,4 +45,17 @@ public class PlayAudio {
     public void setStart(int value) {
         start = value;
     }
+    public void setEnd(int value) {
+        end = value;
+    }
+    public boolean getRun() {
+        return run;
+    }
+
+    public void setRun(boolean run) {
+        this.run = run;
+    }
+
+
+
 }

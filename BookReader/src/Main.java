@@ -15,7 +15,7 @@ public class Main {
         parseArgs(args);
     }
 
-    private static void parseArgs(String[] args) throws ReaderException{
+    private static void parseArgs(String[] args) throws ReaderException, InterruptedException {
         for (int i = 0; i < args.length; i++) {
             if (args[i].equals("--a")) {
                 nameOfAudioFile = args[i + 1];
@@ -34,12 +34,13 @@ public class Main {
         readAndShowAll();
     }
 
-    private static void readAndShowAll() throws ReaderException {
+    private static void readAndShowAll() throws ReaderException, InterruptedException {
         SoundReader soundReader = new SoundReader(nameOfAudioFile);
         short[] audio = soundReader.getShortAmplitudeArr();
 
         Model model = new Model(audio, nameOfRusText, nameOfEngText);
-
+        model.getAudioModel().setAudioBytes(soundReader.getByteAmplitudeArr());
+        model.getAudioModel().setAudioFormat(soundReader.getAudioFormat());
         model.getAudioModel().setStart(13881);
         model.getAudioModel().setEnd(14881);
         model.getAudioModel().setAudioFileFormat(soundReader.getFileFormat());
