@@ -13,7 +13,7 @@ public class Russian extends Language {
     @Override
     public boolean isName(String word) {
         for (String before : beforeName) {
-            if (word == before) {
+            if (word.equals(before)) {
                 return true;
             }
         }

@@ -93,7 +93,9 @@ public class TextViewer  extends AbstractViewer {
     @Override
     public void update(int position) {
         try{
-            //scroll.getVerticalScrollBar().setValue(text.position);
+            int line =  text.getLineOfOffset(position);
+            System.out.println("position: "+ position+ " caretpos: "+ text.getCaretPosition() +" line num: "+line);
+            //scroll.getVerticalScrollBar().setValue(line);
             if (marker == null)
                 marker = text.getHighlighter().addHighlight(position, position+10,
                         new DefaultHighlighter.DefaultHighlightPainter(Color.RED));

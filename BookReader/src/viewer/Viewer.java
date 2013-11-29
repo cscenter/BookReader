@@ -63,7 +63,7 @@ public class Viewer{
             model.getEngModel().setSentenceFromText(currentSentence);
 
         }
-
+       // System.out.println(model.getRusModel().getCurrentPause());
         engPanel.update(model.getEngModel().getSentencePosition(model.getEngModel().getCurrentSentence()));
         rusPanel.update(model.getRusModel().getSentencePosition(model.getRusModel().getCurrentSentence()));
     }

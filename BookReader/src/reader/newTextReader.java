@@ -1,11 +1,9 @@
 package reader;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class newTextReader {
+public class NewTextReader {
 
     private static char[] endSymbols = {'.','!','?'};
     private static char[] pauseSymbols = {',',';',':'};
@@ -14,7 +12,7 @@ public class newTextReader {
     private static Integer[] pauses;
     private static Integer[] sentences;
 
-    public static void Tokenizer (String text, Language language) {
+    public static void tokenizer(String text, Language language) {
         ArrayList<Integer> listSentences = new ArrayList<Integer>();
         ArrayList<Integer> listPauses = new ArrayList<Integer>();
         listPauses.add(0);
@@ -29,13 +27,13 @@ public class newTextReader {
                 }
                 start = i+1;
 
-                if(CheckEndSymbol(text.charAt(i)))
-                    if(CheckEnd(text, i, lastWord.toString(),language)){
+                if(сheckEndSymbol(text.charAt(i)))
+                    if(сheckEnd(text, i, lastWord.toString(), language)){
                         listSentences.add(i);
                         listPauses.add(i);
                     }
-                if(CheckPauseSymbol(text.charAt(i)))
-                    if(CheckPause(text, i)){
+                if(сheckPauseSymbol(text.charAt(i)))
+                    if(сheckPause(text, i)){
                         listPauses.add(i);
                     }
             }
@@ -53,7 +51,7 @@ public class newTextReader {
         return sentences;
     }
 
-    private static boolean CheckEndSymbol(char ch){
+    private static boolean сheckEndSymbol(char ch){
         for (char endSymbol : endSymbols) {
             if (ch == endSymbol) {
                 return true;
@@ -62,7 +60,7 @@ public class newTextReader {
         return false;
     }
 
-    private static boolean CheckPauseSymbol(char ch){
+    private static boolean сheckPauseSymbol(char ch){
         for (char pauseSymbol : pauseSymbols) {
             if (ch == pauseSymbol) {
                 return true;
@@ -71,8 +69,8 @@ public class newTextReader {
         return false;
     }
 
-    private static boolean CheckPause (String text,int i){
-        Pattern p = Pattern.compile("(,|:|;|!|.|\\?)\\s*\\w*\\s*(,|:|;|!|.|\\?)");
+    private static boolean сheckPause(String text, int i){
+        Pattern p = Pattern.compile("[,|:|;|!|.|\\?]\\s*[а-я]*[А-Я]*\\s*[,|:|;|!|.|\\?]");
         Matcher m = p.matcher(text.substring(i-20, i+1));
         if(m.find())
             if(m.group(m.groupCount()).contains(lastWord)) return false;
@@ -80,7 +78,7 @@ public class newTextReader {
         return true;
     }
 
-    private static boolean CheckEnd (String text,int i, String lastWord, Language language)   {
+    private static boolean сheckEnd(String text, int i, String lastWord, Language language)   {
 
             for (i++; i < text.length();i++){
                 if(text.charAt(i) == ' ')  continue;
