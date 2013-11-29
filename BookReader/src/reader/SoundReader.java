@@ -23,7 +23,6 @@ public class SoundReader {
         File fileIn = new File(nameOfFile);
         try {
             audioFileFormat = getAudioFileFormat(fileIn);
-            if (audioFileFormat.getType() == AudioFileFormat.Type.WAVE) {
                 AudioInputStream audioInputStream =
                     AudioSystem.getAudioInputStream(fileIn);
                 int countOfChannel =  audioFileFormat.getFormat().getChannels();
@@ -45,12 +44,9 @@ public class SoundReader {
                 else {
                     littleEndianOrder(shortAmplitudeArr, countOfChannel);
                 }
-            } else {
-                throw new ReaderException("Don't support type " + audioFileFormat.getType());
-            }
 
         } catch (Exception e) {
-            throw new ReaderException("SoundReader", e);
+            throw new ReaderException("SoundReader: " + e.getMessage());
         }
     }
 
