@@ -22,8 +22,8 @@ public class Viewer{
     public Viewer(Model model) throws InterruptedException {
         frame = new JFrame("BookReader");
         this.model = model;
-        rusPanel = new TextViewer(model.getRusModel().text,this);
-        engPanel = new TextViewer(model.getEngModel().text,this);
+        rusPanel = new TextViewer(model.getRusModel().getText(),this);
+        engPanel = new TextViewer(model.getEngModel().getText(),this);
         audioPanel = new SoundViewer(model.getAudioModel(),this);
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,rusPanel,engPanel);
         //JPanel panel = new JPanel();

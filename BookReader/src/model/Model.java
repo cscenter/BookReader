@@ -8,15 +8,9 @@ public class Model {
     private TextModel engModel;
     private SoundModel audioModel;
 
-    public Model(String[] rusText, String[] engText, short[] audio){
-        rusModel = new TextModel(rusText);
-        engModel = new TextModel(engText);
-        audioModel = new SoundModel(audio);
-    }
-
-    public Model(short[] audio, String pathToRusFile, String pathToEngFile){
-        rusModel = new TextModel(pathToRusFile, new Russian());
-        engModel = new TextModel(pathToEngFile, new English());
+    public Model(short[] audio, TextModel rusModel, TextModel engModel){
+        this.rusModel = rusModel;
+        this.engModel = engModel;
         audioModel = new SoundModel(audio);
     }
 

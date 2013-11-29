@@ -39,7 +39,16 @@ public class Main {
         SoundReader soundReader = new SoundReader(nameOfAudioFile);
         short[] audio = soundReader.getShortAmplitudeArr();
 
-        Model model = new Model(audio, nameOfRusText, nameOfEngText);
+        NewTextReader rusBuilder = new NewTextReader();
+        rusBuilder.tokenizer(nameOfRusText, new Russian());
+        TextModel rusModel = rusBuilder.getModel();
+
+        NewTextReader engBuilder = new NewTextReader();
+        engBuilder.tokenizer(nameOfEngText, new English());
+        TextModel engModel = engBuilder.getModel();
+
+        Model model = new Model(audio, rusModel, engModel);
+
         model.getAudioModel().setAudioBytes(soundReader.getByteAmplitudeArr());
         model.getAudioModel().setAudioFormat(soundReader.getAudioFormat());
         model.getAudioModel().setStart(13881);

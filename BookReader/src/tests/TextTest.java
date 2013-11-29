@@ -2,6 +2,10 @@ package tests;
 
 import exception.ReaderException;
 import model.Model;
+import model.TextModel;
+import reader.English;
+import reader.NewTextReader;
+import reader.Russian;
 import reader.SoundReader;
 
 /**
@@ -19,7 +23,15 @@ public class TextTest {
     public static void main(String[] args) throws InterruptedException, ReaderException {
         SoundReader soundReader = new SoundReader("resource/Rey Bredbery.wav");
         short[] audio = soundReader.getShortAmplitudeArr();
-        Model model = new Model(audio,"resource/test1.txt","resource/test2.txt");
+        NewTextReader rusBuilder = new NewTextReader();
+        rusBuilder.tokenizer("resource/ReyBredbery.txt", new Russian());
+        TextModel rusModel = new NewTextReader().getModel();
+
+        NewTextReader engBuilder = new NewTextReader();
+        engBuilder.tokenizer("resource/test2.txt", new English());
+        TextModel engModel = new NewTextReader().getModel();
+
+        Model model = new Model(audio, rusModel, engModel);
 
         for(int i = 0; i < answer.length; i++){
             model.getEngModel().setSentenceFromText(rusQuestion[i]);

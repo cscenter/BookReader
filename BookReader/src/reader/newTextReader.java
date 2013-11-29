@@ -1,54 +1,58 @@
 package reader;
+import model.TextModel;
+
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class NewTextReader {
 
-    private static char[] endSymbols = {'.','!','?'};
-    private static char[] pauseSymbols = {',',';',':'};
+    private static final char[] endSymbols = {'.','!','?'};
+    private static final char[] pauseSymbols = {',',';',':'};
     private static StringBuilder lastWord = new StringBuilder();
 
-    private static Integer[] pauses;
-    private static Integer[] sentences;
+    private TextModel textModel = new TextModel();
 
-    public static void tokenizer(String text, Language language) {
+    public  TextModel getModel(){
+        return textModel;
+    }
+
+
+
+    public void tokenizer(String pathToFile, Language language) {
         ArrayList<Integer> listSentences = new ArrayList<Integer>();
         ArrayList<Integer> listPauses = new ArrayList<Integer>();
         listPauses.add(0);
         listSentences.add(0);
         int start = 0;
         StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < text.length();i++){
-            if (!Character.isLetter(text.charAt(i))){
+        textModel.setText(FileReader.fileRead(pathToFile));
+
+        for(int i = 0; i <  textModel.getText().length();i++){
+            if (!Character.isLetter(textModel.getText().charAt(i))){
                 if (start != i-1 && sb.length()!= 0){
                     lastWord.setLength(0);
                     lastWord.append(sb.substring(start));
                 }
                 start = i+1;
 
-                if(сheckEndSymbol(text.charAt(i)))
-                    if(сheckEnd(text, i, lastWord.toString(), language)){
+                if(сheckEndSymbol(textModel.getText().charAt(i)))
+                    if(сheckEnd(textModel.getText(), i, lastWord.toString(), language)){
                         listSentences.add(i);
                         listPauses.add(i);
                     }
-                if(сheckPauseSymbol(text.charAt(i)))
-                    if(сheckPause(text, i)){
+                if(сheckPauseSymbol(textModel.getText().charAt(i)))
+                    if(language.сheckPause(textModel.getText(), lastWord.toString(), i)){
                         listPauses.add(i);
                     }
             }
-            sb.append(text.charAt(i));
+            sb.append(textModel.getText().charAt(i));
 
         }
-        pauses = listPauses.toArray(new Integer[listPauses.size()]);
-        sentences = listSentences.toArray(new Integer[listSentences.size()]);
-    }
-
-    public static Integer[] getPauses(){
-        return pauses;
-    }
-    public static Integer[] getSentences(){
-        return sentences;
+        textModel.setPauses(listPauses.toArray(new Integer[listPauses.size()]));
+        textModel.setSentences(listSentences.toArray(new Integer[listSentences.size()]));
     }
 
     private static boolean сheckEndSymbol(char ch){
@@ -67,15 +71,6 @@ public class NewTextReader {
             }
         }
         return false;
-    }
-
-    private static boolean сheckPause(String text, int i){
-        Pattern p = Pattern.compile("[,|:|;|!|.|\\?]\\s*[а-я]*[А-Я]*\\s*[,|:|;|!|.|\\?]");
-        Matcher m = p.matcher(text.substring(i-20, i+1));
-        if(m.find())
-            if(m.group(m.groupCount()).contains(lastWord)) return false;
-
-        return true;
     }
 
     private static boolean сheckEnd(String text, int i, String lastWord, Language language)   {

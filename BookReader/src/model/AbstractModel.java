@@ -5,6 +5,7 @@ public class AbstractModel {
     protected int currentSentence;
     protected int currentPause;
     protected Integer[] pauses;
+
     protected Integer[] sentences;
 
     public int getCurrentSentence() {
@@ -99,6 +100,17 @@ public class AbstractModel {
 
     public void setPauses(Integer[] arrPauses){
         pauses = arrPauses;
+    }
+    public Integer[] getSentences() {
+        return sentences;
+    }
+
+    public void setSentences(Integer[] sentences) {
+        this.sentences = sentences;
+    }
+
+    public Integer[] getPauses() {
+        return pauses;
     }
 
     public double findPercent(int sentence){

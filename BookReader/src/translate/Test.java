@@ -18,13 +18,13 @@ public class Test {
                 " his symbolic helmet numbered 451 on his stolid head, and his eyes all " +
                 "orange flame with the thought of what came next, he flicked the igniter" +
                 " and the house jumped up in a gorging fire that burned the evening sky " +
-                "red and yellow and black.He strode in a swarm of firefliers.He wanted" +
+                "red and yellow and black.He strode in a swarm of firefliers. He wanted" +
                 " above all, like the old joke, to shove a marshmallow on a stick in the " +
                 "furnace, while the flapping pigeon-winged books died on the porch and lawn" +
                 " of the house. While the books went up in sparkling whirls and blew away" +
                 " on a wind turned dark with burning.";
         try {
-            System.out.println(new Request("eng", "ru", text).sendGet());
+            System.out.println(new Request("eng", "ru", text.toLowerCase()).sendGet());
         } catch (Exception e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }

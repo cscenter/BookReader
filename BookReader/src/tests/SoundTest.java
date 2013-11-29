@@ -2,6 +2,7 @@ package tests;
 
 import exception.ReaderException;
 import model.Model;
+import model.TextModel;
 import reader.SoundReader;
 import sound.SoundFindSilence;
 
@@ -48,12 +49,15 @@ public class SoundTest {
             };
 
     public static void main(String[] args) throws ReaderException {
-        String[] rusText = {"SoundTest"};
-        String[] engText = {"SoundTest"};
+     //   String[] rusText = {"SoundTest"};
+     //   String[] engText = {"SoundTest"};
         SoundReader soundReader = new SoundReader("resource/Rey.wav");
         short[] audio = soundReader.getShortAmplitudeArr();
 
-        model = new Model(rusText, engText, audio);
+     //   model = new Model(rusText, engText, audio);
+        TextModel ruModel = new TextModel();
+        TextModel engModel = new TextModel();
+        model = new Model(audio, ruModel, engModel);
         model.getAudioModel().setStart(13881);
         model.getAudioModel().setAudioFileFormat(soundReader.getFileFormat());
         model.getAudioModel().setNameOfFile("resource/Rey.wav");

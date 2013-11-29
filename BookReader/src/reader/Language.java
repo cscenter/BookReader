@@ -11,5 +11,7 @@ package reader;
 
     static private String[] beforeName;
 
+    public abstract boolean сheckPause(String text, String lastWord, int i);
+
     public abstract boolean isName(String word);
 }
