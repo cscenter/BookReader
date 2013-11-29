@@ -22,27 +22,31 @@ public class SoundReader {
         int numBytesRead;
         File fileIn = new File(nameOfFile);
         try {
-            AudioInputStream audioInputStream =
+            audioFileFormat = getAudioFileFormat(fileIn);
+            if (audioFileFormat.getType() == AudioFileFormat.Type.WAVE) {
+                AudioInputStream audioInputStream =
                     AudioSystem.getAudioInputStream(fileIn);
-            audioFileFormat =  getAudioFileFormat(fileIn);
-            int countOfChannel =  audioFileFormat.getFormat().getChannels();
-            int bytesPerFrame = audioFileFormat.getFormat().getFrameSize();
-            if (bytesPerFrame == AudioSystem.NOT_SPECIFIED) {
-                bytesPerFrame = 1;
-            }
-            int numBytes = audioFileFormat.getFrameLength()*bytesPerFrame;
-            if (numBytes == AudioSystem.NOT_SPECIFIED){
-                numBytes = 16000 * bytesPerFrame;
-            }
-            audioBytes = new byte[numBytes];
-            numBytesRead = audioInputStream.read(audioBytes);
-            shortAmplitudeArr =  new short[numBytesRead/bytesPerFrame];
+                int countOfChannel =  audioFileFormat.getFormat().getChannels();
+                int bytesPerFrame = audioFileFormat.getFormat().getFrameSize();
+                if (bytesPerFrame == AudioSystem.NOT_SPECIFIED) {
+                    bytesPerFrame = 1;
+                }
+                int numBytes = audioFileFormat.getFrameLength()*bytesPerFrame;
+                if (numBytes == AudioSystem.NOT_SPECIFIED){
+                    numBytes = 16000 * bytesPerFrame;
+                }
+                audioBytes = new byte[numBytes];
+                numBytesRead = audioInputStream.read(audioBytes);
+                shortAmplitudeArr =  new short[numBytesRead/bytesPerFrame];
 
-            if (audioFileFormat.getFormat().isBigEndian()){
-                bigEndianOrder(shortAmplitudeArr, countOfChannel);
-            }
-            else {
-                littleEndianOrder(shortAmplitudeArr, countOfChannel);
+                if (audioFileFormat.getFormat().isBigEndian()){
+                    bigEndianOrder(shortAmplitudeArr, countOfChannel);
+                }
+                else {
+                    littleEndianOrder(shortAmplitudeArr, countOfChannel);
+                }
+            } else {
+                throw new ReaderException("Don't support type " + audioFileFormat.getType());
             }
 
         } catch (Exception e) {

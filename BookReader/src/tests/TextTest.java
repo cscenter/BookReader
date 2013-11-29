@@ -17,7 +17,8 @@ public class TextTest {
     static int[] answer = new int[rightAnswer.length];
 
     public static void main(String[] args) throws InterruptedException, ReaderException {
-        short[] audio = SoundReader.readAudio("resource/Rey Bredbery.wav");
+        SoundReader soundReader = new SoundReader("resource/Rey Bredbery.wav");
+        short[] audio = soundReader.getShortAmplitudeArr();
         Model model = new Model(audio,"resource/test1.txt","resource/test2.txt");
 
         for(int i = 0; i < answer.length; i++){
