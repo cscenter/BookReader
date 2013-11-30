@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class NewTextReader {
+public class NewTextReader {
 
     private static final char[] endSymbols = {'.','!','?'};
     private static final char[] pauseSymbols = {',',';',':'};
