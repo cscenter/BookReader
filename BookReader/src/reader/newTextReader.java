@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class NewTextReader {
+class NewTextReader {
 
     private static char[] endSymbols = {'.','!','?'};
     private static char[] pauseSymbols = {',',';',':'};
