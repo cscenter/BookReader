@@ -1,5 +1,7 @@
 package reader;
 
+import exception.ReaderException;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 
@@ -11,7 +13,7 @@ import java.io.IOException;
  * To change this template use File | Settings | File Templates.
  */
 public class FileReader {
-    public static String fileRead(String pathToFile) {
+    public static String fileRead(String pathToFile) throws ReaderException {
         String text = null;
         FileInputStream in = null;
         try {
@@ -20,6 +22,7 @@ public class FileReader {
             in.read(dataString);
             text = new String(dataString);
         } catch (IOException e) {
+            throw new ReaderException(e);
         }finally {
             try {
                 if(in != null) in.close();

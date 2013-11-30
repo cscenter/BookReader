@@ -1,4 +1,5 @@
 package reader;
+import exception.ReaderException;
 import model.TextModel;
 
 import java.io.FileInputStream;
@@ -21,7 +22,7 @@ public class NewTextReader {
 
 
 
-    public void tokenizer(String pathToFile, Language language) {
+    public void tokenizer(String pathToFile, Language language)throws ReaderException{
         ArrayList<Integer> listSentences = new ArrayList<Integer>();
         ArrayList<Integer> listPauses = new ArrayList<Integer>();
         listPauses.add(0);
