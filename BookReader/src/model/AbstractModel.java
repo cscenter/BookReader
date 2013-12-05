@@ -1,5 +1,7 @@
 package model;
 
+import translate.Request;
+
 public class AbstractModel {
 
     protected int currentSentence;
@@ -68,14 +70,6 @@ public class AbstractModel {
         this.currentSentence = findSentence(position);
     }
 
-    /**
-     * Определяет номер предложения по номеру предложения в другом тексте.
-     * @param currentSentence
-     * @return
-     */
-    public void setSentenceFromText(int currentSentence){
-        this.currentSentence = currentSentence;
-    }
     /**
      * Устанавливает паузу.
      * @param currentPause

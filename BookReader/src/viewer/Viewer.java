@@ -50,14 +50,14 @@ public class Viewer{
             model.getRusModel().setCurrentSentence(currentSentence);
             currentPause = model.getRusModel().findPause(viewer.position);
             model.getRusModel().setCurrentPause(currentPause);
-            model.getEngModel().setSentenceFromText(currentSentence);
+            model.getEngModel().setSentenceFromText(model.getRusModel());
             model.getAudioModel().setPauseFromText(currentPause);
             audioPanel.update(model.getAudioModel().getPausePosition(model.getAudioModel().getCurrentPause() + 1));
         }else if(viewer == engPanel){
 
             currentSentence = model.getEngModel().findSentence(viewer.position);
             model.getEngModel().setCurrentSentence(currentSentence);
-            model.getRusModel().setSentenceFromText(currentSentence);
+            model.getRusModel().setSentenceFromText(model.getEngModel());
             currentPause = model.getRusModel().findPause(currentSentence);
             model.getRusModel().setCurrentPause(currentPause);
             model.getAudioModel().setPauseFromText(currentPause);
@@ -68,7 +68,7 @@ public class Viewer{
             model.getRusModel().setSentenceFromSound(currentPause);
             currentSentence = model.getRusModel().getCurrentSentence();
             model.getRusModel().setCurrentPause(currentPause);
-            model.getEngModel().setSentenceFromText(currentSentence);
+            model.getEngModel().setSentenceFromText(model.getRusModel());
 
         }
        // System.out.println(model.getRusModel().getCurrentPause());

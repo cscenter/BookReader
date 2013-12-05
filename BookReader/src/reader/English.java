@@ -11,7 +11,9 @@ import java.util.regex.Pattern;
  * To change this template use File | Settings | File Templates.
  */
 public class English extends Language {
-
+    public English(){
+        setName("en");
+    }
     private static String[] beforeName = {"Mr", "Mrs", "St"};
     @Override
     public boolean isName(String word) {

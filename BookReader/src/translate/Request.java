@@ -7,6 +7,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
+
 import org.json.simple.JSONObject;
 
 
@@ -27,9 +29,10 @@ public class Request {
     private String languageTo;
 
     private String text;
+    private Integer[] textNum;
 
     Request(){}
-    Request(String languageFrom, String languageTo, String text){
+    public Request(String languageFrom, String languageTo, String text){
         this.languageFrom = languageFrom;
         this.languageTo = languageTo;
         this.text = text;
@@ -63,7 +66,7 @@ public class Request {
 
         String url = "https://translate.yandex.net/api/v1.5/tr.json/translate?" +
                 "key=" +  KEY +
-                "&text=" + this.text +
+                "&text=" + URLEncoder.encode(this.text,"UTF-8") +
                 "&lang=" + this.languageFrom +"-" + this.languageTo +
                 "&format=plain";
 
@@ -76,8 +79,9 @@ public class Request {
 
         int responseCode = con.getResponseCode();
 
+        System.out.println("\nSending 'GET' request to URL : " + url);
         if(responseCode != SUCCESS) throw new Exception("Response Code : " + responseCode);
-        //System.out.println("\nSending 'GET' request to URL : " + url);
+
         //System.out.println("Response Code : " + responseCode);
 
         BufferedReader in = new BufferedReader(

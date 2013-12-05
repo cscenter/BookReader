@@ -34,7 +34,8 @@ public class TextTest {
         Model model = new Model(audio, rusModel, engModel);
 
         for(int i = 0; i < answer.length; i++){
-            model.getEngModel().setSentenceFromText(rusQuestion[i]);
+            rusModel.setCurrentSentence(rusQuestion[i]);
+            model.getEngModel().setSentenceFromText(rusModel);
           //  double percent = model.getRusModel().findPercent(rusQuestion[i]);
           //  model.getEngModel().setSentencesFromPercent(percent);
             answer[i] = model.getEngModel().getCurrentSentence();

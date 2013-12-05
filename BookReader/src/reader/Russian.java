@@ -12,6 +12,9 @@ import java.util.regex.Pattern;
  */
 public class Russian extends Language {
 
+    public Russian(){
+        setName("ru");
+    }
     private static String[] beforeName = {"г","ул","пр","ш"};
     @Override
     public boolean isName(String word) {

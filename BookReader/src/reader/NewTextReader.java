@@ -54,6 +54,7 @@ public class NewTextReader {
         }
         textModel.setPauses(listPauses.toArray(new Integer[listPauses.size()]));
         textModel.setSentences(listSentences.toArray(new Integer[listSentences.size()]));
+        textModel.setLanguage(language);
     }
 
     private static boolean сheckEndSymbol(char ch){
