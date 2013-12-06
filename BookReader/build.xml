@@ -1,0 +1,53 @@
+<project>
+
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src" destdir="build/classes">
+            <classpath location="src/json-simple-1.1.1.jar"/>
+        </javac>
+    </target>
+
+    <target name="jarSoundTest">
+        <mkdir dir="build/jar"/>
+        <jar destfile="build/jar/SoundTest.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Main-Class" value="tests/SoundTest"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="runSoundTest">
+        <java jar="build/jar/SoundTest.jar" fork="true"/>
+    </target>
+
+    <target name="jarTextTest">
+        <mkdir dir="build/jar"/>
+        <jar destfile="build/jar/TextTest.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Main-Class" value="tests/TextTest"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="runTextTest">
+        <java jar="build/jar/TextTest.jar" fork="true"/>
+    </target>
+
+    <target name="jar">
+        <mkdir dir="build/jar"/>
+        <jar destfile="build/jar/BookReader.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Main-Class" value="Main"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="run">
+        <java jar="build/jar/BookReader.jar" fork="true"/>
+    </target>
+
+</project>
