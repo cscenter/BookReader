@@ -2,8 +2,6 @@ package viewer;
 
 import model.*;
 import javax.swing.*;
-import javax.swing.plaf.multi.MultiSplitPaneUI;
-import java.awt.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -71,7 +69,8 @@ public class Viewer{
             model.getEngModel().setSentenceFromText(model.getRusModel());
 
         }
-       // System.out.println(model.getRusModel().getCurrentPause());
+        System.out.println("Предложение ru: "+model.getRusModel().getCurrentSentence());
+        System.out.println("Предложение eng: "+model.getEngModel().getCurrentSentence());
         engPanel.update(model.getEngModel().getSentencePosition(model.getEngModel().getCurrentSentence()));
         rusPanel.update(model.getRusModel().getSentencePosition(model.getRusModel().getCurrentSentence()));
     }

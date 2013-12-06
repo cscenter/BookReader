@@ -1,7 +1,5 @@
 package model;
 
-import translate.Request;
-
 public class AbstractModel {
 
     protected int currentSentence;

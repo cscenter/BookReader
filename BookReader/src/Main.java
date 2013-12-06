@@ -47,6 +47,20 @@ public class Main {
         engBuilder.tokenizer(nameOfEngText, new English());
         TextModel engModel = engBuilder.getModel();
 
+        rusBuilder.setControlPoints(engModel);
+        engBuilder.setControlPoints(rusModel);
+
+        for(int i= 0; i < rusModel.getControlPoints().size(); i++){
+            System.out.print(rusModel.getControlPoints().get(i).getKeySentence()+" "+
+                    rusModel.getControlPoints().get(i).getValueSentence()+ " ");
+
+        }
+        System.out.println();
+        for(int i= 0; i < engModel.getControlPoints().size(); i++){
+            System.out.print(engModel.getControlPoints().get(i).getKeySentence()+ " " +
+                    engModel.getControlPoints().get(i).getValueSentence()+ " ");
+        }
+
         Model model = new Model(audio, rusModel, engModel);
 
         model.getAudioModel().setAudioBytes(soundReader.getByteAmplitudeArr());

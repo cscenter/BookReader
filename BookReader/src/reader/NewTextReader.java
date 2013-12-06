@@ -1,18 +1,19 @@
 package reader;
 import exception.ReaderException;
+import model.Point;
 import model.TextModel;
+import translate.Request;
+import translate.Search;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import static translate.Search.search;
 
 public class NewTextReader {
 
     private static final char[] endSymbols = {'.','!','?'};
     private static final char[] pauseSymbols = {',',';',':'};
-    private static StringBuilder lastWord = new StringBuilder();
+    private StringBuilder lastWord = new StringBuilder();
 
     private TextModel textModel = new TextModel();
 
@@ -56,6 +57,31 @@ public class NewTextReader {
         textModel.setSentences(listSentences.toArray(new Integer[listSentences.size()]));
         textModel.setLanguage(language);
     }
+
+    public void setControlPoints(TextModel anotherModel) throws ReaderException {
+        ArrayList<Point> controlPoints = new ArrayList<Point>();
+
+        int anotherIndex = 0;
+        for(int i = 0; i < textModel.getSentences().length; i = i + Search.RANGE*2){
+            Point currentPoint = new Point();
+            textModel.setCurrentSentence(i);
+            anotherModel.setCurrentSentence(anotherIndex);
+            String buf = textModel.getSubstring();
+            if(buf == null) break;
+            String translate = new Request(textModel.getLanguage().getName(),
+                    anotherModel.getLanguage().getName(),
+                    buf).sendGet();
+
+            anotherIndex = search(translate.toLowerCase(), anotherModel);
+
+            currentPoint.setKeySentence(i);
+            currentPoint.setValueSentence(anotherIndex);
+            controlPoints.add(currentPoint);
+            anotherIndex += 100;
+        }
+        textModel.setControlPoints(controlPoints);
+    }
+
 
     private static boolean сheckEndSymbol(char ch){
         for (char endSymbol : endSymbols) {

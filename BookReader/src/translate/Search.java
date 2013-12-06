@@ -2,7 +2,6 @@ package translate;
 
 import model.TextModel;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -14,15 +13,18 @@ import java.util.HashMap;
  */
 public class Search {
 
+    public static final int DEVIATION = 5;
+    public static final int RANGE = 50;
+
     public static int search (String translate, TextModel originalModel){
         int sentence = originalModel.getCurrentSentence();
         int maxPercent = 0;
         int maxNumber = sentence;
         int currentPercent;
-        for(int i = sentence - 50; i < sentence + 50; i++){
-            if(i< 5) i = 5;
-            //if(i+5 >= originalModel.getSentences().length) break;
-            int begin = originalModel.getSentencePosition(i - 5);
+        if(sentence < DEVIATION) return sentence;
+        for(int i = sentence - RANGE; i < sentence + RANGE; i++){
+            if(i < DEVIATION) i = DEVIATION;
+            int begin = originalModel.getSentencePosition(i - DEVIATION);
             int end = originalModel.getSentencePosition(i + 1);
             String original = originalModel.getText().substring(begin, end);
             currentPercent = compare(translate, original);
@@ -30,7 +32,6 @@ public class Search {
                 maxPercent = currentPercent;
                 maxNumber = i;
             }
-         //   if(maxPercent >= 50) return maxNumber;
         }
         return maxNumber;
     }

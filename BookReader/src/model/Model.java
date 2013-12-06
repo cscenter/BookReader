@@ -1,8 +1,5 @@
 package model;
 
-import reader.English;
-import reader.Russian;
-
 public class Model {
     private TextModel rusModel;
     private TextModel engModel;

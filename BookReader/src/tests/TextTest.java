@@ -7,6 +7,7 @@ import reader.English;
 import reader.NewTextReader;
 import reader.Russian;
 import reader.SoundReader;
+import translate.Search;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,26 +25,28 @@ public class TextTest {
         SoundReader soundReader = new SoundReader("resource/Rey Bredbery.wav");
         short[] audio = soundReader.getShortAmplitudeArr();
         NewTextReader rusBuilder = new NewTextReader();
-        rusBuilder.tokenizer("resource/ReyBredbery.txt", new Russian());
-        TextModel rusModel = new NewTextReader().getModel();
+        rusBuilder.tokenizer("resource/test1.txt", new Russian());
+        TextModel rusModel = rusBuilder.getModel();
 
         NewTextReader engBuilder = new NewTextReader();
         engBuilder.tokenizer("resource/test2.txt", new English());
-        TextModel engModel = new NewTextReader().getModel();
+        TextModel engModel = engBuilder.getModel();
 
         Model model = new Model(audio, rusModel, engModel);
+        int count = 0;
 
         for(int i = 0; i < answer.length; i++){
             rusModel.setCurrentSentence(rusQuestion[i]);
             model.getEngModel().setSentenceFromText(rusModel);
-          //  double percent = model.getRusModel().findPercent(rusQuestion[i]);
-          //  model.getEngModel().setSentencesFromPercent(percent);
             answer[i] = model.getEngModel().getCurrentSentence();
+            if(answer[i] >= rightAnswer[i] - Search.DEVIATION && answer[i] <= rightAnswer[i] + Search.DEVIATION)
+                count ++;
         }
 
         for (int anAnswer : answer) System.out.print(anAnswer+" ");
         System.out.println('\n');
         for (int anAnswer : rightAnswer) System.out.print(anAnswer+" ");
+        System.out.println(count + "/"+ answer.length);
 
 
 

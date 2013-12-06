@@ -1,5 +1,6 @@
 package translate;
 
+import exception.ReaderException;
 import org.json.simple.parser.JSONParser;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -62,8 +63,8 @@ public class Request {
         this.text = text;
     }
 
-    public String sendGet() throws Exception {
-
+    public String sendGet() throws ReaderException {
+        try{
         String url = "https://translate.yandex.net/api/v1.5/tr.json/translate?" +
                 "key=" +  KEY +
                 "&text=" + URLEncoder.encode(this.text,"UTF-8") +
@@ -79,7 +80,7 @@ public class Request {
 
         int responseCode = con.getResponseCode();
 
-        System.out.println("\nSending 'GET' request to URL : " + url);
+        //System.out.println("\nSending 'GET' request to URL : " + url);
         if(responseCode != SUCCESS) throw new Exception("Response Code : " + responseCode);
 
         //System.out.println("Response Code : " + responseCode);
@@ -95,6 +96,10 @@ public class Request {
         in.close();
 
         return jsonObj.get("text").toString();
+        }catch (Exception e){
+            throw new ReaderException(e);
+        }
     }
+
 
 }
