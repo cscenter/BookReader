@@ -18,25 +18,28 @@ public class PlayAudio {
 
     public void playClip() throws InterruptedException {
         try {
-            DataLine.Info info = new DataLine.Info(Clip.class, audio.getAudioFormat());
-
+            AudioFileFormat audioFileFormat = audio.getAudioFileFormat();
+            AudioFormat audioFormat = audioFileFormat.getFormat();
+            File fileIn = new File(audio.getNameOfFile());
+            AudioInputStream stream = AudioSystem.getAudioInputStream(fileIn);
+            DataLine.Info info = new DataLine.Info(Clip.class, audioFormat);
             if (AudioSystem.isLineSupported(info)) {
                 line = (Clip)AudioSystem.getLine(info);
-                AudioFormat audioFormat = audio.getAudioFormat();
-                byte[] audioBytes = audio.getAudioBytes();
-                line.open(audioFormat, audioBytes, start, start - end);
-                System.out.println(line.isOpen());
-
+                line.open(stream);
                 line.setFramePosition(start);
                 line.start();
 
+
+                // Why do I do it?
                 while (!line.isRunning())
                     Thread.sleep(10);
                 while (line.isRunning())
                     Thread.sleep(10);
                 line.close();
+
             }
         } catch (Exception e) {
+            System.out.println("AudioReaderExeption!!!");
         }
         line.close();
     }
