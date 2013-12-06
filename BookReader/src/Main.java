@@ -6,8 +6,8 @@ import reader.*;
 
 public class Main {
     private static final int MIN = 10000;
-    private static final double LAMBDA = 0.995;
-    private static String nameOfAudioFile = "resource/Rey Bredbery.wav";
+    private static final double DELTA = 1.15;
+    private static String nameOfAudioFile = "resource/Rey.wav";
     private static String nameOfRusText = "resource/test1.txt";
     private static String nameOfEngText = "resource/test2.txt";
 
@@ -52,10 +52,10 @@ public class Main {
         model.getAudioModel().setAudioBytes(soundReader.getByteAmplitudeArr());
         model.getAudioModel().setAudioFormat(soundReader.getAudioFormat());
         model.getAudioModel().setStart(13881);
-        model.getAudioModel().setEnd(14881);
+        model.getAudioModel().setEnd(16881);
         model.getAudioModel().setAudioFileFormat(soundReader.getFileFormat());
         model.getAudioModel().setNameOfFile(nameOfAudioFile);
-        SoundFindSilence soundFindSilence = new SoundFindSilence(model.getAudioModel(), MIN, LAMBDA);
+        SoundFindSilence soundFindSilence = new SoundFindSilence(model.getAudioModel(), MIN, DELTA);
         Viewer myViewer = new Viewer(model);
     }
 

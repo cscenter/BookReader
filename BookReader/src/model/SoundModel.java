@@ -1,6 +1,7 @@
 package model;
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioFormat;
+import java.util.List;
 
 public class SoundModel extends AbstractModel{
     private short shortAmplitude[];
@@ -11,6 +12,10 @@ public class SoundModel extends AbstractModel{
     private AudioFileFormat audioFileFormat;
     private String nameOfFile;
     private AudioFormat audioFormat;
+    private List<Double> eMaxArr;
+    private List<Double> eMinArr;
+    private List<Double> thresholdArr;
+    private List<Double> energy;
 
     public SoundModel(short[] audio){
         setShortAmplitude(audio);
@@ -89,5 +94,36 @@ public class SoundModel extends AbstractModel{
         return audioBytes;
     }
 
+    public List<Double> getEMaxArr() {
+        return eMaxArr;
+    }
+
+    public void setEMaxArr(List<Double> eMaxArr) {
+        this.eMaxArr = eMaxArr;
+    }
+
+    public List<Double> getEMinArr() {
+        return eMinArr;
+    }
+
+    public void setEMinArr(List<Double> eMinArr) {
+        this.eMinArr = eMinArr;
+    }
+
+    public List<Double> getThresholdArr() {
+        return thresholdArr;
+    }
+
+    public void setThresholdArr(List<Double> thresholdArr) {
+        this.thresholdArr = thresholdArr;
+    }
+
+    public List<Double> getEnergy() {
+        return energy;
+    }
+
+    public void setEnergy(List<Double> energy) {
+        this.energy = energy;
+    }
 
 }

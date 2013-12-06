@@ -11,8 +11,8 @@ public class SoundTest {
     private static Model model;
     private static Integer silenceFromAlgorithm[];
     private static final int FREQUENCY = 8000;
-    private static final int MIN = 100;
-    private static final double LAMBDA = 0.9999;
+    private static final int MIN = 10000;
+    private static final double LAMBDA = 5;
     private static final double ACCURACY_BACK = 4;
     private static final double ACCURACY_FORWARD = 4;
 
@@ -65,10 +65,10 @@ public class SoundTest {
 
         System.out.println(calculatePoints2() + " points from " + silenceFromFile.length);
         System.out.println();
-        printSilenceFromAlgorithm();
+//        printSilenceFromAlgorithm();
         System.out.println();
 
-        printSilenceFromFile();
+//        printSilenceFromFile();
     }
 
     private static int calculatePoints() {

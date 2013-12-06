@@ -5,35 +5,49 @@ import java.util.List;
 
 public class SoundFindSilence {
     private SoundModel audioModel;
-    private final static int LENGTH_FRAME = 240;
+    private final static int LENGTH_FRAME = 250;
     private final int LENGTH_SILENCE = 4;
     private final int HANGOVER_THRESHOLD = 1;
-    private double eMax;
-    private double eMin;
+    private double eMax = 0;
+    private double eMin = 0;
     private double delta;
     private double minInitValue;
     private double deltaInitValue;
     private double threshold;
     private boolean isVoice[];
     private final double CHANGE_DELTA = 1.0001;
+    private int inactiveCounter;
+    private final double eps = 0.0001;
 
+    private List<Double> eMaxArr;
+    private List<Double> eMinArr;
+    private List<Double> thresholdArr;
     private List<Integer> silence;
+    private List<Double> energy;
 
     public SoundFindSilence(SoundModel model, double minInit, double deltaInit) {
+
         silence = new ArrayList<Integer>();
         audioModel = model;
         isVoice = new boolean[audioModel.getShortAmplitude().length / LENGTH_FRAME + 1];
+        eMaxArr = new ArrayList<Double>();
+        eMinArr = new ArrayList<Double>();
+        thresholdArr = new ArrayList<Double>();
+        energy = new ArrayList<Double>();
         minInitValue = minInit;
         deltaInitValue = deltaInit;
         delta = deltaInit;
-
-        algorithmDLED(minInit, deltaInit);
-        checkIsSilence();
+        inactiveCounter = 0;
+        algorithmDLED();
+        //checkIsSilence();
         addSilence();
 
         audioModel.setSilence(silence.toArray(new Integer[silence.size()]));
         audioModel.setBooleanPauses(isVoice);
-
+        audioModel.setEMaxArr(eMaxArr);
+        audioModel.setEMinArr(eMinArr);
+        audioModel.setThresholdArr(thresholdArr);
+        audioModel.setEnergy(energy);
     }
 
 
@@ -41,12 +55,14 @@ public class SoundFindSilence {
         return LENGTH_FRAME;
     }
 
-    private void algorithmDLED(double minInit, double deltaInit) {
-
+    private void algorithmDLED() {
+        int j = 0;
         for(int i = LENGTH_FRAME; i < audioModel.getShortAmplitude().length - LENGTH_FRAME;
             i += LENGTH_FRAME) {
+
+              j++;
             double currentEnergy = calculateEnergyOfFrame(i / LENGTH_FRAME);
-            if (i/ LENGTH_FRAME == 1) {
+            if (i / LENGTH_FRAME == 1) {
                 firstFrame(currentEnergy);
             }
             if (currentEnergy > eMax) {
@@ -64,6 +80,12 @@ public class SoundFindSilence {
                 lessThreshold(i / LENGTH_FRAME);
             }
             increaseEMin();
+            eMaxArr.add(eMax);
+            eMinArr.add(eMin);
+            thresholdArr.add(threshold);
+            energy.add(currentEnergy);
+
+//            System.out.println(threshold);
         }
     }
 
@@ -116,7 +138,7 @@ public class SoundFindSilence {
     }
 
     private void lessEMin(double currentEnergy) {
-        if (currentEnergy == 0) {
+        if (currentEnergy == 0 + eps) {
             eMin = minInitValue;
         } else {
 
@@ -131,17 +153,22 @@ public class SoundFindSilence {
 
     private void calculateThreshold() {
         double lambda = (eMax - eMin) / eMax;
+        lambda *= 0.9999;
         threshold = (1 - lambda) * eMax + lambda * eMin;
     }
 
     private void moreThreshold(int j) {
-        j--;
-        isVoice[j] = true;
+        isVoice[j - 1] = true;
+        inactiveCounter = 0;
     }
 
     private void lessThreshold(int j) {
-        j--;
-        isVoice[j] = false;
+        if (inactiveCounter > HANGOVER_THRESHOLD) {
+            isVoice[j - 1] = false;
+        } else {
+            isVoice[j - 1] = true;
+            inactiveCounter++;
+        }
     }
 
     private void increaseEMin() {

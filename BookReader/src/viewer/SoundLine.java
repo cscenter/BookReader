@@ -36,6 +36,17 @@ class SoundLine extends JPanel{
             g2d.drawLine(vertX, -200, vertX, 200);
             paintVert = false;
         }
+        int x = 10;
+        for (int i = start; i < end - 100; i += 100) {
+            g2d.setStroke(new BasicStroke(2,
+                    BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
+            g2d.drawLine(x, -200, x, 200);
+            Integer integer = i;
+            g2d.drawString(integer.toString(), x, 2 * OFFSET_Y);
+            x += 100;
+
+        }
+
         g2d.setStroke(new BasicStroke(1,
                 BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
         g2d.setColor(Color.BLUE);
