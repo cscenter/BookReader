@@ -14,7 +14,7 @@ public class SoundTest {
     private static final int MIN = 10000;
     private static final double LAMBDA = 5;
     private static final double ACCURACY_BACK = 4;
-    private static final double ACCURACY_FORWARD = 4;
+    private static final double ACCURACY_FORWARD = 2;
 
     private static Double silenceFromFile[] =
             {
@@ -38,23 +38,49 @@ public class SoundTest {
             };
     private static Double silenceFromFullFile[] =
             {
-                    2924D,
-                    2927D,
-                    2932D,
-                    2934D,
-                    2935D,
-                    2939D,
-                    2943.5,
-                    2950.5
+                    0.0,
+                    2.30,
+                    4.80,
+                    6.00,
+                    12.00,
+                    17.00,
+                    21.20,
+                    23.5,
+                    26.0,
+                    28.0,
+                    29.5,
+                    35.5,
+                    39.0,
+                    41.0,
+                    48.0,
+                    52.0,
+                    57.5,
+                    5034D,
+                    5032D,
+                    5096D,
+                    3226D,
+                    805D,
+                    7131D,
+                    8912D,
+                    9029D,
+                    126D,
+                    767D,
+                    759D,
+                    4575D,
+                    5352D,
+                    5260D,
+                    5049D,
+                    2539D,
+                    2135D,
+                    6096D
+
+
             };
 
     public static void main(String[] args) throws ReaderException {
-     //   String[] rusText = {"SoundTest"};
-     //   String[] engText = {"SoundTest"};
         SoundReader soundReader = new SoundReader("resource/Rey.wav");
         short[] audio = soundReader.getShortAmplitudeArr();
 
-     //   model = new Model(rusText, engText, audio);
         TextModel ruModel = new TextModel();
         TextModel engModel = new TextModel();
         model = new Model(audio, ruModel, engModel);
@@ -62,13 +88,8 @@ public class SoundTest {
         model.getAudioModel().setAudioFileFormat(soundReader.getFileFormat());
         model.getAudioModel().setNameOfFile("resource/Rey.wav");
         SoundFindSilence soundFindSilence = new SoundFindSilence(model.getAudioModel(), MIN, LAMBDA);
-
-        System.out.println(calculatePoints2() + " points from " + silenceFromFile.length);
-        System.out.println();
-//        printSilenceFromAlgorithm();
-        System.out.println();
-
-//        printSilenceFromFile();
+        System.out.println(calculatePoints2() + " points from " + silenceFromFullFile.length);
+//        System.out.println(calculatePoints() + " points from " + silenceFromFile.length);
     }
 
     private static int calculatePoints() {
@@ -121,6 +142,7 @@ public class SoundTest {
             System.out.println(i + ". " + silenceFromFile[i]);
         }
     }
+
     private static void printSilenceFromFullFile() {
         System.out.println("Silence from file");
         for (int i = 0; i < silenceFromFullFile.length; i++) {

@@ -6,6 +6,7 @@ import reader.*;
 
 public class Main {
     private static final int MIN = 10000;
+//    private static final double DELTA = 1.15;
     private static final double DELTA = 1.15;
     private static String nameOfAudioFile = "resource/Rey.wav";
     private static String nameOfRusText = "resource/test1.txt";

@@ -82,7 +82,7 @@ public class Paint extends JPanel{
 
 //          thresholdArr
             distance = 0;
-            g2d.setColor(Color.green);
+            g2d.setColor(Color.GREEN);
 
             g2d.setStroke(new BasicStroke(3,
                     BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
