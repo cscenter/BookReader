@@ -22,4 +22,28 @@
         </jar>
     </target>
     
+    <target name="jarSound">
+        <mkdir dir="build/jar"/>
+        <jar destfile="build/jar/Sound.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Main-Class" value="tests/SoundTest"/>
+                <attribute name="Class-Path" value="../../json-simple-1.jar"/>
+            </manifest>
+        </jar>
+    </target>
+
+
+    <target name="jarSoundTest">
+        <mkdir dir="build/jar"/>
+        <jar destfile="build/jar/SoundTest.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Main-Class" value="tests/SoundTest"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="runSoundTest">
+        <java jar="build/jar/SoundTest.jar" fork="true"/>
+    </target>
+
 </project>
