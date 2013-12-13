@@ -4,7 +4,9 @@ import exception.ReaderException;
 import model.Model;
 import model.TextModel;
 import reader.SoundReader;
+import sound.Average;
 import sound.SoundFindSilence;
+import sound.ZeroCrossing;
 
 public class SoundTest {
 
@@ -12,7 +14,7 @@ public class SoundTest {
     private static Integer silenceFromAlgorithm[];
     private static final int FREQUENCY = 8000;
     private static final int MIN = 10000;
-    private static final double LAMBDA = 5;
+    private static final double LAMBDA = 1.15;
     private static final double ACCURACY_BACK = 4;
     private static final double ACCURACY_FORWARD = 2;
 
@@ -55,26 +57,24 @@ public class SoundTest {
                     48.0,
                     52.0,
                     57.5,
-                    5034D,
-                    5032D,
-                    5096D,
-                    3226D,
+                  //  5034D,
+                  //  5032D,
+                   // 5096D,
+                   // 3226D,
                     805D,
-                    7131D,
-                    8912D,
-                    9029D,
+                   // 7131D,
+                   // 8912D,
+                   // 9029D,
                     126D,
                     767D,
                     759D,
-                    4575D,
-                    5352D,
-                    5260D,
-                    5049D,
-                    2539D,
-                    2135D,
-                    6096D
-
-
+                  //  4575D,
+                   // 5352D,
+                   // 5260D,
+                   // 5049D,
+                   // 2539D,
+                    2135D
+                    //6096D
             };
 
     public static void main(String[] args) throws ReaderException {
@@ -87,7 +87,15 @@ public class SoundTest {
         model.getAudioModel().setStart(13881);
         model.getAudioModel().setAudioFileFormat(soundReader.getFileFormat());
         model.getAudioModel().setNameOfFile("resource/Rey.wav");
-        SoundFindSilence soundFindSilence = new SoundFindSilence(model.getAudioModel(), MIN, LAMBDA);
+
+//        SoundFindSilence soundFindSilence = new SoundFindSilence(model.getAudioModel(), MIN, LAMBDA);
+//        System.out.println(calculatePoints2() + " points from " + silenceFromFullFile.length);
+//
+//        ZeroCrossing zeroCrossing = new ZeroCrossing(model.getAudioModel(), MIN, LAMBDA);
+//        System.out.println(calculatePoints2() + " points from " + silenceFromFullFile.length);
+
+
+        Average average = new Average(model.getAudioModel(), MIN, LAMBDA);
         System.out.println(calculatePoints2() + " points from " + silenceFromFullFile.length);
 //        System.out.println(calculatePoints() + " points from " + silenceFromFile.length);
     }

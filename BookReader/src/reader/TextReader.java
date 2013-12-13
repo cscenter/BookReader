@@ -68,9 +68,11 @@ public class TextReader {
                     else if((text.charAt(j) != ' ')) break;
 
                 if(     (text.charAt(j) >= 'A'&& text.charAt(j) <= 'Z')||
-                        (text.charAt(j) >= 'А'&& text.charAt(j) <= 'Я')) {
+                        //(text.charAt(j) >= 'А'&& text.charAt(j) <= 'Я')) {
+                        (text.charAt(j) >= 'A'&& text.charAt(j) <= 'Z')) {
                     if ((text.charAt(--j) >= 'A'&& text.charAt(j) <= 'Z')||
-                            (text.charAt(j) >= 'А'&& text.charAt(j) <= 'Я'))
+                            //(text.charAt(j) >= 'А'&& text.charAt(j) <= 'Я'))
+                        (text.charAt(j) >= 'A'&& text.charAt(j) <= 'Z'))
                         return true;
                     else return false;
                 }
@@ -82,9 +84,11 @@ public class TextReader {
                 if(text.charAt(i) == '\n')  return true;
                 if(text.charAt(i) >= '0'&&text.charAt(i) <= '9' ) return false;
                 if(     (text.charAt(i) >= 'a'&& text.charAt(i) <= 'z')||
-                        (text.charAt(i) >= 'а'&& text.charAt(i) <= 'я')) return false;
+                        (text.charAt(i) >= '\u1072'&& text.charAt(i) <= '\u1103')) return false;
+//                        (text.charAt(i) >= 'a'&& text.charAt(i) <= 'z')) return false;
                 if ((text.charAt(i) >= 'A'&& text.charAt(i) <= 'Z')||
-                        (text.charAt(i) >= 'А'&& text.charAt(i) <= 'Я'))
+                        (text.charAt(i) >= '\u1040'&& text.charAt(i) <= '\u1071'))
+//                        (text.charAt(i) >= 'A'&& text.charAt(i) <= 'Z'))
                     if(notName()) return true;
                 else return false;
             }

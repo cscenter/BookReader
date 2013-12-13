@@ -24,7 +24,7 @@ public class Paint extends JPanel{
         private boolean paintVert = false;
         private int scale = 1;
         private final double SCALE_Y = -0.025;
-        private final int OFFSET_Y = 400;
+        private final int OFFSET_Y = 450;
 
         private List<Double> eMaxArr;
         private List<Double> eMinArr;
@@ -55,7 +55,7 @@ public class Paint extends JPanel{
             g2d.setColor(Color.BLACK);
             g2d.setStroke(new BasicStroke(3,
                     BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
-            int scale = 100;
+            int scale = 70;
             int endPaint = end * scale;
             if (endPaint > eMaxArr.size())
                 endPaint = eMaxArr.size();

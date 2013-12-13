@@ -28,7 +28,7 @@ public class Russian extends Language {
 
     @Override
     public boolean сheckPause(String text, String lastWord, int i){
-        Pattern p = Pattern.compile("[,|:|;|!|.|\\?]\\s*[а-я]*[А-Я]*\\s*[,|:|;|!|.|\\?]");
+        Pattern p = Pattern.compile("[,|:|;|!|.|\\?]\\s*[\\u1072-\\u1103]*[\\u1040-\\u1071]*\\s*[,|:|;|!|.|\\?]");
         Matcher m = p.matcher(text.substring(i-20, i+1));
         if(m.find())
             if(m.group(m.groupCount()).contains(lastWord)) return false;
