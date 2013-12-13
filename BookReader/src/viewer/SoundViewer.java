@@ -17,17 +17,17 @@ public class SoundViewer extends AbstractViewer{
     private JButton stopButton;
     private JButton plusButton;
     private JButton minusButton;
-    private final int SPEED_CHANGE_SCALE = 80;
+    private final int SPEED_CHANGE_SCALE = 20;
     private final int WIDTH = 1800;
     private int speedChangeY = 2000;
-    private Paint line;
+    private SoundLine line;
     private Thread thread = new Thread();
     private JSlider slider;
     private PlayAudio play;
-
+    private final SoundViewer THIS = this;
 
     public void writeAmplitude(){
-        line = new Paint(audioModel);
+        line = new SoundLine(audioModel);
         this.add(line, BorderLayout.CENTER);
     }
 
@@ -35,7 +35,7 @@ public class SoundViewer extends AbstractViewer{
         super(viewer);
         position = 0;
         audioModel = model;
-        play = new PlayAudio(audioModel);
+        play = new PlayAudio(audioModel, line, THIS);
         this.setLayout(new BorderLayout());
         this.setPreferredSize(new Dimension(200, 250));
         JPanel buttons = new JPanel();
@@ -93,11 +93,12 @@ public class SoundViewer extends AbstractViewer{
 
     @Override
     public void update(int value) {
-//        TODO: delete value += 5;
-
         System.out.println(value);
         if (value > audioModel.getShortAmplitude().length)
             value = audioModel.getShortAmplitude().length - 1;
+
+        System.out.println("Sound position " + position);
+        position = value;
 
         int positionFromSilence =  value;
         line.setStart(positionFromSilence);
@@ -142,7 +143,7 @@ public class SoundViewer extends AbstractViewer{
     public class plusActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            speedChangeY -=  SPEED_CHANGE_SCALE;
+//            speedChangeY -=  SPEED_CHANGE_SCALE;
             line.setScale(line.getScale() - SPEED_CHANGE_SCALE);
             line.repaint();
         }
@@ -162,7 +163,7 @@ public class SoundViewer extends AbstractViewer{
     public class minusActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            speedChangeY += SPEED_CHANGE_SCALE;
+//            speedChangeY += SPEED_CHANGE_SCALE;
             line.setScale(line.getScale() + SPEED_CHANGE_SCALE);
             line.repaint();
         }
@@ -172,6 +173,8 @@ public class SoundViewer extends AbstractViewer{
         @Override
         public void actionPerformed(ActionEvent e) {
             if (thread.isAlive()) {
+                line.setStart(position);
+                line.setEnd(position + WIDTH);
                 System.out.println("Stop");
                 thread.interrupt();
             }
@@ -189,8 +192,9 @@ public class SoundViewer extends AbstractViewer{
                         try{
                             System.out.println("Start");
                             PlayAudio play;
-                            play = new PlayAudio(audioModel);
-                            play.setStart(line.getStart() + position);
+                            play = new PlayAudio(audioModel, line, THIS);
+                            System.out.println(position);
+                            play.setStart(position);
                             play.playClip();
                         }catch (InterruptedException e){
                             System.out.println("SoundViewer: run");

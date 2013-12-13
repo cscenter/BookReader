@@ -65,9 +65,9 @@ public class Viewer{
             model.getAudioModel().setCurrentPause(currentPause);
             model.getRusModel().setSentenceFromSound(currentPause);
             currentSentence = model.getRusModel().getCurrentSentence();
-            model.getRusModel().setCurrentPause(currentPause);
+//            model.getRusModel().setCurrentPause(currentPause);
+            model.getRusModel().setCurrentSentence(currentSentence);
             model.getEngModel().setSentenceFromText(model.getRusModel());
-
         }
         System.out.println("Предложение ru: "+model.getRusModel().getCurrentSentence());
         System.out.println("Предложение eng: "+model.getEngModel().getCurrentSentence());

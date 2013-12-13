@@ -1,7 +1,12 @@
 package sound;
 import model.SoundModel;
+import viewer.Paint;
+import viewer.SoundLine;
+import viewer.SoundViewer;
+
 import javax.sound.sampled.*;
 import javax.sound.sampled.DataLine;
+import java.io.File;
 
 public class PlayAudio {
 
@@ -10,10 +15,12 @@ public class PlayAudio {
     private int start = 0;
     private int end = 0;
     private boolean run = true;
-
-
-    public PlayAudio(SoundModel model) throws InterruptedException {
+    private SoundLine line1;
+    private SoundViewer soundViewer;
+    public PlayAudio(SoundModel model, SoundLine l, SoundViewer sv) throws InterruptedException {
         audio = model;
+        line1 = l;
+        soundViewer = sv;
     }
 
     public void playClip() throws InterruptedException {
@@ -31,10 +38,16 @@ public class PlayAudio {
 
 
                 // Why do I do it?
-                while (!line.isRunning())
+                while (!line.isRunning()) {
                     Thread.sleep(10);
-                while (line.isRunning())
+                }
+                while (line.isRunning()) {
                     Thread.sleep(10);
+                    line1.setStart(line.getFramePosition());
+                    line1.setEnd(line.getFramePosition() + 1600);
+                    soundViewer.update(line.getFramePosition());
+//                    line1.repaint();
+                }
                 line.close();
 
             }

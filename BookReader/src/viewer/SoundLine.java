@@ -4,7 +4,7 @@ import sound.SoundFindSilence;
 import javax.swing.*;
 import java.awt.*;
 
-class SoundLine extends JPanel{
+public class SoundLine extends JPanel{
 
     private short shortAmplitudeArr[];
     private SoundModel audioModel;
@@ -46,7 +46,6 @@ class SoundLine extends JPanel{
             x += 100;
 
         }
-
         g2d.setStroke(new BasicStroke(1,
                 BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
         g2d.setColor(Color.BLUE);
@@ -56,7 +55,10 @@ class SoundLine extends JPanel{
     private void addSpectogram(Graphics2D g2d) {
         boolean pauses[] = audioModel.getBooleanPauses();
         int distance = 0;
-        for (int i = start; i < end - scale; i += scale){
+        end = scale * (end - 2);
+        if (end > shortAmplitudeArr.length)
+            end = shortAmplitudeArr.length - 2 * scale;
+        for (int i = start; i < end; i += scale){
             int countPause = 0;
             for (int j = i; j < i + scale; j++) {
                 if (!pauses[i / SoundFindSilence.getLENGTH_FRAME()]) {
