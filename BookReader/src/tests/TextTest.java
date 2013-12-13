@@ -31,6 +31,8 @@ public class TextTest {
         NewTextReader engBuilder = new NewTextReader();
         engBuilder.tokenizer("resource/test2.txt", new English());
         TextModel engModel = engBuilder.getModel();
+        rusBuilder.setControlPoints(engModel);
+        engBuilder.setControlPoints(rusModel);
 
         Model model = new Model(audio, rusModel, engModel);
         int count = 0;

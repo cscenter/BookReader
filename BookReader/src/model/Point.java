@@ -10,6 +10,12 @@ package model;
 public class Point {
     private int KeySentence;
     private int ValueSentence;
+    public Point(){}
+    public Point(int key, int value){
+        KeySentence = key;
+        ValueSentence = value;
+    }
+
 
     public int getKeySentence() {
         return KeySentence;

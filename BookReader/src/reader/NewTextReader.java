@@ -15,6 +15,8 @@ public class NewTextReader {
     private static final char[] pauseSymbols = {',',';',':'};
     private StringBuilder lastWord = new StringBuilder();
 
+    public static int DIST = 100;
+
     private TextModel textModel = new TextModel();
 
     public  TextModel getModel(){
@@ -62,7 +64,7 @@ public class NewTextReader {
         ArrayList<Point> controlPoints = new ArrayList<Point>();
 
         int anotherIndex = 0;
-        for(int i = 0; i < textModel.getSentences().length; i = i + Search.RANGE*2){
+        for(int i = 0; i < textModel.getSentences().length; i = i + DIST){
             Point currentPoint = new Point();
             textModel.setCurrentSentence(i);
             anotherModel.setCurrentSentence(anotherIndex);
@@ -77,7 +79,7 @@ public class NewTextReader {
             currentPoint.setKeySentence(i);
             currentPoint.setValueSentence(anotherIndex);
             controlPoints.add(currentPoint);
-            anotherIndex += 100;
+            anotherIndex += DIST;
         }
         textModel.setControlPoints(controlPoints);
     }

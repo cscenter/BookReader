@@ -59,7 +59,10 @@ public class TextModel extends AbstractModel{
     }
 
     public void setSentenceFromText(TextModel anotherModel){
-        this.currentSentence = anotherModel.getCurrentSentence(); //!!!!
+       this.currentSentence = anotherModel.getControlPoint(  anotherModel.getCurrentSentence()).getValueSentence()+
+                                                anotherModel.getCurrentSentence()-
+                                                getControlPoint(anotherModel.getCurrentSentence()).getKeySentence();
+        //this.currentSentence = anotherModel.getCurrentSentence();
 
         String translate = null;
         try {
@@ -72,4 +75,21 @@ public class TextModel extends AbstractModel{
 
         this.currentSentence = search(translate.toLowerCase(), this);
     }
+
+    public Point getControlPoint(int sentence){
+        int l = 0;
+        int r = controlPoints.size();
+        int j;
+        Point currentPoint = new Point(0,0);
+        while(r-l>1){
+            j = (r+l)/2;
+            if(controlPoints.get(j).getValueSentence()>=sentence) r = j;
+            else{
+                l = j;
+                currentPoint = controlPoints.get(j);
+            }
+        }
+        return currentPoint;
+    }
+
 }
