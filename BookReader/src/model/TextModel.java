@@ -3,6 +3,7 @@ package model;
 import exception.ReaderException;
 import reader.Language;
 import translate.Request;
+import translate.Search;
 
 import java.util.ArrayList;
 
@@ -41,39 +42,38 @@ public class TextModel extends AbstractModel{
         return text;
     }
 
-    public String getSubstring(){
+    public String getSubstring(int position){
         int begin, end;
-        if(this.getCurrentSentence() >= this.getSentences().length) return null;
-        if(this.getCurrentSentence() >= DEVIATION){
-            begin = getSentences()[getCurrentSentence() - DEVIATION];
-            if(getCurrentSentence() < getSentences().length)
-                end =  getSentences()[getCurrentSentence()+1];
-            else end =  getSentences()[getCurrentSentence()];
+        if(position > this.getSentences().length) return null;
+        if(position >= Search.DEVIATION){
+            begin = getSentences()[position - Search.DEVIATION];
+            if(position < getSentences().length)
+                end =  getSentences()[position+1];
+            else end =  getSentences()[position];
         }else{
             begin = 0;
-            if(getSentences().length > DEVIATION + 1)
-                end =  getSentences()[DEVIATION + 1];
+            if(getSentences().length > Search.DEVIATION + 1)
+                end =  getSentences()[Search.DEVIATION + 1];
             else end = getSentences()[getSentences().length -1];
         }
         return getText().substring(begin, end);
     }
 
     public void setSentenceFromText(TextModel anotherModel){
-       this.currentSentence = anotherModel.getControlPoint(  anotherModel.getCurrentSentence()).getValueSentence()+
-                                                anotherModel.getCurrentSentence()-
-                                                getControlPoint(anotherModel.getCurrentSentence()).getKeySentence();
+       this.currentSentence = anotherModel.getControlPoint(anotherModel.getCurrentSentence()).getValueSentence()+
+                              anotherModel.getCurrentSentence()-
+                              anotherModel.getControlPoint(anotherModel.getCurrentSentence()).getKeySentence();
         //this.currentSentence = anotherModel.getCurrentSentence();
 
         String translate = null;
         try {
             translate = new Request(anotherModel.getLanguage().getName(),
                         this.getLanguage().getName(),
-                        anotherModel.getSubstring()).sendGet();
+                        anotherModel.getSubstring(anotherModel.getCurrentSentence())).sendGet();
         } catch (ReaderException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
 
-        this.currentSentence = search(translate.toLowerCase(), this);
+        this.currentSentence = search(translate, this);
     }
 
     public Point getControlPoint(int sentence){
@@ -83,7 +83,7 @@ public class TextModel extends AbstractModel{
         Point currentPoint = new Point(0,0);
         while(r-l>1){
             j = (r+l)/2;
-            if(controlPoints.get(j).getValueSentence()>=sentence) r = j;
+            if(controlPoints.get(j).getKeySentence()>=sentence) r = j;
             else{
                 l = j;
                 currentPoint = controlPoints.get(j);

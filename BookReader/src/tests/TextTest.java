@@ -17,12 +17,12 @@ import translate.Search;
  * To change this template use File | Settings | File Templates.
  */
 public class TextTest {
-    static int[] rusQuestion = {0, 2, 6, 30, 65, 75, 127, 213, 396, 820, 1122  };
-    static int[] rightAnswer = {0, 1, 7, 30, 60, 67, 111, 188, 368, 748, 1256  };
+    static int[] rusQuestion = {0, 2, 6, 30, 65, 75, 127, 213, 396, 820, 1122, 1845 };
+    static int[] rightAnswer = {0, 1, 7, 30, 60, 67, 111, 188, 368, 748, 1010, 1647 };
     static int[] answer = new int[rightAnswer.length];
 
     public static void main(String[] args) throws InterruptedException, ReaderException {
-        SoundReader soundReader = new SoundReader("resource/Rey Bredbery.wav");
+        SoundReader soundReader = new SoundReader("resource/Rey.wav");
         short[] audio = soundReader.getShortAmplitudeArr();
         NewTextReader rusBuilder = new NewTextReader();
         rusBuilder.tokenizer("resource/test1.txt", new Russian());
@@ -49,8 +49,5 @@ public class TextTest {
         System.out.println('\n');
         for (int anAnswer : rightAnswer) System.out.print(anAnswer+" ");
         System.out.println(count + "/"+ answer.length);
-
-
-
     }
 }

@@ -12,7 +12,7 @@ public class Main {
     private static final double DELTA = 1.15;
 
     private static String nameOfAudioFile = "resource/Rey.wav";
-    private static String nameOfRusText = "resource/ReyBredbery.txt";
+    private static String nameOfRusText = "resource/test1.txt";
 
     private static String nameOfEngText = "resource/test2.txt";
     private static String defNameOfAudioFile = "../../resource/Rey.wav";
