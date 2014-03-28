@@ -1,43 +1,56 @@
 package model;
 
 import exception.ReaderException;
+import java.beans.Transient;
 import reader.Language;
 import translate.Request;
 import translate.Search;
 
 import java.util.ArrayList;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAnyAttribute;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import static translate.Search.DEVIATION;
 import static translate.Search.search;
 
+@XmlAccessorType( XmlAccessType.NONE )
+@XmlRootElement
 public class TextModel extends AbstractModel{
 
     private String text;
     private Language language;
     private ArrayList <Point> controlPoints;
 
+//    @XmlElement
     public ArrayList<Point> getControlPoints() {
         return controlPoints;
     }
 
+    @XmlElement
     public void setControlPoints(ArrayList<Point> controlPoints) {
         this.controlPoints = controlPoints;
     }
 
+//    @XmlElement
     public void setLanguage(Language language) {
         this.language = language;
     }
 
+    
     public Language getLanguage(){
         return language;
     }
 
-
-
+    @XmlElement
     public void setText(String text) {
         this.text = text;
     }
-
+    
+ //   @XmlElement
     public String getText() {
         return text;
     }
@@ -59,6 +72,7 @@ public class TextModel extends AbstractModel{
         return getText().substring(begin, end);
     }
 
+    
     public void setSentenceFromText(TextModel anotherModel){
        this.currentSentence = anotherModel.getControlPoint(anotherModel.getCurrentSentence()).getValueSentence()+
                               anotherModel.getCurrentSentence()-

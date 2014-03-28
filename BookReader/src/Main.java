@@ -1,4 +1,12 @@
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import exception.ReaderException;
+import java.io.File;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import sound.Average;
 import sound.SoundFindSilence;
 import sound.ZeroCrossing;
@@ -74,6 +82,8 @@ public class Main {
                     engModel.getControlPoints().get(i).getValueSentence()+ " ");
         }
 
+//        Model model = XMLToModel();
+//        model.setAudioModel(new SoundModel(audio));
         Model model = new Model(audio, rusModel, engModel);
 
         model.getAudioModel().setAudioBytes(soundReader.getByteAmplitudeArr());
@@ -84,6 +94,37 @@ public class Main {
         model.getAudioModel().setNameOfFile(nameOfAudioFile);
         SoundFindSilence soundFindSilence = new SoundFindSilence(model.getAudioModel(), MIN, DELTA);
         Viewer myViewer = new Viewer(model);
+        modelToXML(model);
+    }
+    
+    private static void modelToXML(Model model){
+        try {
+            File file = new File("file.xml");
+            System.out.println(file.getAbsolutePath());
+            JAXBContext jaxbContext = JAXBContext.newInstance(Model.class);
+            Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+            jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+ 
+            jaxbMarshaller.marshal(model, file);
+	    } catch (JAXBException e) {
+                e.printStackTrace();
+            }
+    }
+    
+    private static Model XMLToModel(){
+        try {
+            File file = new File("file.xml");
+            JAXBContext jaxbContext = JAXBContext.newInstance(Model.class);
+            
+            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+            Model model = (Model) jaxbUnmarshaller.unmarshal(file);
+            return model;
+ 
+	  } catch (JAXBException e) {
+              System.out.println(e.getLocalizedMessage());
+              e.printStackTrace();
+	  }
+        return new Model();
     }
 
     private static void printHelpInformation() {

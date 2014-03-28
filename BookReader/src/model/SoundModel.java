@@ -2,7 +2,13 @@ package model;
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioFormat;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 
+@XmlAccessorType( XmlAccessType.NONE )
+@XmlRootElement
 public class SoundModel extends AbstractModel{
     private short shortAmplitude[];
     private boolean booleanPauses[];
@@ -17,6 +23,8 @@ public class SoundModel extends AbstractModel{
     private List<Double> thresholdArr;
     private List<Double> energy;
 
+    public SoundModel(){}
+    
     public SoundModel(short[] audio){
         setShortAmplitude(audio);
     }
@@ -37,11 +45,12 @@ public class SoundModel extends AbstractModel{
         return audioFormat;
     }
 
-
+//    @XmlElement
     public void setNameOfFile(String value) {
         nameOfFile = value;
     }
 
+ //   @XmlElement
     public String getNameOfFile() {
         return nameOfFile;
     }

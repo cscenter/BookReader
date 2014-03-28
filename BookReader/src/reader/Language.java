@@ -1,5 +1,9 @@
 package reader;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Лиза
@@ -7,6 +11,8 @@ package reader;
  * Time: 12:33
  * To change this template use File | Settings | File Templates.
  */
+@XmlAccessorType( XmlAccessType.PROPERTY )
+@XmlRootElement
     public abstract class Language {
 
     static private String[] beforeName;
