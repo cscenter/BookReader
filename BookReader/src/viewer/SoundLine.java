@@ -49,40 +49,9 @@ public class SoundLine extends JPanel{
         g2d.setStroke(new BasicStroke(1,
                 BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
         g2d.setColor(Color.BLUE);
-        addSpectogram(g2d);
     }
 
-    private void addSpectogram(Graphics2D g2d) {
-        boolean pauses[] = audioModel.getBooleanPauses();
-        int distance = 0;
-        end = scale * (end - 2);
-        if (end > shortAmplitudeArr.length)
-            end = shortAmplitudeArr.length - 2 * scale;
-        for (int i = start; i < end; i += scale){
-            int countPause = 0;
-            for (int j = i; j < i + scale; j++) {
-                if (!pauses[i / SoundFindSilence.getLENGTH_FRAME()]) {
-                    countPause++;
-                }
-            }
-            if (countPause > scale / 2) {
-                g2d.setColor(Color.GREEN);
-            } else {
-                g2d.setColor(Color.BLUE);
-            }
-            int y1 = 0;
-            int y2 = 0;
-            for (int j = i; j < i + scale; j++) {
-                y1 += shortAmplitudeArr[j];
-                y2 += shortAmplitudeArr[j + scale];
-            }
-            y1 /= scale;
-            y2 /= scale;
-            g2d.drawLine(distance, ((int) (y1 * SCALE_Y) + OFFSET_Y),
-                    distance + 1, ((int) (y2 * SCALE_Y) + OFFSET_Y));
-            distance += 1;
-        }
-    }
+    
 
     public void setVertX(int value){
         vertX = value;

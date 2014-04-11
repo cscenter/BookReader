@@ -9,7 +9,7 @@ import java.awt.*;
 
 /**
  * Created with IntelliJ IDEA.
- * User: Лиза
+ * User: Р вЂєР С‘Р В·Р В°
  * Date: 26.10.13
  * Time: 16:16
  * To change this template use File | Settings | File Templates.
@@ -95,12 +95,23 @@ public class TextViewer  extends AbstractViewer {
         try{
             int line =  text.getLineOfOffset(position);
             System.out.println("position: "+ position+ " caretpos: "+ text.getCaretPosition() +" line num: "+line);
-            //scroll.getVerticalScrollBar().setValue(line);
+ //           scroll.getVerticalScrollBar().setValue(line);
             if (marker == null)
                 marker = text.getHighlighter().addHighlight(position, position+10,
                         new DefaultHighlighter.DefaultHighlightPainter(Color.RED));
-            else
-                text.getHighlighter().changeHighlight(marker,position, position+10);
+            else{
+                text.getHighlighter().changeHighlight(marker,position, position+10);  
+            }
+            System.out.println(text.getVisibleRect());
+            int y = line*50000/text.getLineCount();
+            int line_ = position/30;
+            int y1 = line_*scroll.getHeight()/16;
+            int numSignsInLine = 40;
+            int heightLine = scroll.getHeight()/16;
+            int y2 = position/numSignsInLine * heightLine;
+            int y3 = line * text.getRows()*16/text.getLineCount();
+            text.scrollRectToVisible(new Rectangle(0,(y+y1+y2)/3, 1, 10));
+            System.out.println(text.getVisibleRect());
         }catch (BadLocationException exc){};
 
     }

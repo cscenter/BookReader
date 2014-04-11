@@ -17,10 +17,10 @@ public class PlayAudio {
     private boolean run = true;
     private SoundLine line1;
     private SoundViewer soundViewer;
-    public PlayAudio(SoundModel model, SoundLine l, SoundViewer sv) throws InterruptedException {
+public PlayAudio(SoundModel model, SoundLine l, SoundViewer sv) throws InterruptedException {
         audio = model;
         line1 = l;
-        soundViewer = sv;
+        soundViewer = sv;        
     }
 
     public void playClip() throws InterruptedException {
@@ -30,10 +30,16 @@ public class PlayAudio {
             File fileIn = new File(audio.getNameOfFile());
             AudioInputStream stream = AudioSystem.getAudioInputStream(fileIn);
             DataLine.Info info = new DataLine.Info(Clip.class, audioFormat);
+            
+            
             if (AudioSystem.isLineSupported(info)) {
                 line = (Clip)AudioSystem.getLine(info);
                 line.open(stream);
                 line.setFramePosition(start);
+                System.out.println("MicrosecondPosition  " + line.getMicrosecondPosition());
+                System.out.println("FramePosition  " + line.getFramePosition());
+                System.out.println("FrameLength  " + line.getFrameLength());
+                
                 line.start();
 
 

@@ -1,6 +1,6 @@
 package translate;
 
-import exception.ReaderException;
+import reader.ReaderException;
 import org.json.simple.parser.JSONParser;
 
 import javax.net.ssl.HttpsURLConnection;

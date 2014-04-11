@@ -1,7 +1,7 @@
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import exception.ReaderException;
+import reader.ReaderException;
 import java.io.File;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -21,11 +21,13 @@ public class Main {
 
     private static String nameOfAudioFile = "resource/Rey.wav";
     private static String nameOfRusText = "resource/test1.txt";
-
     private static String nameOfEngText = "resource/test2.txt";
+    private static String nameOfXMLFile = "resource/Concordance.xml";
+    
     private static String defNameOfAudioFile = "../../resource/Rey.wav";
     private static String defNameOfRusText = "../../resource/ReyBredbery.txt";
     private static String defNameOfEngText = "../../resource/test2.txt";
+    private static String defNameOfXMLFile = "../../resource/Concordance.xml";
 
     public static void main(String[] args) throws InterruptedException, ReaderException {
         parseArgs(args);
@@ -50,6 +52,7 @@ public class Main {
                 nameOfAudioFile = defNameOfAudioFile;
                 nameOfEngText = defNameOfEngText;
                 nameOfRusText = defNameOfRusText;
+                nameOfXMLFile = defNameOfXMLFile;
             }
         }
         readAndShowAll();
@@ -57,9 +60,9 @@ public class Main {
 
 
     private static void readAndShowAll() throws ReaderException, InterruptedException {
-        SoundReader soundReader = new SoundReader(nameOfAudioFile);
-        short[] audio = soundReader.getShortAmplitudeArr();
-
+        SoundReader audioBuilder = new SoundReader(nameOfAudioFile);
+        SoundModel audioModel = audioBuilder.getModel();
+        
         NewTextReader rusBuilder = new NewTextReader();
         rusBuilder.tokenizer(nameOfRusText, new Russian());
         TextModel rusModel = rusBuilder.getModel();
@@ -67,66 +70,39 @@ public class Main {
         NewTextReader engBuilder = new NewTextReader();
         engBuilder.tokenizer(nameOfEngText, new English());
         TextModel engModel = engBuilder.getModel();
+        
+        XMLReader xmlReader = new XMLReader(nameOfXMLFile);
 
         rusBuilder.setControlPoints(engModel);
         engBuilder.setControlPoints(rusModel);
 
-        for(int i= 0; i < rusModel.getControlPoints().size(); i++){
-            System.out.print(rusModel.getControlPoints().get(i).getKeySentence()+" "+
-                    rusModel.getControlPoints().get(i).getValueSentence()+ " ");
+        
+    /*    xmlReader.readXML();
+        Model m = xmlReader.getModel();
+        rusModel.setControlPoints(m.getRusModel().getControlPoints());
+        engModel.setControlPoints(m.getEngModel().getControlPoints());
+        audioModel.setControlPoints(m.getAudioModel().getControlPoints());*/
+                   
+        Model model = new Model(audioModel, rusModel, engModel);
 
+ //       SoundFindSilence soundFindSilence = new SoundFindSilence(model.getAudioModel(), MIN, DELTA);
+        Viewer myViewer = new Viewer(model, nameOfXMLFile);
+        
+        
+    }
+    
+    private void printControlPoints(Model model){
+        for(int i= 0; i < model.getRusModel().getControlPoints().size(); i++){
+            System.out.print(model.getRusModel().getControlPoints().get(i).getKeySentence()+" "+
+                    model.getRusModel().getControlPoints().get(i).getValueSentence()+ " ");
         }
         System.out.println();
-        for(int i= 0; i < engModel.getControlPoints().size(); i++){
-            System.out.print(engModel.getControlPoints().get(i).getKeySentence()+ " " +
-                    engModel.getControlPoints().get(i).getValueSentence()+ " ");
+        for(int i= 0; i < model.getEngModel().getControlPoints().size(); i++){
+            System.out.print(model.getEngModel().getControlPoints().get(i).getKeySentence()+ " " +
+                    model.getEngModel().getControlPoints().get(i).getValueSentence()+ " ");
         }
-
-//        Model model = XMLToModel();
-//        model.setAudioModel(new SoundModel(audio));
-        Model model = new Model(audio, rusModel, engModel);
-
-        model.getAudioModel().setAudioBytes(soundReader.getByteAmplitudeArr());
-        model.getAudioModel().setAudioFormat(soundReader.getAudioFormat());
-        model.getAudioModel().setStart(13881);
-        model.getAudioModel().setEnd(16881);
-        model.getAudioModel().setAudioFileFormat(soundReader.getFileFormat());
-        model.getAudioModel().setNameOfFile(nameOfAudioFile);
-        SoundFindSilence soundFindSilence = new SoundFindSilence(model.getAudioModel(), MIN, DELTA);
-        Viewer myViewer = new Viewer(model);
-        modelToXML(model);
     }
     
-    private static void modelToXML(Model model){
-        try {
-            File file = new File("file.xml");
-            System.out.println(file.getAbsolutePath());
-            JAXBContext jaxbContext = JAXBContext.newInstance(Model.class);
-            Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-            jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
- 
-            jaxbMarshaller.marshal(model, file);
-	    } catch (JAXBException e) {
-                e.printStackTrace();
-            }
-    }
-    
-    private static Model XMLToModel(){
-        try {
-            File file = new File("file.xml");
-            JAXBContext jaxbContext = JAXBContext.newInstance(Model.class);
-            
-            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-            Model model = (Model) jaxbUnmarshaller.unmarshal(file);
-            return model;
- 
-	  } catch (JAXBException e) {
-              System.out.println(e.getLocalizedMessage());
-              e.printStackTrace();
-	  }
-        return new Model();
-    }
-
     private static void printHelpInformation() {
         System.out.println("If you want to choose a Russian book, type --r \"name of file\"");
         System.out.println("If you want to choose a English book, type --e \"name of file\"");

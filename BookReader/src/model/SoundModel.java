@@ -1,4 +1,5 @@
 package model;
+import java.util.ArrayList;
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioFormat;
 import java.util.List;
@@ -11,7 +12,6 @@ import javax.xml.bind.annotation.XmlElement;
 @XmlRootElement
 public class SoundModel extends AbstractModel{
     private short shortAmplitude[];
-    private boolean booleanPauses[];
     private byte[] audioBytes;
     private int start;
     private int end;
@@ -22,10 +22,11 @@ public class SoundModel extends AbstractModel{
     private List<Double> eMinArr;
     private List<Double> thresholdArr;
     private List<Double> energy;
-
+    
     public SoundModel(){}
     
     public SoundModel(short[] audio){
+        setConcordance(new Concordance(nameOfFile));
         setShortAmplitude(audio);
     }
 
@@ -45,12 +46,10 @@ public class SoundModel extends AbstractModel{
         return audioFormat;
     }
 
-//    @XmlElement
     public void setNameOfFile(String value) {
         nameOfFile = value;
     }
 
- //   @XmlElement
     public String getNameOfFile() {
         return nameOfFile;
     }
@@ -79,21 +78,6 @@ public class SoundModel extends AbstractModel{
         end = value;
     }
 
-    public void setSilence(Integer arr[]){
-        pauses = arr;
-    }
-
-    public Integer[] getSilence(){
-        return pauses;
-    }
-
-    public boolean[] getBooleanPauses(){
-        return booleanPauses;
-    }
-
-    public void setBooleanPauses(boolean arr[]){
-        booleanPauses = arr;
-    }
 
     public void setAudioBytes(byte[] arr) {
         audioBytes = arr;
@@ -134,5 +118,5 @@ public class SoundModel extends AbstractModel{
     public void setEnergy(List<Double> energy) {
         this.energy = energy;
     }
-
+    
 }

@@ -42,8 +42,8 @@ public class SoundFindSilence {
         //checkIsSilence();
         addSilence();
 
-        audioModel.setSilence(silence.toArray(new Integer[silence.size()]));
-        audioModel.setBooleanPauses(isVoice);
+//        audioModel.setSilence(silence.toArray(new Integer[silence.size()]));
+//        audioModel.setBooleanPauses(isVoice);
         audioModel.setEMaxArr(eMaxArr);
         audioModel.setEMinArr(eMinArr);
         audioModel.setThresholdArr(thresholdArr);

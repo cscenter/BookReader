@@ -1,19 +1,45 @@
 package model;
 
+import java.util.ArrayList;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlAccessorType( XmlAccessType.NONE)
+@XmlRootElement
 public class AbstractModel {
 
     protected int currentSentence;
     protected int currentPause;
+    protected int currentPosition;
     protected Integer[] pauses;
-
     protected Integer[] sentences;
+    @XmlElement
+    public Concordance concordance;
 
+    public Concordance getConcordance(){
+        return concordance;
+    }
+    
+    public void setConcordance(Concordance concordance){
+        this.concordance = concordance;
+    }
+    
     public int getCurrentSentence() {
         return currentSentence;
     }
 
     public void setCurrentSentence(int currentSentence) {
         this.currentSentence = currentSentence;
+    }
+    
+    public int getCurrentPosition() {
+        return currentPosition;
+    }
+
+    public void setCurrentPosition(int currentPosition) {
+        this.currentPosition = currentPosition;
     }
 
     public int getCurrentPause() {
@@ -25,7 +51,7 @@ public class AbstractModel {
     }
 
     /**
-     * Находит номер ближайшего слева предложения по положению курсора.
+     * Р СњР В°РЎвЂ¦Р С•Р Т‘Р С‘РЎвЂљ Р Р…Р С•Р С�Р ВµРЎР‚ Р В±Р В»Р С‘Р В¶Р В°Р в„–РЎв‚¬Р ВµР С–Р С• РЎРѓР В»Р ВµР Р†Р В° Р С—РЎР‚Р ВµР Т‘Р В»Р С•Р В¶Р ВµР Р…Р С‘РЎРЏ Р С—Р С• Р С—Р С•Р В»Р С•Р В¶Р ВµР Р…Р С‘РЎР‹ Р С”РЎС“РЎР‚РЎРѓР С•РЎР‚Р В°.
      * @param position
      * @return
      */
@@ -42,7 +68,7 @@ public class AbstractModel {
     }
 
     /**
-     * Находит номер ближайшей слева паузы по положению мыши
+     * Р СњР В°РЎвЂ¦Р С•Р Т‘Р С‘РЎвЂљ Р Р…Р С•Р С�Р ВµРЎР‚ Р В±Р В»Р С‘Р В¶Р В°Р в„–РЎв‚¬Р ВµР в„– РЎРѓР В»Р ВµР Р†Р В° Р С—Р В°РЎС“Р В·РЎвЂ№ Р С—Р С• Р С—Р С•Р В»Р С•Р В¶Р ВµР Р…Р С‘РЎР‹ Р С�РЎвЂ№РЎв‚¬Р С‘
      * @param position
      * @return
      */
@@ -59,7 +85,7 @@ public class AbstractModel {
     }
 
     /**
-     * Определяет номер предложения по номеру паузы.
+     * Р С›Р С—РЎР‚Р ВµР Т‘Р ВµР В»РЎРЏР ВµРЎвЂљ Р Р…Р С•Р С�Р ВµРЎР‚ Р С—РЎР‚Р ВµР Т‘Р В»Р С•Р В¶Р ВµР Р…Р С‘РЎРЏ Р С—Р С• Р Р…Р С•Р С�Р ВµРЎР‚РЎС“ Р С—Р В°РЎС“Р В·РЎвЂ№.
      * @param currentPause
      * @return
      */
@@ -69,7 +95,7 @@ public class AbstractModel {
     }
 
     /**
-     * Устанавливает паузу.
+     * Р Р€РЎРѓРЎвЂљР В°Р Р…Р В°Р Р†Р В»Р С‘Р Р†Р В°Р ВµРЎвЂљ Р С—Р В°РЎС“Р В·РЎС“.
      * @param currentPause
      * @return
      */
@@ -113,7 +139,7 @@ public class AbstractModel {
         int position = (int)percent*this.sentences[this.sentences.length-1]/100;
         this.setCurrentSentence(findSentence(position));
     }
-
+    
 
 }
 

@@ -1,7 +1,11 @@
 package viewer;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.*;
 import javax.swing.*;
+import reader.ReaderException;
+import reader.XMLReader;
 
 /**
  * Created with IntelliJ IDEA.
@@ -16,8 +20,11 @@ public class Viewer{
     private TextViewer engPanel;
     private SoundViewer audioPanel;
     private Model model;
+    private String nameOfXMLFile;
+    private float frameRate=1;
 
-    public Viewer(Model model) throws InterruptedException {
+    public Viewer(Model model, String nameOfXMLFile) throws InterruptedException {
+        this.nameOfXMLFile = nameOfXMLFile;
         frame = new JFrame("BookReader");
         this.model = model;
         rusPanel = new TextViewer(model.getRusModel().getText(),this);
@@ -36,41 +43,59 @@ public class Viewer{
         frame.getContentPane().add(verticalSplitPane);
         frame.pack();
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         frame.setVisible(true);
+        frameRate = model.getAudioModel().getAudioFormat().getFrameRate();
+        MyShutdownHook shutdownHook = new MyShutdownHook();
+        Runtime.getRuntime().addShutdownHook(shutdownHook);
+    }
+    
+    private void shutdown() {
+        try {
+            XMLReader xmlReader = new XMLReader(nameOfXMLFile);
+            xmlReader.setModel(model);
+            xmlReader.writeXML();
+        } catch (ReaderException ex) {
+            Logger.getLogger(Viewer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    private class MyShutdownHook extends Thread {
+
+        public void run() {
+            shutdown();
+        }
+    }
+    private void updateWithRusModel(){
+        int currentSentence = model.getRusModel().getCurrentSentence();
+        model.getEngModel().setSentenceFromText(model.getRusModel());
+        int curentSec = model.getAudioModel().getConcordance().get(currentSentence);
+        audioPanel.update((int)(curentSec*frameRate));
     }
 
     public void update (AbstractViewer viewer){
         int currentSentence = 0 ;
-        int currentPause;
+        int currentAudioPosition;
         if(viewer == rusPanel) {
             currentSentence = model.getRusModel().findSentence(viewer.position);
             model.getRusModel().setCurrentSentence(currentSentence);
-            currentPause = model.getRusModel().findPause(viewer.position);
-            model.getRusModel().setCurrentPause(currentPause);
-            model.getEngModel().setSentenceFromText(model.getRusModel());
-            model.getAudioModel().setPauseFromText(currentPause);
-            audioPanel.update(model.getAudioModel().getPausePosition(model.getAudioModel().getCurrentPause() + 1));
+            updateWithRusModel();
         }else if(viewer == engPanel){
-
             currentSentence = model.getEngModel().findSentence(viewer.position);
             model.getEngModel().setCurrentSentence(currentSentence);
             model.getRusModel().setSentenceFromText(model.getEngModel());
-            currentPause = model.getRusModel().findPause(currentSentence);
-            model.getRusModel().setCurrentPause(currentPause);
-            model.getAudioModel().setPauseFromText(currentPause);
-            audioPanel.update(model.getAudioModel().getPausePosition(model.getAudioModel().getCurrentPause() + 1));
-        }else if(viewer == audioPanel){
-            currentPause = model.getAudioModel().findPause(viewer.position);
-            model.getAudioModel().setCurrentPause(currentPause);
-            model.getRusModel().setSentenceFromSound(currentPause);
             currentSentence = model.getRusModel().getCurrentSentence();
-//            model.getRusModel().setCurrentPause(currentPause);
+            int currentSec = model.getAudioModel().getConcordance().get(currentSentence);
+            audioPanel.update((int)(currentSec*frameRate));
+        }else if(viewer == audioPanel){
+            int currentSec = (int)(viewer.position/frameRate);
+            System.out.println("viewer.position " + viewer.position);
+            System.out.println("lenAmpl " + model.getAudioModel().getShortAmplitude().length);
+            currentSentence = model.getAudioModel().getConcordance().getSentence(currentSec);
             model.getRusModel().setCurrentSentence(currentSentence);
             model.getEngModel().setSentenceFromText(model.getRusModel());
         }
-        System.out.println("Предложение ru: "+model.getRusModel().getCurrentSentence());
-        System.out.println("Предложение eng: "+model.getEngModel().getCurrentSentence());
+        System.out.println("Р СџРЎР‚Р ВµР Т‘Р В»Р С•Р В¶Р ВµР Р…Р С‘Р Вµ ru: "+model.getRusModel().getCurrentSentence());
+        System.out.println("Р СџРЎР‚Р ВµР Т‘Р В»Р С•Р В¶Р ВµР Р…Р С‘Р Вµ eng: "+model.getEngModel().getCurrentSentence());
         engPanel.update(model.getEngModel().getSentencePosition(model.getEngModel().getCurrentSentence()));
         rusPanel.update(model.getRusModel().getSentencePosition(model.getRusModel().getCurrentSentence()));
     }

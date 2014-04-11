@@ -12,10 +12,10 @@ public class Model {
 
     public Model(){}
     
-    public Model(short[] audio, TextModel rusModel, TextModel engModel){
+    public Model(SoundModel audioModel, TextModel rusModel, TextModel engModel){
         this.rusModel = rusModel;
         this.engModel = engModel;
-        audioModel = new SoundModel(audio);
+        this.audioModel = audioModel;
     }
 
     public TextModel getRusModel(){

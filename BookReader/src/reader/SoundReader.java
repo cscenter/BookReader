@@ -2,9 +2,8 @@ package reader;
 import javax.sound.sampled.*;
 import java.io.*;
 
-import exception.ReaderException;
-
 import static javax.sound.sampled.AudioSystem.getAudioFileFormat;
+import model.SoundModel;
 
 public class SoundReader {
 
@@ -13,12 +12,25 @@ public class SoundReader {
     private AudioFileFormat audioFileFormat;
     private AudioFormat audioFormat;
     private String nameOfFile;
-
+    private SoundModel audioModel;
+    
     public SoundReader(String name) throws ReaderException {
         nameOfFile = name;
         readAudio();
+        
+        audioModel = new SoundModel(shortAmplitudeArr);
+        audioModel.setAudioBytes(audioBytes);
+        audioModel.setAudioFormat(audioFormat);
+        audioModel.setStart(13881);
+        audioModel.setEnd(16881);
+        audioModel.setAudioFileFormat(audioFileFormat);
+        audioModel.setNameOfFile(nameOfFile);
     }
-
+    
+    public SoundModel getModel(){
+        return audioModel;
+    } 
+    
     private void readAudio() throws ReaderException {
         int numBytesRead;
         File fileIn = new File(nameOfFile);

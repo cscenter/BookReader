@@ -1,6 +1,6 @@
 package model;
 
-import exception.ReaderException;
+import reader.ReaderException;
 import java.beans.Transient;
 import reader.Language;
 import translate.Request;
@@ -20,22 +20,22 @@ import static translate.Search.search;
 @XmlAccessorType( XmlAccessType.NONE )
 @XmlRootElement
 public class TextModel extends AbstractModel{
-
+    private String nameOfFile;
     private String text;
     private Language language;
     private ArrayList <Point> controlPoints;
-
-//    @XmlElement
+    
+    public TextModel(){}
+    
+    public TextModel(String nameOfFile){
+        this.nameOfFile = nameOfFile;
+        setConcordance(new Concordance(nameOfFile));
+    }
+    
     public ArrayList<Point> getControlPoints() {
         return controlPoints;
     }
-
-    @XmlElement
-    public void setControlPoints(ArrayList<Point> controlPoints) {
-        this.controlPoints = controlPoints;
-    }
-
-//    @XmlElement
+    
     public void setLanguage(Language language) {
         this.language = language;
     }
@@ -45,12 +45,14 @@ public class TextModel extends AbstractModel{
         return language;
     }
 
-    @XmlElement
+  
     public void setText(String text) {
         this.text = text;
     }
     
- //   @XmlElement
+    public void setControlPoints(ArrayList<Point> controlPoints) {
+        this.controlPoints = controlPoints;
+    }
     public String getText() {
         return text;
     }
@@ -89,7 +91,7 @@ public class TextModel extends AbstractModel{
 
         this.currentSentence = search(translate, this);
     }
-
+    
     public Point getControlPoint(int sentence){
         int l = 0;
         int r = controlPoints.size();
