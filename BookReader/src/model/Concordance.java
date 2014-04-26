@@ -6,11 +6,7 @@ package model;
 
 import java.util.List;
 import java.util.ArrayList;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 /**
  *
@@ -19,44 +15,64 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType( XmlAccessType.FIELD)
 @XmlRootElement
 public class Concordance {    
-    @XmlAttribute
-    public String fName = "";
-    @XmlAttribute
-    public String language = "";
-    public ArrayList <Integer> conc;
+    @XmlElement(name = "conc")
+    private ArrayList <Point> conc;
     
     public Concordance(){
-        conc = new ArrayList <>();
-        conc.add(0);
+        init();
     }
     
-    public Concordance(String fName){
-        this.fName = fName;
+    private void init(){
         conc = new ArrayList <>();
-        conc.add(0);
+        conc.add(new Point(0,0));
     }
    
     public int get(int key){
         if (conc.size() <= key){
             redefine(key);
         }
-        return conc.get(key);
+        return get_(key);
     }
     
     public void set(int key, int value){
         if (conc.size() <= key){
             redefine(key);
         }
-        conc.add(key, value);
+        add_(key, value);
+    }
+    
+//    @XmlElement
+    public ArrayList<Point> getConc(){
+        return conc;
+    }
+    
+  //  @XmlElement
+    public void setConc(ArrayList<Point> conc){
+        this.conc = conc;
     }
     
     
+    private int get_(int key){
+        return conc.get(key).getValueSentence();
+    }
+    
+    private void add_(int key, int value){
+        if (key < conc.size())
+            set_(key,value);
+        else
+            conc.add(new Point(key, value));
+    }
+    
+    private void set_(int key, int value){
+        conc.set(key, new Point(key, value));
+    }
+    
     private void redefine(int key){
         int lastKey = conc.size() - 1;
-            int val = conc.get(lastKey);
-            while (lastKey <= key){
-                conc.add(val);
+            int val = get_(lastKey);
+            while (lastKey < key){
                 lastKey++;
+                add_(lastKey, val);
             }
     }
     
@@ -67,10 +83,10 @@ public class Concordance {
         int currentSent = 0;
         while (r-l > 1){
             j = (r+l)/2;
-            if (conc.get(j) >= sec) r = j;
+            if (get_(j) >= sec) r = j;
             else {
                 l = j;
-                currentSent = conc.get(j);
+                currentSent = get_(j);
             }
         }
         return currentSent;

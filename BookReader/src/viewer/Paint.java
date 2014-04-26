@@ -1,7 +1,6 @@
 package viewer;
 
 import model.SoundModel;
-import sound.SoundFindSilence;
 
 import javax.swing.*;
 import java.awt.*;

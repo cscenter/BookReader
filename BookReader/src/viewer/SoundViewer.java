@@ -106,7 +106,7 @@ public class SoundViewer extends AbstractViewer {
         JLabel labelSentense = new JLabel("Sentense: ");
          tfSentense = new JTextField("00001");
      
-        JLabel labelPosition = new JLabel("Position: ");
+        JLabel labelPosition = new JLabel("Second: ");
         tfPosition = new JTextField("00000");
         panelConcordances.add(addConcButton);
         panelConcordances.add(labelSentense);
@@ -142,7 +142,9 @@ public class SoundViewer extends AbstractViewer {
         line.setStart(position);
         slider.setValue(position);
         slider.setExtent(10);
-        tfPosition.setText(""+ (int)((float)(position)/frameRate));
+        int sec = (int)((float)(position)/frameRate);
+        tfPosition.setText(""+ sec);
+        audioModel.setCurrentSecond(sec);
         line.setEnd(position + WIDTH * line.getScale());
         line.repaint();
     }
@@ -252,7 +254,7 @@ public class SoundViewer extends AbstractViewer {
         public void actionPerformed(ActionEvent e) {
             int sent = new Integer(tfSentense.getText());
             int pos = new Integer(tfPosition.getText());
-            audioModel.concordance.set(sent, pos);
+            audioModel.getConcordance().set(sent, pos);
             System.out.println("Add " + sent + ":" + pos);
             sentenseConc = sent+1;
             tfSentense.setText(""+sentenseConc);

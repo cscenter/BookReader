@@ -28,7 +28,7 @@ public class SoundReader {
     }
     
     public SoundModel getModel(){
-        return audioModel;
+        return audioModel;              
     } 
     
     private void readAudio() throws ReaderException {
@@ -61,6 +61,9 @@ public class SoundReader {
             }
 
         } catch (Exception e) {
+            System.out.println(fileIn.getAbsolutePath());
+            System.out.println(e.getMessage());
+            e.printStackTrace();
             throw new ReaderException("SoundReader: " + e.getMessage());
         }
     }

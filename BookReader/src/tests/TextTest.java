@@ -1,8 +1,9 @@
 package tests;
 
-import exception.ReaderException;
+import reader.ReaderException;
 import model.Model;
 import model.TextModel;
+import model.SoundModel;
 import reader.English;
 import reader.NewTextReader;
 import reader.Russian;
@@ -34,7 +35,7 @@ public class TextTest {
         rusBuilder.setControlPoints(engModel);
         engBuilder.setControlPoints(rusModel);
 
-        Model model = new Model(audio, rusModel, engModel);
+        Model model = new Model(new SoundModel(audio), rusModel, engModel);
         int count = 0;
 
         for(int i = 0; i < answer.length; i++){

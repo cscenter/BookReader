@@ -7,9 +7,6 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import sound.Average;
-import sound.SoundFindSilence;
-import sound.ZeroCrossing;
 import viewer.*;
 import model.*;
 import reader.*;
@@ -19,7 +16,7 @@ public class Main {
 //    private static final double DELTA = 1.15;
     private static final double DELTA = 1.15;
 
-    private static String nameOfAudioFile = "resource/Rey.wav";
+    private static String nameOfAudioFile = "resource/2.wav";
     private static String nameOfRusText = "resource/test1.txt";
     private static String nameOfEngText = "resource/test2.txt";
     private static String nameOfXMLFile = "resource/Concordance.xml";
@@ -71,17 +68,12 @@ public class Main {
         engBuilder.tokenizer(nameOfEngText, new English());
         TextModel engModel = engBuilder.getModel();
         
-        XMLReader xmlReader = new XMLReader(nameOfXMLFile);
-
         rusBuilder.setControlPoints(engModel);
         engBuilder.setControlPoints(rusModel);
 
-        
-    /*    xmlReader.readXML();
-        Model m = xmlReader.getModel();
-        rusModel.setControlPoints(m.getRusModel().getControlPoints());
-        engModel.setControlPoints(m.getEngModel().getControlPoints());
-        audioModel.setControlPoints(m.getAudioModel().getControlPoints());*/
+        XMLReader xmlReader = new XMLReader();
+        Model m = xmlReader.readXML(nameOfXMLFile);
+        audioModel.setConcordance(m.getAudioModel().getConcordance());
                    
         Model model = new Model(audioModel, rusModel, engModel);
 

@@ -13,18 +13,20 @@ public class AbstractModel {
     protected int currentSentence;
     protected int currentPause;
     protected int currentPosition;
+    protected int currentSecond;
     protected Integer[] pauses;
     protected Integer[] sentences;
     @XmlElement
-    public Concordance concordance;
-
+    private Concordance concordance;
+    
     public Concordance getConcordance(){
         return concordance;
     }
-    
+
     public void setConcordance(Concordance concordance){
         this.concordance = concordance;
     }
+
     
     public int getCurrentSentence() {
         return currentSentence;
@@ -32,6 +34,14 @@ public class AbstractModel {
 
     public void setCurrentSentence(int currentSentence) {
         this.currentSentence = currentSentence;
+    }
+    
+    public int getCurrentSecond() {
+        return currentSecond;
+    }
+
+    public void setCurrentSecond(int currentSecond) {
+        this.currentSecond = currentSecond;
     }
     
     public int getCurrentPosition() {
@@ -50,11 +60,6 @@ public class AbstractModel {
         this.currentPause = currentPause;
     }
 
-    /**
-     * Р СњР В°РЎвЂ¦Р С•Р Т‘Р С‘РЎвЂљ Р Р…Р С•Р С�Р ВµРЎР‚ Р В±Р В»Р С‘Р В¶Р В°Р в„–РЎв‚¬Р ВµР С–Р С• РЎРѓР В»Р ВµР Р†Р В° Р С—РЎР‚Р ВµР Т‘Р В»Р С•Р В¶Р ВµР Р…Р С‘РЎРЏ Р С—Р С• Р С—Р С•Р В»Р С•Р В¶Р ВµР Р…Р С‘РЎР‹ Р С”РЎС“РЎР‚РЎРѓР С•РЎР‚Р В°.
-     * @param position
-     * @return
-     */
     public int findSentence(int position){
         int l = 0;
         int r = sentences.length;
@@ -67,11 +72,6 @@ public class AbstractModel {
         return l;
     }
 
-    /**
-     * Р СњР В°РЎвЂ¦Р С•Р Т‘Р С‘РЎвЂљ Р Р…Р С•Р С�Р ВµРЎР‚ Р В±Р В»Р С‘Р В¶Р В°Р в„–РЎв‚¬Р ВµР в„– РЎРѓР В»Р ВµР Р†Р В° Р С—Р В°РЎС“Р В·РЎвЂ№ Р С—Р С• Р С—Р С•Р В»Р С•Р В¶Р ВµР Р…Р С‘РЎР‹ Р С�РЎвЂ№РЎв‚¬Р С‘
-     * @param position
-     * @return
-     */
     public int findPause(int position){
         int l = 0;
         int r = pauses.length;
@@ -84,21 +84,11 @@ public class AbstractModel {
         return l;
     }
 
-    /**
-     * Р С›Р С—РЎР‚Р ВµР Т‘Р ВµР В»РЎРЏР ВµРЎвЂљ Р Р…Р С•Р С�Р ВµРЎР‚ Р С—РЎР‚Р ВµР Т‘Р В»Р С•Р В¶Р ВµР Р…Р С‘РЎРЏ Р С—Р С• Р Р…Р С•Р С�Р ВµРЎР‚РЎС“ Р С—Р В°РЎС“Р В·РЎвЂ№.
-     * @param currentPause
-     * @return
-     */
     public void setSentenceFromSound(int currentPause){
         int position = getPausePosition(currentPause);
         this.currentSentence = findSentence(position);
     }
 
-    /**
-     * Р Р€РЎРѓРЎвЂљР В°Р Р…Р В°Р Р†Р В»Р С‘Р Р†Р В°Р ВµРЎвЂљ Р С—Р В°РЎС“Р В·РЎС“.
-     * @param currentPause
-     * @return
-     */
     public int setPauseFromText(int currentPause){
         this.currentPause = currentPause;
         return  currentPause;
@@ -138,8 +128,7 @@ public class AbstractModel {
     public void setSentencesFromPercent(double percent){
         int position = (int)percent*this.sentences[this.sentences.length-1]/100;
         this.setCurrentSentence(findSentence(position));
-    }
-    
+    }   
 
 }
 

@@ -7,30 +7,28 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 public class XMLReader {
-    private String nameOfFile;
-    private Model model;
     
-    public XMLReader(String name) throws ReaderException {
-        nameOfFile = name;
+    public XMLReader() throws ReaderException {
     }
     
-    public void readXML() throws ReaderException{
+    public Model readXML(String fileName) throws ReaderException{
         try {
-            File file = new File(nameOfFile);
+            File file = new File(fileName);
             JAXBContext jaxbContext = JAXBContext.newInstance(Model.class);
             
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-            model = (Model) jaxbUnmarshaller.unmarshal(file);
- 
+            Model model = (Model) jaxbUnmarshaller.unmarshal(file);
+            return model;
+            
 	  } catch (JAXBException e) {
               e.printStackTrace();
               throw new ReaderException("Can't read XML:\n" + e.getMessage());
 	  }
     }
     
-    public void writeXML() throws ReaderException{
+    public void writeXML(String fileName, Model model) throws ReaderException{
         try {
-            File file = new File(nameOfFile);
+            File file = new File(fileName);
             System.out.println(file.getAbsolutePath());
             JAXBContext jaxbContext = JAXBContext.newInstance(Model.class);
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
@@ -41,21 +39,5 @@ public class XMLReader {
                 e.printStackTrace();
                 throw new ReaderException("Can't write XML:\n" + e.getMessage());
             }
-    }
-    
-    public Model getModel(){
-        return model;
-    }
-    
-    public void setModel(Model model){
-        this.model = model;
-    }
-    
-    public String getNameOfFile(){
-        return nameOfFile;
-    }
-    
-    public void setNameOfFile(String nameOfFile){
-        this.nameOfFile = nameOfFile;
     }
 }

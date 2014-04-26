@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model>
+    <audioModel nameOfFile="resource/2.wav">
+        <concordance>
+            <conc keySentence="0">
+                <valueSentence>0</valueSentence>
+            </conc>
+            <conc keySentence="1">
+                <valueSentence>14</valueSentence>
+            </conc>
+            <conc keySentence="2">
+                <valueSentence>23</valueSentence>
+            </conc>
+            <conc keySentence="3">
+                <valueSentence>49</valueSentence>
+            </conc>
+            <conc keySentence="4">
+                <valueSentence>74</valueSentence>
+            </conc>
+            <conc keySentence="5">
+                <valueSentence>107</valueSentence>
+            </conc>
+            <conc keySentence="6">
+                <valueSentence>122</valueSentence>
+            </conc>
+            <conc keySentence="7">
+                <valueSentence>134</valueSentence>
+            </conc>
+            <conc keySentence="8">
+                <valueSentence>143</valueSentence>
+            </conc>
+            <conc keySentence="9">
+                <valueSentence>149</valueSentence>
+            </conc>
+            <conc keySentence="10">
+                <valueSentence>184</valueSentence>
+            </conc>
+            <conc keySentence="11">
+                <valueSentence>188</valueSentence>
+            </conc>
+            <conc keySentence="12">
+                <valueSentence>204</valueSentence>
+            </conc>
+            <conc keySentence="13">
+                <valueSentence>208</valueSentence>
+            </conc>
+            <conc keySentence="14">
+                <valueSentence>215</valueSentence>
+            </conc>
+            <conc keySentence="15">
+                <valueSentence>224</valueSentence>
+            </conc>
+            <conc keySentence="16">
+                <valueSentence>235</valueSentence>
+            </conc>
+            <conc keySentence="17">
+                <valueSentence>242</valueSentence>
+            </conc>
+            <conc keySentence="18">
+                <valueSentence>257</valueSentence>
+            </conc>
+            <conc keySentence="19">
+                <valueSentence>272</valueSentence>
+            </conc>
+            <conc keySentence="20">
+                <valueSentence>275</valueSentence>
+            </conc>
+            <conc keySentence="21">
+                <valueSentence>282</valueSentence>
+            </conc>
+            <conc keySentence="22">
+                <valueSentence>292</valueSentence>
+            </conc>
+            <conc keySentence="23">
+                <valueSentence>297</valueSentence>
+            </conc>
+            <conc keySentence="24">
+                <valueSentence>301</valueSentence>
+            </conc>
+            <conc keySentence="25">
+                <valueSentence>303</valueSentence>
+            </conc>
+            <conc keySentence="26">
+                <valueSentence>309</valueSentence>
+            </conc>
+            <conc keySentence="27">
+                <valueSentence>312</valueSentence>
+            </conc>
+            <conc keySentence="28">
+                <valueSentence>326</valueSentence>
+            </conc>
+            <conc keySentence="29">
+                <valueSentence>326</valueSentence>
+            </conc>
+            <conc keySentence="30">
+                <valueSentence>326</valueSentence>
+            </conc>
+            <conc keySentence="31">
+                <valueSentence>326</valueSentence>
+            </conc>
+        </concordance>
+    </audioModel>
+    <engModel nameOfFile="resource/test2.txt"/>
+    <rusModel nameOfFile="resource/test1.txt"/>
+</model>

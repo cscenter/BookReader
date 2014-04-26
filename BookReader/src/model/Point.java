@@ -1,35 +1,39 @@
 package model;
 
+import javax.xml.bind.annotation.*;
+
 /**
  * Created with IntelliJ IDEA.
- * User: Лиза
+ * User: Р В РІР‚С”Р В РЎвЂ�Р В Р’В·Р В Р’В°
  * Date: 07.12.13
  * Time: 0:16
  * To change this template use File | Settings | File Templates.
  */
+@XmlAccessorType( XmlAccessType.FIELD)
+@XmlRootElement
 public class Point {
-    private int KeySentence;
-    private int ValueSentence;
+    @XmlAttribute(name="keySentence")
+    private int keySentence;
+    private int valueSentence;
     public Point(){}
     public Point(int key, int value){
-        KeySentence = key;
-        ValueSentence = value;
+        keySentence = key;
+        valueSentence = value;
     }
-
-
+    
     public int getKeySentence() {
-        return KeySentence;
+        return keySentence;
     }
 
     public void setKeySentence(int keySentence) {
-        KeySentence = keySentence;
+        keySentence = keySentence;
     }
-
+ 
     public int getValueSentence() {
-        return ValueSentence;
+        return valueSentence;
     }
 
     public void setValueSentence(int valueSentence) {
-        ValueSentence = valueSentence;
+        valueSentence = valueSentence;
     }
 }

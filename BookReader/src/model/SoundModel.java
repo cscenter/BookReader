@@ -6,6 +6,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
 @XmlAccessorType( XmlAccessType.NONE )
@@ -16,20 +17,22 @@ public class SoundModel extends AbstractModel{
     private int start;
     private int end;
     private AudioFileFormat audioFileFormat;
+    @XmlAttribute(name = "nameOfFile")
     private String nameOfFile;
     private AudioFormat audioFormat;
     private List<Double> eMaxArr;
     private List<Double> eMinArr;
     private List<Double> thresholdArr;
     private List<Double> energy;
-    
+        
     public SoundModel(){}
     
     public SoundModel(short[] audio){
-        setConcordance(new Concordance(nameOfFile));
+        setConcordance(new Concordance());
         setShortAmplitude(audio);
     }
 
+      
     public void setAudioFileFormat(AudioFileFormat value) {
         audioFileFormat = value;
     }

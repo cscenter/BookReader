@@ -3,7 +3,7 @@ package model;
 import java.beans.Transient;
 import javax.xml.bind.annotation.*;
 
-@XmlAccessorType( XmlAccessType.PROPERTY)
+//@XmlAccessorType( XmlAccessType.PROPERTY)
 @XmlRootElement
 public class Model {
     private TextModel rusModel;

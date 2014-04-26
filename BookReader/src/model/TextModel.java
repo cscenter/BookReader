@@ -20,6 +20,7 @@ import static translate.Search.search;
 @XmlAccessorType( XmlAccessType.NONE )
 @XmlRootElement
 public class TextModel extends AbstractModel{
+    @XmlAttribute(name="nameOfFile")
     private String nameOfFile;
     private String text;
     private Language language;
@@ -29,7 +30,7 @@ public class TextModel extends AbstractModel{
     
     public TextModel(String nameOfFile){
         this.nameOfFile = nameOfFile;
-        setConcordance(new Concordance(nameOfFile));
+     //   setConcordance(new Concordance());
     }
     
     public ArrayList<Point> getControlPoints() {
