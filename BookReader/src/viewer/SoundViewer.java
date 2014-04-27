@@ -9,10 +9,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class SoundViewer extends AbstractViewer {
-
     private SoundModel audioModel;
-//    private JButton nextButton;
-//    private JButton prevButton;
     private JButton playButton;
     private JButton stopButton;
     private JButton plusButton;
@@ -72,8 +69,6 @@ public class SoundViewer extends AbstractViewer {
     }
 
     private void initButtons(JPanel panelButtons) {
-        //nextButton = new JButton("\u2192");
-       // prevButton = new JButton("\u2190");
         playButton = new JButton("Play");
         stopButton = new JButton("Stop");
         plusButton = new JButton("+");
@@ -91,8 +86,6 @@ public class SoundViewer extends AbstractViewer {
     
 
     private void addButtonsToJPanel(JPanel buttons) {
-      //  buttons.add(prevButton);
-       // buttons.add(nextButton);
         buttons.add(playButton);
         buttons.add(stopButton);
         buttons.add(plusButton);
@@ -103,24 +96,21 @@ public class SoundViewer extends AbstractViewer {
         addConcButton = new JButton("Add concordance");
         ActionListener addPointListener = new addConcActionListener();
         addConcButton.addActionListener(addPointListener);
-        JLabel labelSentense = new JLabel("Sentense: ");
-         tfSentense = new JTextField("00001");
-     
+        JLabel labelSentense = new JLabel("Sentence: ");
+        tfSentense = new JTextField("1");
+        tfSentense.setPreferredSize(new Dimension(64, 24));
+   
         JLabel labelPosition = new JLabel("Second: ");
-        tfPosition = new JTextField("00000");
+        tfPosition = new JTextField("0");
+        tfPosition.setPreferredSize(new Dimension(64, 24));
         panelConcordances.add(addConcButton);
         panelConcordances.add(labelSentense);
         panelConcordances.add(tfSentense);
         panelConcordances.add(labelPosition);
         panelConcordances.add(tfPosition);
     }
-    
-        
+            
     private void addListenersToButtons() {
-//        ActionListener nextListener = new nextActionListener();
-//        nextButton.addActionListener(nextListener);
-//        ActionListener prevListener = new prevActionListener();
-//        prevButton.addActionListener(prevListener);
         ActionListener playListener = new playActionListener();
         playButton.addActionListener(playListener);
         ActionListener stopListener = new stopActionListener();
@@ -133,11 +123,9 @@ public class SoundViewer extends AbstractViewer {
 
     @Override
     public void update(int value) {
-//        System.out.println(value);
         if (value > audioModel.getShortAmplitude().length)
             value = audioModel.getShortAmplitude().length - 1;
 
- //       System.out.println("Sound position " + position);
         position = value;
         line.setStart(position);
         slider.setValue(position);
@@ -156,7 +144,6 @@ public class SoundViewer extends AbstractViewer {
 
             line.setStart(line.getStart() + speedChangeY);
             line.setEnd(line.getStart() + speedChangeY + WIDTH);
-            //line.setEnd(line.getEnd() + speedChangeY);
             line.repaint();
         }
     }
@@ -167,7 +154,6 @@ public class SoundViewer extends AbstractViewer {
             if (line.getStart() > speedChangeY) {
                 line.setStart(line.getStart() - speedChangeY);
                 line.setEnd(line.getStart() - speedChangeY + WIDTH);
-                //line.setEnd(line.getEnd() - speedChangeY);
                 line.repaint();
             }
         }
@@ -185,7 +171,6 @@ public class SoundViewer extends AbstractViewer {
     public class plusActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-//            speedChangeY -=  SPEED_CHANGE_SCALE;
             line.setScale(line.getScale() - SPEED_CHANGE_SCALE);
             line.repaint();
         }
@@ -205,7 +190,6 @@ public class SoundViewer extends AbstractViewer {
     public class minusActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-//            speedChangeY += SPEED_CHANGE_SCALE;
             line.setScale(line.getScale() + SPEED_CHANGE_SCALE);
             line.repaint();
         }
@@ -246,7 +230,6 @@ public class SoundViewer extends AbstractViewer {
                 thread.start();
             }
         }
-
     }
     
     public class addConcActionListener implements ActionListener {

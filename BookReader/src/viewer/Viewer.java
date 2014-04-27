@@ -38,26 +38,47 @@ public class Viewer{
         this.nameOfXMLFile = nameOfXMLFile;
         frame = new JFrame("BookReader");
         this.model = model;
+        frameRate = model.getAudioModel().getAudioFormat().getFrameRate();         
         rusPanel = new TextViewer(model.getRusModel().getText(),this);
         engPanel = new TextViewer(model.getEngModel().getText(),this);
         audioPanel = new SoundViewer(model.getAudioModel(),this);
         currPos = new JLabel("Current position:");
+        addToolBar();
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,rusPanel,engPanel);
-
         splitPane.setDividerLocation(300);
-
         JSplitPane verticalSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,splitPane,audioPanel);
         verticalSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,verticalSplitPane,currPos);
         frame.getContentPane().add(verticalSplitPane);
         frame.pack();
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
         frame.setVisible(true);
-        frameRate = model.getAudioModel().getAudioFormat().getFrameRate();
-                
-        
-        Font font = new Font("Verdana", Font.PLAIN, 11);
-         
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+    
+        frame.addWindowListener(new WindowAdapter() {  
+            
+            @Override
+            public void windowClosing(WindowEvent e) {
+                int option = JOptionPane.showConfirmDialog (
+                        null, "Would you like to save changes?",
+                        "Warning", JOptionPane.YES_NO_CANCEL_OPTION);
+                if (option == JOptionPane.YES_OPTION) {
+                    try {
+                        XMLReader xml = new XMLReader();
+                        xml.write(nameOfXMLFile, model);
+                    } catch (ReaderException ex) {
+                        ex.showError();
+                    }
+                    System.out.println("Saving");
+                }
+                if (option == JOptionPane.YES_OPTION || option == JOptionPane.NO_OPTION){
+                    frame.dispose();
+                }
+            }            
+        });
+    }
+    
+    private void addToolBar(){
+        Font font = new Font("Verdana", Font.PLAIN, 11); 
         JMenuBar menuBar = new JMenuBar();
          
         JMenu fileMenu = new JMenu("File");
@@ -68,9 +89,9 @@ public class Viewer{
         newMenu.setFont(font);
         fileMenu.add(newMenu);
          
-        JMenuItem txtFileItem = new JMenuItem("Text file");
-        txtFileItem.setFont(font);
-        newMenu.add(txtFileItem);
+        JMenuItem textFileItem = new JMenuItem("Text file");
+        textFileItem.setFont(font);
+        newMenu.add(textFileItem);
          
         JMenuItem audioFileItem = new JMenuItem("Audio file");
         audioFileItem.setFont(font);
@@ -78,18 +99,17 @@ public class Viewer{
         audioFileItem.addActionListener(new ActionListener() {
 
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed (ActionEvent e) {
                 JFileChooser dialog = new JFileChooser();
                 dialog.showOpenDialog(frame);
-                File file =dialog.getSelectedFile();
+                File file = dialog.getSelectedFile();
                 String nameOfAudioFile = file.getPath();
                 SoundReader audioBuilder;
                 try {
-                    audioBuilder = new SoundReader(nameOfAudioFile);
-                    SoundModel audioModel = audioBuilder.getModel();
+                    SoundModel audioModel = new SoundReader().read(nameOfAudioFile);
                     model.setAudioModel(audioModel);
                 } catch (ReaderException ex) {
-                    Logger.getLogger(Viewer.class.getName()).log(Level.SEVERE, null, ex);
+                    ex.showError();
                 }
             }
         });
@@ -108,16 +128,15 @@ public class Viewer{
                 XMLReader xmlReader;
                 try {
                     xmlReader = new XMLReader();
-                    Model m = xmlReader.readXML(nameOfXMLFile);
+                    Model m = xmlReader.read(nameOfXMLFile);
                     model.getAudioModel().setConcordance(m.getAudioModel().getConcordance());
                 } catch (ReaderException ex) {
-                    Logger.getLogger(Viewer.class.getName()).log(Level.SEVERE, null, ex);
+                    ex.showError();
                 }
             }
-        });
-    
+        });    
          
-        JMenuItem saveItem = new JMenuItem("SaveXML");
+        JMenuItem saveItem = new JMenuItem("Save");
         saveItem.setFont(font);
         fileMenu.add(saveItem);
         saveItem.addActionListener(new ActionListener() {
@@ -127,10 +146,10 @@ public class Viewer{
                 XMLReader xml;
                 try {
                     xml = new XMLReader();
-                    xml.writeXML(nameOfXMLFile, model);
+                    xml.write(nameOfXMLFile, model);
                     System.out.println("Saving");
                 } catch (ReaderException ex) {
-                    Logger.getLogger(Viewer.class.getName()).log(Level.SEVERE, null, ex);
+                    ex.showError();
                 }
             }
         });
@@ -147,47 +166,23 @@ public class Viewer{
                 System.exit(0);             
             }           
         });
-         
+
         menuBar.add(fileMenu);
-                 
         frame.setJMenuBar(menuBar);
-        
-        frame.addWindowListener(new WindowAdapter() {  
-            
-            @Override
-            public void windowClosing(WindowEvent e) {
-                Object[] options = { "Yes", "No" };
-                int ind_option = JOptionPane
-                        .showOptionDialog(e.getWindow(), "Would you like to save changes to XML file?",
-                                "XML", JOptionPane.YES_NO_OPTION,
-                                JOptionPane.QUESTION_MESSAGE, null, options,
-                                options[0]);
-                if (options[ind_option] == "Yes") {
-                    try {
-                        XMLReader xml = new XMLReader();
-                        xml.writeXML(nameOfXMLFile, model);
-                    } catch (ReaderException ex) {
-                        Logger.getLogger(Viewer.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    System.out.println("Saving");
-                }
-                super.windowClosing(e);
-            }            
-        });
     }
     
 
     public void update (AbstractViewer viewer){
         int currentSentence = 0 ;
         int currentSec = 0 ;
-        if(viewer == rusPanel) {
+        if (viewer == rusPanel) {
             currentSentence = model.getRusModel().findSentence(viewer.position);
             model.getRusModel().setCurrentSentence(currentSentence);
             model.getAudioModel().setCurrentSentence(currentSentence);
             model.getEngModel().setSentenceFromText(model.getRusModel());
             currentSec = model.getAudioModel().getConcordance().get(currentSentence);
             audioPanel.update((int)(currentSec*frameRate));
-        }else if(viewer == engPanel){
+        } else if (viewer == engPanel){
             currentSentence = model.getEngModel().findSentence(viewer.position);
             model.getEngModel().setCurrentSentence(currentSentence);
             model.getRusModel().setSentenceFromText(model.getEngModel());
@@ -195,7 +190,7 @@ public class Viewer{
             currentSec = model.getAudioModel().getConcordance().get(currentSentence);
             model.getAudioModel().setCurrentSentence(currentSentence);
             audioPanel.update((int)(currentSec*frameRate));
-        }else if(viewer == audioPanel){
+        } else if (viewer == audioPanel){
             currentSec = (int)(viewer.position/frameRate);
             System.out.println("viewer.position " + viewer.position);
             System.out.println("lenAmpl " + model.getAudioModel().getShortAmplitude().length);
@@ -210,5 +205,4 @@ public class Viewer{
         rusPanel.update(model.getRusModel().getSentencePosition(model.getRusModel().getCurrentSentence()));
         currPos.setText("Current position: sent = " + currentSentence + " sec = " + currentSec);
     }
-
 }

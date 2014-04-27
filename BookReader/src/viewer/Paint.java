@@ -13,7 +13,6 @@ import java.util.List;
  * 2013
  */
 public class Paint extends JPanel{
-
         private short shortAmplitudeArr[];
         private SoundModel audioModel;
         private int start;
@@ -29,7 +28,6 @@ public class Paint extends JPanel{
         private List<Double> eMinArr;
         private List<Double> thresholdArr;
         private List<Double> energy;
-
 
         public Paint(SoundModel model){
             audioModel = model;
@@ -76,8 +74,6 @@ public class Paint extends JPanel{
                         distance + 1, (int)( y2 * SCALE_Y + OFFSET_Y));
                 distance += 1;
             }
-
-
 
 //          thresholdArr
             distance = 0;
@@ -191,7 +187,6 @@ public class Paint extends JPanel{
                 end = value;
             }
         }
-
 
 }
 

@@ -12,10 +12,7 @@ import model.*;
 import reader.*;
 
 public class Main {
-    private static final int MIN = 10000;
-//    private static final double DELTA = 1.15;
-    private static final double DELTA = 1.15;
-
+    
     private static String nameOfAudioFile = "resource/2.wav";
     private static String nameOfRusText = "resource/test1.txt";
     private static String nameOfEngText = "resource/test2.txt";
@@ -25,10 +22,6 @@ public class Main {
     private static String defNameOfRusText = "../../resource/ReyBredbery.txt";
     private static String defNameOfEngText = "../../resource/test2.txt";
     private static String defNameOfXMLFile = "../../resource/Concordance.xml";
-
-    public static void main(String[] args) throws InterruptedException, ReaderException {
-        parseArgs(args);
-    }
 
     private static void parseArgs(String[] args) throws ReaderException, InterruptedException {
         for (int i = 0; i < args.length; i++) {
@@ -55,44 +48,24 @@ public class Main {
         readAndShowAll();
     }
 
-
     private static void readAndShowAll() throws ReaderException, InterruptedException {
-        SoundReader audioBuilder = new SoundReader(nameOfAudioFile);
-        SoundModel audioModel = audioBuilder.getModel();
+        SoundModel audioModel = new SoundReader().read(nameOfAudioFile);
         
-        NewTextReader rusBuilder = new NewTextReader();
-        rusBuilder.tokenizer(nameOfRusText, new Russian());
-        TextModel rusModel = rusBuilder.getModel();
-
-        NewTextReader engBuilder = new NewTextReader();
-        engBuilder.tokenizer(nameOfEngText, new English());
-        TextModel engModel = engBuilder.getModel();
+        TextReader rusReader = new TextReader();
+        TextModel rusModel = rusReader.read(nameOfRusText, new Russian());
         
-        rusBuilder.setControlPoints(engModel);
-        engBuilder.setControlPoints(rusModel);
+        TextReader engReader = new TextReader();
+        TextModel engModel = engReader.read(nameOfEngText, new English());
+        
+        rusReader.setControlPoints(engModel);
+        engReader.setControlPoints(rusModel);
 
         XMLReader xmlReader = new XMLReader();
-        Model m = xmlReader.readXML(nameOfXMLFile);
+        Model m = xmlReader.read(nameOfXMLFile);
         audioModel.setConcordance(m.getAudioModel().getConcordance());
                    
         Model model = new Model(audioModel, rusModel, engModel);
-
- //       SoundFindSilence soundFindSilence = new SoundFindSilence(model.getAudioModel(), MIN, DELTA);
-        Viewer myViewer = new Viewer(model, nameOfXMLFile);
-        
-        
-    }
-    
-    private void printControlPoints(Model model){
-        for(int i= 0; i < model.getRusModel().getControlPoints().size(); i++){
-            System.out.print(model.getRusModel().getControlPoints().get(i).getKeySentence()+" "+
-                    model.getRusModel().getControlPoints().get(i).getValueSentence()+ " ");
-        }
-        System.out.println();
-        for(int i= 0; i < model.getEngModel().getControlPoints().size(); i++){
-            System.out.print(model.getEngModel().getControlPoints().get(i).getKeySentence()+ " " +
-                    model.getEngModel().getControlPoints().get(i).getValueSentence()+ " ");
-        }
+        Viewer myViewer = new Viewer(model, nameOfXMLFile);      
     }
     
     private static void printHelpInformation() {
@@ -102,5 +75,8 @@ public class Main {
         System.out.println("For example: --r \"RusFile.txt\" --e \"EngFile.txt\" --a \"AudioFile.wav\"");
         System.out.println("Or only: --r \"RusFile.txt\"");
     }
-
+    
+    public static void main(String[] args) throws InterruptedException, ReaderException {
+        parseArgs(args);
+    }
 }

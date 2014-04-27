@@ -6,7 +6,6 @@ import static javax.sound.sampled.AudioSystem.getAudioFileFormat;
 import model.SoundModel;
 
 public class SoundReader {
-
     private byte[] audioBytes;
     private short[] shortAmplitudeArr;
     private AudioFileFormat audioFileFormat;
@@ -14,7 +13,7 @@ public class SoundReader {
     private String nameOfFile;
     private SoundModel audioModel;
     
-    public SoundReader(String name) throws ReaderException {
+    public SoundModel read(String name) throws ReaderException {
         nameOfFile = name;
         readAudio();
         
@@ -24,7 +23,8 @@ public class SoundReader {
         audioModel.setStart(13881);
         audioModel.setEnd(16881);
         audioModel.setAudioFileFormat(audioFileFormat);
-        audioModel.setNameOfFile(nameOfFile);
+        audioModel.setFileName(nameOfFile);
+        return audioModel;
     }
     
     public SoundModel getModel(){

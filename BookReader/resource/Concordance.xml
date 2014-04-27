@@ -1,105 +1,99 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model>
-    <audioModel nameOfFile="resource/2.wav">
+    <audioModel fileName="resource/2.wav">
         <concordance>
-            <conc keySentence="0">
-                <valueSentence>0</valueSentence>
-            </conc>
-            <conc keySentence="1">
-                <valueSentence>14</valueSentence>
-            </conc>
-            <conc keySentence="2">
-                <valueSentence>23</valueSentence>
-            </conc>
-            <conc keySentence="3">
-                <valueSentence>49</valueSentence>
-            </conc>
-            <conc keySentence="4">
-                <valueSentence>74</valueSentence>
-            </conc>
-            <conc keySentence="5">
-                <valueSentence>107</valueSentence>
-            </conc>
-            <conc keySentence="6">
-                <valueSentence>122</valueSentence>
-            </conc>
-            <conc keySentence="7">
-                <valueSentence>134</valueSentence>
-            </conc>
-            <conc keySentence="8">
-                <valueSentence>143</valueSentence>
-            </conc>
-            <conc keySentence="9">
-                <valueSentence>149</valueSentence>
-            </conc>
-            <conc keySentence="10">
-                <valueSentence>184</valueSentence>
-            </conc>
-            <conc keySentence="11">
-                <valueSentence>188</valueSentence>
-            </conc>
-            <conc keySentence="12">
-                <valueSentence>204</valueSentence>
-            </conc>
-            <conc keySentence="13">
-                <valueSentence>208</valueSentence>
-            </conc>
-            <conc keySentence="14">
-                <valueSentence>215</valueSentence>
-            </conc>
-            <conc keySentence="15">
-                <valueSentence>224</valueSentence>
-            </conc>
-            <conc keySentence="16">
-                <valueSentence>235</valueSentence>
-            </conc>
-            <conc keySentence="17">
-                <valueSentence>242</valueSentence>
-            </conc>
-            <conc keySentence="18">
-                <valueSentence>257</valueSentence>
-            </conc>
-            <conc keySentence="19">
-                <valueSentence>272</valueSentence>
-            </conc>
-            <conc keySentence="20">
-                <valueSentence>275</valueSentence>
-            </conc>
-            <conc keySentence="21">
-                <valueSentence>282</valueSentence>
-            </conc>
-            <conc keySentence="22">
-                <valueSentence>292</valueSentence>
-            </conc>
-            <conc keySentence="23">
-                <valueSentence>297</valueSentence>
-            </conc>
-            <conc keySentence="24">
-                <valueSentence>301</valueSentence>
-            </conc>
-            <conc keySentence="25">
-                <valueSentence>303</valueSentence>
-            </conc>
-            <conc keySentence="26">
-                <valueSentence>309</valueSentence>
-            </conc>
-            <conc keySentence="27">
-                <valueSentence>312</valueSentence>
-            </conc>
-            <conc keySentence="28">
-                <valueSentence>326</valueSentence>
-            </conc>
-            <conc keySentence="29">
-                <valueSentence>326</valueSentence>
-            </conc>
-            <conc keySentence="30">
-                <valueSentence>326</valueSentence>
-            </conc>
-            <conc keySentence="31">
-                <valueSentence>326</valueSentence>
-            </conc>
+            <conc keySentence="0" valueSentence="7"/>
+            <conc keySentence="1" valueSentence="13"/>
+            <conc keySentence="2" valueSentence="23"/>
+            <conc keySentence="3" valueSentence="49"/>
+            <conc keySentence="4" valueSentence="74"/>
+            <conc keySentence="5" valueSentence="107"/>
+            <conc keySentence="6" valueSentence="122"/>
+            <conc keySentence="7" valueSentence="134"/>
+            <conc keySentence="8" valueSentence="143"/>
+            <conc keySentence="9" valueSentence="149"/>
+            <conc keySentence="10" valueSentence="168"/>
+            <conc keySentence="11" valueSentence="184"/>
+            <conc keySentence="12" valueSentence="189"/>
+            <conc keySentence="13" valueSentence="204"/>
+            <conc keySentence="14" valueSentence="208"/>
+            <conc keySentence="15" valueSentence="215"/>
+            <conc keySentence="16" valueSentence="224"/>
+            <conc keySentence="17" valueSentence="235"/>
+            <conc keySentence="18" valueSentence="242"/>
+            <conc keySentence="19" valueSentence="257"/>
+            <conc keySentence="20" valueSentence="272"/>
+            <conc keySentence="21" valueSentence="275"/>
+            <conc keySentence="22" valueSentence="282"/>
+            <conc keySentence="23" valueSentence="291"/>
+            <conc keySentence="24" valueSentence="297"/>
+            <conc keySentence="25" valueSentence="301"/>
+            <conc keySentence="26" valueSentence="302"/>
+            <conc keySentence="27" valueSentence="310"/>
+            <conc keySentence="28" valueSentence="312"/>
+            <conc keySentence="29" valueSentence="326"/>
+            <conc keySentence="30" valueSentence="333"/>
+            <conc keySentence="31" valueSentence="340"/>
+            <conc keySentence="32" valueSentence="343"/>
+            <conc keySentence="33" valueSentence="349"/>
+            <conc keySentence="34" valueSentence="354"/>
+            <conc keySentence="35" valueSentence="377"/>
+            <conc keySentence="36" valueSentence="382"/>
+            <conc keySentence="37" valueSentence="384"/>
+            <conc keySentence="38" valueSentence="398"/>
+            <conc keySentence="39" valueSentence="403"/>
+            <conc keySentence="40" valueSentence="414"/>
+            <conc keySentence="41" valueSentence="417"/>
+            <conc keySentence="42" valueSentence="423"/>
+            <conc keySentence="43" valueSentence="427"/>
+            <conc keySentence="44" valueSentence="429"/>
+            <conc keySentence="45" valueSentence="435"/>
+            <conc keySentence="46" valueSentence="437"/>
+            <conc keySentence="47" valueSentence="440"/>
+            <conc keySentence="48" valueSentence="441"/>
+            <conc keySentence="49" valueSentence="443"/>
+            <conc keySentence="50" valueSentence="444"/>
+            <conc keySentence="51" valueSentence="450"/>
+            <conc keySentence="52" valueSentence="461"/>
+            <conc keySentence="53" valueSentence="466"/>
+            <conc keySentence="54" valueSentence="469"/>
+            <conc keySentence="55" valueSentence="471"/>
+            <conc keySentence="56" valueSentence="472"/>
+            <conc keySentence="57" valueSentence="473"/>
+            <conc keySentence="58" valueSentence="478"/>
+            <conc keySentence="59" valueSentence="482"/>
+            <conc keySentence="60" valueSentence="483"/>
+            <conc keySentence="61" valueSentence="486"/>
+            <conc keySentence="62" valueSentence="487"/>
+            <conc keySentence="63" valueSentence="489"/>
+            <conc keySentence="64" valueSentence="491"/>
+            <conc keySentence="65" valueSentence="494"/>
+            <conc keySentence="66" valueSentence="494"/>
+            <conc keySentence="67" valueSentence="508"/>
+            <conc keySentence="68" valueSentence="512"/>
+            <conc keySentence="69" valueSentence="514"/>
+            <conc keySentence="70" valueSentence="520"/>
+            <conc keySentence="71" valueSentence="526"/>
+            <conc keySentence="72" valueSentence="529"/>
+            <conc keySentence="73" valueSentence="534"/>
+            <conc keySentence="74" valueSentence="539"/>
+            <conc keySentence="75" valueSentence="540"/>
+            <conc keySentence="76" valueSentence="548"/>
+            <conc keySentence="77" valueSentence="552"/>
+            <conc keySentence="78" valueSentence="558"/>
+            <conc keySentence="79" valueSentence="562"/>
+            <conc keySentence="80" valueSentence="564"/>
+            <conc keySentence="81" valueSentence="567"/>
         </concordance>
     </audioModel>
-    <engModel nameOfFile="resource/test2.txt"/>
-    <rusModel nameOfFile="resource/test1.txt"/>
+    <engModel fileName="resource/test2.txt">
+        <concordance>
+            <conc keySentence="0" valueSentence="0"/>
+        </concordance>
+    </engModel>
+    <rusModel fileName="resource/test1.txt">
+        <concordance>
+            <conc keySentence="0" valueSentence="0"/>
+        </concordance>
+    </rusModel>
 </model>

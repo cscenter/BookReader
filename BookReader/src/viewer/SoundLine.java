@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class SoundLine extends JPanel{
-
     private short shortAmplitudeArr[];
     private SoundModel audioModel;
     private int start;
@@ -48,9 +47,7 @@ public class SoundLine extends JPanel{
         g2d.setStroke(new BasicStroke(1,
                 BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
         g2d.setColor(Color.BLUE);
-    }
-
-    
+    }    
 
     public void setVertX(int value){
         vertX = value;

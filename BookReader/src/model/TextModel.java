@@ -1,36 +1,30 @@
 package model;
 
 import reader.ReaderException;
-import java.beans.Transient;
 import reader.Language;
 import translate.Request;
 import translate.Search;
-
 import java.util.ArrayList;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import static translate.Search.DEVIATION;
 import static translate.Search.search;
 
 @XmlAccessorType( XmlAccessType.NONE )
 @XmlRootElement
 public class TextModel extends AbstractModel{
-    @XmlAttribute(name="nameOfFile")
-    private String nameOfFile;
+    @XmlAttribute(name="fileName")
+    private String fileName;
     private String text;
     private Language language;
     private ArrayList <Point> controlPoints;
     
     public TextModel(){}
     
-    public TextModel(String nameOfFile){
-        this.nameOfFile = nameOfFile;
-     //   setConcordance(new Concordance());
+    public TextModel(String fileName){
+        this.fileName = fileName;
+        setConcordance(new Concordance());
     }
     
     public ArrayList<Point> getControlPoints() {
@@ -74,20 +68,18 @@ public class TextModel extends AbstractModel{
         }
         return getText().substring(begin, end);
     }
-
     
     public void setSentenceFromText(TextModel anotherModel){
        this.currentSentence = anotherModel.getControlPoint(anotherModel.getCurrentSentence()).getValueSentence()+
                               anotherModel.getCurrentSentence()-
                               anotherModel.getControlPoint(anotherModel.getCurrentSentence()).getKeySentence();
-        //this.currentSentence = anotherModel.getCurrentSentence();
-
         String translate = null;
         try {
             translate = new Request(anotherModel.getLanguage().getName(),
                         this.getLanguage().getName(),
                         anotherModel.getSubstring(anotherModel.getCurrentSentence())).sendGet();
         } catch (ReaderException e) {
+            System.out.println(e.getMessage());
         }
 
         this.currentSentence = search(translate, this);

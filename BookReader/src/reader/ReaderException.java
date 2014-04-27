@@ -1,5 +1,8 @@
 package reader;
 
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+
 /**
  * Oskina Olga
  * SPBGPU
@@ -17,6 +20,13 @@ public class ReaderException extends Exception {
 
     public ReaderException(Throwable cause) {
         super(cause);
+    }
+    
+    public void showError() {
+        JOptionPane optionPane = new JOptionPane(getMessage(), JOptionPane.ERROR_MESSAGE);    
+        JDialog dialog = optionPane.createDialog("Failure");
+        dialog.setAlwaysOnTop(true);
+        dialog.setVisible(true);
     }
 
 }

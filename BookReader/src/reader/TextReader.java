@@ -1,105 +1,123 @@
 package reader;
 import java.io.FileInputStream;
 import java.io.IOException;
+import model.Point;
+import model.TextModel;
+import translate.Request;
+import translate.Search;
+
 import java.util.ArrayList;
 
+import static translate.Search.search;
+
 public class TextReader {
+    private static final char[] endSymbols = {'.','!','?'};
+    private static final char[] pauseSymbols = {',',';',':'};
+    private StringBuilder lastWord = new StringBuilder();
+    public static int DIST = 300;
+    private TextModel textModel;
 
-    private static String[] beforeName = {"Mr", "Mrs", "St","г","ул","пр","ш"};
-    private static char[] end = {'.','!','?'};
-    private static StringBuilder lastWord = new StringBuilder();
-    private static String fileRead(String pathToFile) {
-        String text = null;
-        try {
-            FileInputStream in = new FileInputStream(pathToFile);
-            byte[] dataString = new byte[in.available()];
-            in.read(dataString);
-            text = new String(dataString);
-            in.close();
-        } catch (IOException e) {
-
-        }
-        return text;
+    public  TextModel getModel(){
+        return textModel;
     }
-
-    public static  String[] Tokenizer (String pathToFile) {
-        String text = fileRead(pathToFile);
-        if(text == null) return null;
-        ArrayList<String> list = new ArrayList<String>();
+    
+    public TextModel read(String pathToFile, Language language)throws ReaderException{
+        ArrayList<Integer> listSentences = new ArrayList<Integer>();
+        ArrayList<Integer> listPauses = new ArrayList<Integer>();
+        listPauses.add(0);
+        listSentences.add(0);
         int start = 0;
         StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < text.length();i++){
-          /*  if (!(  (text.charAt(i) >= 'a'&& text.charAt(i) <= 'z')||
-                    (text.charAt(i) >= 'а'&& text.charAt(i) <= 'я')||
-                    (text.charAt(i) >= 'A'&& text.charAt(i) <= 'Z')||
-                    (text.charAt(i) >= 'А'&& text.charAt(i) <= 'Я'))) {
+        textModel = new TextModel(pathToFile);
+        textModel.setText(fileRead(pathToFile));
+        
+        for (int i = 0; i <  textModel.getText().length();i++){
+            if (!Character.isLetter(textModel.getText().charAt(i))){
                 if (start != i-1 && sb.length()!= 0){
                     lastWord.setLength(0);
                     lastWord.append(sb.substring(start));
                 }
                 start = i+1;
-            }      */
-            if (text.charAt(i)== '\n'){
-                continue;
-            }
-            sb.append(text.charAt(i));
-
-            for(int j = 0; j < end.length; j++){
-                if(text.charAt(i)== end[j]) {
-                    if(Check(text,i)){
-                        list.add(sb.toString());
-                        sb.setLength(0);
+                if (checkEndSymbol(textModel.getText().charAt(i)))
+                    if (checkEnd(textModel.getText(), i, lastWord.toString(), language)){
+                        listSentences.add(i);
+                        listPauses.add(i);
                     }
-                }
+            }
+            sb.append(textModel.getText().charAt(i));
+        }
+        textModel.setPauses(listPauses.toArray(new Integer[listPauses.size()]));
+        textModel.setSentences(listSentences.toArray(new Integer[listSentences.size()]));
+        textModel.setLanguage(language);
+        return textModel;
+    }
+    
+    public static String fileRead(String pathToFile) throws ReaderException {
+        String text = null;
+        FileInputStream in = null;
+        try {
+            in = new FileInputStream(pathToFile);
+            byte[] dataString = new byte[in.available()];
+            in.read(dataString);
+            text = new String(dataString);
+        } catch (IOException e) {
+            throw new ReaderException(e);
+        } finally {
+            try {
+                if(in != null) in.close();
+            } catch (IOException e) { }
+        }
+        return text;
+    }
+
+    public void setControlPoints(TextModel anotherModel) throws ReaderException {
+        ArrayList<Point> controlPoints = new ArrayList<Point>();
+        int anotherIndex = 0;
+        for (int i = 0;
+            i < textModel.getSentences().length &&
+            anotherIndex < anotherModel.getSentences().length;
+            i = i + DIST){
+
+            String buf = textModel.getSubstring(i);
+            String translate = new Request(textModel.getLanguage().getName(),
+                    anotherModel.getLanguage().getName(),
+                    buf).sendGet();
+
+            anotherModel.setCurrentSentence(anotherIndex);
+            anotherIndex = search(translate.toLowerCase(), anotherModel);
+
+            controlPoints.add(new Point(i, anotherIndex));
+            anotherIndex += DIST;
+        }
+        textModel.setControlPoints(controlPoints);
+    }
+
+
+    private static boolean checkEndSymbol(char ch){
+        for (char endSymbol : endSymbols) {
+            if (ch == endSymbol) {
+                return true;
             }
         }
-        return list.toArray(new String[list.size()]) ;
+        return false;
     }
-    private static boolean Check (String text,int i)   {
-        if (text.charAt(i) == '.') {
-            int flag  = 0;
-            for (int j= i-1; j > 0;j--) {
-                if(text.charAt(j) >= '0'&&text.charAt(j) <= '9' ) {
-                    flag = 1;
-                    continue;
-                }
-                if( flag == 1)
-                    if (text.charAt(j) == '\n') return false;
-                    else if((text.charAt(j) != ' ')) break;
 
-                if(     (text.charAt(j) >= 'A'&& text.charAt(j) <= 'Z')||
-                        //(text.charAt(j) >= 'А'&& text.charAt(j) <= 'Я')) {
-                        (text.charAt(j) >= 'A'&& text.charAt(j) <= 'Z')) {
-                    if ((text.charAt(--j) >= 'A'&& text.charAt(j) <= 'Z')||
-                            //(text.charAt(j) >= 'А'&& text.charAt(j) <= 'Я'))
-                        (text.charAt(j) >= 'A'&& text.charAt(j) <= 'Z'))
-                        return true;
-                    else return false;
-                }
-                if ((flag != 2)&&(text.charAt(i) != ' '))break;
-            }
+    private static boolean checkEnd(String text, int i, String lastWord, Language language)   {
             for (i++; i < text.length();i++){
-                if(text.charAt(i) == ' ')  continue;
-                if(text.charAt(i) == '.')  return false;
-                if(text.charAt(i) == '\n')  return true;
-                if(text.charAt(i) >= '0'&&text.charAt(i) <= '9' ) return false;
-                if(     (text.charAt(i) >= 'a'&& text.charAt(i) <= 'z')||
-                        (text.charAt(i) >= '\u1072'&& text.charAt(i) <= '\u1103')) return false;
-//                        (text.charAt(i) >= 'a'&& text.charAt(i) <= 'z')) return false;
-                if ((text.charAt(i) >= 'A'&& text.charAt(i) <= 'Z')||
-                        (text.charAt(i) >= '\u1040'&& text.charAt(i) <= '\u1071'))
-//                        (text.charAt(i) >= 'A'&& text.charAt(i) <= 'Z'))
-                    if(notName()) return true;
-                else return false;
+                if (text.charAt(i) == ' ')
+                    continue;
+                if (text.charAt(i) == '.')
+                    return false;
+                if (text.charAt(i) == '\n')
+                    return true;
+                if (Character.isUpperCase(text.charAt(i))){
+                    if(lastWord.length()==1 && Character.isUpperCase(lastWord.charAt(0)))
+                        return false;
+                    if (language.isName(lastWord))
+                        return false;
+                    return true;
             }
         }
         return true;
     }
-
-    private static boolean notName() {
-      //  for (int j = 0; j < beforeName.length;j++)
-       //     if (lastWord.equals(beforeName[j])) return false;
-        return true;
-    }
-
 }

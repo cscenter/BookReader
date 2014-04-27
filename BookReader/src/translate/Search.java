@@ -6,13 +6,12 @@ import java.util.HashMap;
 
 /**
  * Created with IntelliJ IDEA.
- * User: Лиза
+ * User: Р вЂєР С‘Р В·Р В°
  * Date: 30.11.13
  * Time: 14:32
  * To change this template use File | Settings | File Templates.
  */
 public class Search {
-
     public static final int DEVIATION = 5;
     public static final int RANGE = 50;
 
@@ -21,8 +20,8 @@ public class Search {
         int maxPercent = 0;
         int maxNumber = sentence;
         int currentPercent;
-        if(sentence < DEVIATION) return sentence;
-        for(int i = sentence - RANGE; i < sentence + RANGE; i++){
+        if (sentence < DEVIATION) return sentence;
+        for (int i = sentence - RANGE; i < sentence + RANGE; i++){
             if(i < DEVIATION) i = DEVIATION;
             int begin = originalModel.getSentencePosition(i - DEVIATION);
             int end = originalModel.getSentencePosition(i + 1);
@@ -44,7 +43,7 @@ public class Search {
         int value;
         int matches = 0;
         double count = 0;
-        for(int i = 0; i <  original.length();i++){
+        for (int i = 0; i <  original.length();i++){
             if (!Character.isLetter(original.charAt(i))){
                 if (start < i-1){
                     lastWord = original.substring(start,i);
@@ -67,7 +66,7 @@ public class Search {
         String lastWord;
         int start = 0;
         Integer value;
-        for(int i = 0; i <  text.length();i++){
+        for (int i = 0; i <  text.length();i++){
             if (!Character.isLetter(text.charAt(i))){
                 if (start < i-1){
                     lastWord = text.substring(start,i);
@@ -80,6 +79,5 @@ public class Search {
         }
         return map;
     }
-
 
 }

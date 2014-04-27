@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 /**
  * Created with IntelliJ IDEA.
- * User: Лиза
+ * User: Р›РёР·Р°
  * Date: 15.11.13
  * Time: 12:34
  * To change this template use File | Settings | File Templates.
@@ -23,15 +23,5 @@ public class English extends Language {
             }
         }
         return false;
-    }
-
-    @Override
-    public boolean сheckPause(String text,String lastWord, int i){
-        Pattern p = Pattern.compile("[,|:|;|!|.|\\?]\\s*w*\\s*[,|:|;|!|.|\\?]");
-        Matcher m = p.matcher(text.substring(i-20, i+1));
-        if(m.find())
-            if(m.group(m.groupCount()).contains(lastWord)) return false;
-
-        return true;
     }
 }
