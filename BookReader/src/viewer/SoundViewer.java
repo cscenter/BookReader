@@ -118,17 +118,13 @@ public class SoundViewer extends AbstractViewer {
         
         ActionListener addConcListener = new addConcActionListener();
         addConcButton.addActionListener(addConcListener);
-        JLabel labelSentense = new JLabel("Sentence: ");
         tfSentFrom = new JTextField("1");
         tfSentFrom.setPreferredSize(new Dimension(50, 20));
-   
-        JLabel labelPosition = new JLabel("Second: ");
+        
         tfSentTo = new JTextField("0");
         tfSentTo.setPreferredSize(new Dimension(50, 20));
-        panelConcordances.add(addConcButton);
-        panelConcordances.add(labelSentense);
         panelConcordances.add(tfSentFrom);
-        panelConcordances.add(labelPosition);
+        panelConcordances.add(addConcButton);
         panelConcordances.add(tfSentTo);
     }
             

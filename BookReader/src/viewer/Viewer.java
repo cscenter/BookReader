@@ -39,8 +39,8 @@ public class Viewer{
         frame = new JFrame("SuperBook");
         this.model = model;
         frameRate = model.getAudioModel().getAudioFormat().getFrameRate();         
-        rusPanel = new TextViewer(model.getRusModel().getText(),this);
-        engPanel = new TextViewer(model.getEngModel().getText(),this);
+        rusPanel = new TextViewer(model.getRusModel(),this);
+        engPanel = new TextViewer(model.getEngModel(),this);
         audioPanel = new SoundViewer(model.getAudioModel(),this);
         currPos = new JLabel("Current position:");
         addToolBar();

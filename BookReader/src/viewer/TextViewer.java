@@ -27,8 +27,9 @@ public class TextViewer  extends AbstractViewer {
     private JTextField tfSentTo;
     private int sentenseConc = 0;
 
-    public TextViewer(String text, Viewer viewer){
+    public TextViewer(TextModel textModel, Viewer viewer){
         super(viewer);
+        this.textModel = textModel;
         marker = null;
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.text = new JTextArea();
@@ -41,7 +42,7 @@ public class TextViewer  extends AbstractViewer {
         scroll.setPreferredSize(new Dimension(300, 250));
 
         this.add(scroll);
-        this.text.setText(text);
+        this.text.setText(textModel.getText());
         
         JPanel panelConcordances = new JPanel();
         initPanelConcordances(panelConcordances);
@@ -64,17 +65,13 @@ public class TextViewer  extends AbstractViewer {
         
         ActionListener addConcListener = new TextViewer.addConcActionListener();
         addConcButton.addActionListener(addConcListener);
-        JLabel labelSentense = new JLabel("SentFrom: ");
         tfSentFrom = new JTextField("1");
         tfSentFrom.setPreferredSize(new Dimension(50, 20));
-   
-        JLabel labelPosition = new JLabel("SentTo: ");
         tfSentTo = new JTextField("0");
         tfSentTo.setPreferredSize(new Dimension(50, 20));
         panelConcordances.add(addConcButton);
-        panelConcordances.add(labelSentense);
         panelConcordances.add(tfSentFrom);
-        panelConcordances.add(labelPosition);
+        panelConcordances.add(addConcButton);
         panelConcordances.add(tfSentTo);
     }
     
