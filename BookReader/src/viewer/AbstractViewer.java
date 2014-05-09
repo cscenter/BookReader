@@ -1,5 +1,7 @@
 package viewer;
 
+import java.awt.Dimension;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
@@ -27,5 +29,5 @@ public abstract class AbstractViewer extends JPanel {
     }
 
     public abstract void update(int position);
-
+    
 }

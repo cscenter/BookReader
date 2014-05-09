@@ -7,6 +7,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.net.URL;
 
 public class SoundViewer extends AbstractViewer {
     private SoundModel audioModel;
@@ -25,11 +27,12 @@ public class SoundViewer extends AbstractViewer {
     private PlayAudio play;
     private final SoundViewer THIS = this;
     private int sentenseConc = 0;
-    private JTextField tfSentense;
-    private JTextField tfPosition;
-    public void writeAmplitude(){
+    private JTextField tfSentFrom;
+    private JTextField tfSentTo;
+  
+    public void writeAmplitude(GridBagConstraints c){
         line = new SoundLine(audioModel);
-        this.add(line, BorderLayout.CENTER);
+        this.add(line, c);
     }
 
     public SoundViewer(SoundModel model, Viewer viewer) throws InterruptedException {
@@ -53,14 +56,18 @@ public class SoundViewer extends AbstractViewer {
         c.anchor = GridBagConstraints.NORTH;  
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridwidth  = GridBagConstraints.REMAINDER;  
+        c.gridx = GridBagConstraints.RELATIVE; 
         c.gridy = GridBagConstraints.RELATIVE; 
         c.insets = new Insets(0, 0, 0, 0);
         c.weightx = 0.5;
         c.weighty = GridBagConstraints.RELATIVE;
         this.add(panelButtons, c);
-        c.anchor = GridBagConstraints.CENTER; 
-        c.insets = new Insets(40, 0, 0, 0);
-        c.weighty = 0.2;
+      //  c.anchor = GridBagConstraints.NORTH; 
+        c.fill = GridBagConstraints.BOTH;
+        c.gridheight = 20;
+     //   c.insets = new Insets(40, 0, 0, 0);
+        c.weightx = 0.5;
+        c.weighty = 0.3;
         this.add(line,c);
         c.weighty = 0;
         this.add(slider, c);
@@ -69,10 +76,22 @@ public class SoundViewer extends AbstractViewer {
     }
 
     private void initButtons(JPanel panelButtons) {
-        playButton = new JButton("Play");
-        stopButton = new JButton("Stop");
-        plusButton = new JButton("+");
-        minusButton = new JButton("-");
+        playButton = new JButton();
+        stopButton = new JButton();
+        plusButton = new JButton();
+        minusButton = new JButton();
+        
+        String pathIcon = "resource/";
+        ImageIcon iconPlay = new ImageIcon(pathIcon + "Play16.gif");
+        ImageIcon iconStop = new ImageIcon(pathIcon + "Pause16.gif");
+        ImageIcon iconPlus = new ImageIcon(pathIcon + "ZoomIn16.gif");
+        ImageIcon iconMinus = new ImageIcon(pathIcon + "ZoomOut16.gif");
+        
+        playButton.setIcon(iconPlay);
+        stopButton.setIcon(iconStop);
+        plusButton.setIcon(iconPlus);
+        minusButton.setIcon(iconMinus);
+        
         addListenersToButtons();
         addButtonsToJPanel(panelButtons);
     }
@@ -93,21 +112,24 @@ public class SoundViewer extends AbstractViewer {
     }
     
     private void initPanelConcordances(JPanel panelConcordances){
-        addConcButton = new JButton("Add concordance");
-        ActionListener addPointListener = new addConcActionListener();
-        addConcButton.addActionListener(addPointListener);
+        addConcButton = new JButton();
+        ImageIcon icon = new ImageIcon("resource/concTxtAudio.gif");
+        addConcButton.setIcon(icon);
+        
+        ActionListener addConcListener = new addConcActionListener();
+        addConcButton.addActionListener(addConcListener);
         JLabel labelSentense = new JLabel("Sentence: ");
-        tfSentense = new JTextField("1");
-        tfSentense.setPreferredSize(new Dimension(64, 24));
+        tfSentFrom = new JTextField("1");
+        tfSentFrom.setPreferredSize(new Dimension(50, 20));
    
         JLabel labelPosition = new JLabel("Second: ");
-        tfPosition = new JTextField("0");
-        tfPosition.setPreferredSize(new Dimension(64, 24));
+        tfSentTo = new JTextField("0");
+        tfSentTo.setPreferredSize(new Dimension(50, 20));
         panelConcordances.add(addConcButton);
         panelConcordances.add(labelSentense);
-        panelConcordances.add(tfSentense);
+        panelConcordances.add(tfSentFrom);
         panelConcordances.add(labelPosition);
-        panelConcordances.add(tfPosition);
+        panelConcordances.add(tfSentTo);
     }
             
     private void addListenersToButtons() {
@@ -131,10 +153,20 @@ public class SoundViewer extends AbstractViewer {
         slider.setValue(position);
         slider.setExtent(10);
         int sec = (int)((float)(position)/frameRate);
-        tfPosition.setText(""+ sec);
+        tfSentTo.setText(""+ sec);
         audioModel.setCurrentSecond(sec);
         line.setEnd(position + WIDTH * line.getScale());
         line.repaint();
+    }
+
+    private ImageIcon createIcon(String path) {
+        URL imgURL = this.getClass().getResource(path);     
+        if (imgURL != null) {
+            return new ImageIcon(imgURL);
+        } else {
+            System.err.println("File not found " + path);
+            return null;
+        }
     }
 
     public class nextActionListener implements ActionListener {
@@ -235,12 +267,12 @@ public class SoundViewer extends AbstractViewer {
     public class addConcActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            int sent = new Integer(tfSentense.getText());
-            int pos = new Integer(tfPosition.getText());
+            int sent = new Integer(tfSentFrom.getText());
+            int pos = new Integer(tfSentTo.getText());
             audioModel.getConcordance().set(sent, pos);
             System.out.println("Add " + sent + ":" + pos);
             sentenseConc = sent+1;
-            tfSentense.setText(""+sentenseConc);
+            tfSentFrom.setText(""+sentenseConc);
         }
     }
 

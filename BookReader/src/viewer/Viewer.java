@@ -36,7 +36,7 @@ public class Viewer{
 
     public Viewer(final Model model, final String nameOfXMLFile) throws InterruptedException {
         this.nameOfXMLFile = nameOfXMLFile;
-        frame = new JFrame("BookReader");
+        frame = new JFrame("SuperBook");
         this.model = model;
         frameRate = model.getAudioModel().getAudioFormat().getFrameRate();         
         rusPanel = new TextViewer(model.getRusModel().getText(),this);
@@ -45,7 +45,8 @@ public class Viewer{
         currPos = new JLabel("Current position:");
         addToolBar();
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,rusPanel,engPanel);
-        splitPane.setDividerLocation(300);
+        splitPane.setDividerLocation(0.5);
+        splitPane.setResizeWeight(0.5);
         JSplitPane verticalSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,splitPane,audioPanel);
         verticalSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,verticalSplitPane,currPos);
         frame.getContentPane().add(verticalSplitPane);
@@ -64,7 +65,7 @@ public class Viewer{
                 if (option == JOptionPane.YES_OPTION) {
                     try {
                         XMLReader xml = new XMLReader();
-                        xml.write(nameOfXMLFile, model);
+                        xml.write("conc1.xml", model);
                     } catch (ReaderException ex) {
                         ex.showError();
                     }
@@ -198,11 +199,12 @@ public class Viewer{
             model.getRusModel().setCurrentSentence(currentSentence);
             model.getEngModel().setSentenceFromText(model.getRusModel());
         }
-        System.out.println(" ru: "+model.getRusModel().getCurrentSentence());
-        System.out.println(" eng: "+model.getEngModel().getCurrentSentence());
-        System.out.println(" audio: "+model.getAudioModel().getCurrentPosition());
+                
         engPanel.update(model.getEngModel().getSentencePosition(model.getEngModel().getCurrentSentence()));
         rusPanel.update(model.getRusModel().getSentencePosition(model.getRusModel().getCurrentSentence()));
-        currPos.setText("Current position: sent = " + currentSentence + " sec = " + currentSec);
+        currPos.setText("Current position:" + 
+                        " rus = " + currentSentence + 
+                        ", eng = " + model.getEngModel().getCurrentSentence() + 
+                        ", sec = " + currentSec);
     }
 }

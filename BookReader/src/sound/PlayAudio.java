@@ -8,56 +8,56 @@ import javax.sound.sampled.DataLine;
 import java.io.File;
 
 public class PlayAudio {
-    private SoundModel audio;
-    private Clip line = null;
+    private SoundModel audioModel;
+    private Clip clip = null;
     private int start = 0;
     private int end = 0;
     private boolean run = true;
-    private SoundLine line1;
+    private SoundLine soundLine;
     private SoundViewer soundViewer;
     
-    public PlayAudio(SoundModel model, SoundLine l, SoundViewer sv) throws InterruptedException {
-        audio = model;
-        line1 = l;
-        soundViewer = sv;        
+    public PlayAudio(SoundModel audioModel, SoundLine soundLine, SoundViewer soundViewer) throws InterruptedException {
+        this.audioModel = audioModel;
+        this.soundLine = soundLine;
+        this.soundViewer = soundViewer;        
     }
 
     public void playClip() throws InterruptedException {
         try {
-            AudioFileFormat audioFileFormat = audio.getAudioFileFormat();
+            AudioFileFormat audioFileFormat = audioModel.getAudioFileFormat();
             AudioFormat audioFormat = audioFileFormat.getFormat();
-            File fileIn = new File(audio.getFileName());
+            File fileIn = new File(audioModel.getFileName());
             AudioInputStream stream = AudioSystem.getAudioInputStream(fileIn);
             DataLine.Info info = new DataLine.Info(Clip.class, audioFormat);
             
             
             if (AudioSystem.isLineSupported(info)) {
-                line = (Clip)AudioSystem.getLine(info);
-                line.open(stream);
-                line.setFramePosition(start);
-                System.out.println("MicrosecondPosition  " + line.getMicrosecondPosition());
-                System.out.println("FramePosition  " + line.getFramePosition());
-                System.out.println("FrameLength  " + line.getFrameLength());
+                clip = (Clip)AudioSystem.getLine(info);
+                clip.open(stream);
+                clip.setFramePosition(start);
+                System.out.println("MicrosecondPosition  " + clip.getMicrosecondPosition());
+                System.out.println("FramePosition  " + clip.getFramePosition());
+                System.out.println("FrameLength  " + clip.getFrameLength());
                 
-                line.start();
+                clip.start();
 
                 // Why do I do it?
-                while (!line.isRunning()) {
+                while (!clip.isRunning()) {
                     Thread.sleep(10);
                 }
-                while (line.isRunning()) {
+                while (clip.isRunning()) {
                     Thread.sleep(10);
-                    line1.setStart(line.getFramePosition());
-                    line1.setEnd(line.getFramePosition() + 1600);
-                    soundViewer.update(line.getFramePosition());
-//                    line1.repaint();
+                    soundLine.setStart(clip.getFramePosition());
+                    soundLine.setEnd(clip.getFramePosition() + 1600);
+                    soundViewer.update(clip.getFramePosition());
+                    //soundLine.repaint();
                 }
-                line.close();
+                clip.close();
             }
         } catch (Exception e) {
             System.out.println("AudioReaderExeption!!!");
         }
-        line.close();
+        clip.close();
     }
 
     public void setStart(int value) {

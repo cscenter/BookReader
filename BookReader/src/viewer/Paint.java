@@ -57,7 +57,6 @@ public class Paint extends JPanel{
             if (endPaint > eMaxArr.size())
                 endPaint = eMaxArr.size();
             for (int i = start; i < endPaint - 2*scale; i += scale) {
-
                 double y1 = 0;
                 double y2 = 0;
                 for (int j = i; j < i + scale; j++) {
