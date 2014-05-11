@@ -19,7 +19,7 @@ public class SoundLine extends JPanel{
     public SoundLine(SoundModel model){
         audioModel = model;
         shortAmplitudeArr = model.getShortAmplitude();
-        super.setBackground(new Color(212,193,115));
+        super.setBackground(Colors.backEqualizerColor);
         setStart(model.getStart());
         setEnd(model.getEnd());
     }
@@ -28,7 +28,7 @@ public class SoundLine extends JPanel{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         g2d = (Graphics2D) g;
-        g2d.setColor(new Color(35,144,49));
+        g2d.setColor(Colors.lineColor);
         g2d.drawLine(0, 100, 10000, 100); // Draw the axis Y
         if (paintVert) {
             g2d.setStroke(new BasicStroke(4,
