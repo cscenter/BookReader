@@ -79,7 +79,7 @@ public class Request {
             int responseCode = con.getResponseCode();
 
             //System.out.println("\nSending 'GET' request to URL : " + url);
-            if(responseCode != SUCCESS) throw new Exception("Response Code : " + responseCode);
+            if (responseCode != SUCCESS) throw new Exception("Response Code : " + responseCode);
 
             //System.out.println("Response Code : " + responseCode);
 
@@ -94,7 +94,7 @@ public class Request {
             in.close();
 
             return jsonObj.get("text").toString();
-        }catch (Exception e){
+        } catch (Exception e){
             throw new ReaderException(e);
         }
     }

@@ -19,6 +19,7 @@ public class SoundLine extends JPanel{
     public SoundLine(SoundModel model){
         audioModel = model;
         shortAmplitudeArr = model.getShortAmplitude();
+        super.setBackground(new Color(212,193,115));
         setStart(model.getStart());
         setEnd(model.getEnd());
     }
@@ -27,7 +28,7 @@ public class SoundLine extends JPanel{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         g2d = (Graphics2D) g;
-        g2d.setColor(Color.RED);
+        g2d.setColor(new Color(35,144,49));
         g2d.drawLine(0, 100, 10000, 100); // Draw the axis Y
         if (paintVert) {
             g2d.setStroke(new BasicStroke(4,
@@ -35,6 +36,7 @@ public class SoundLine extends JPanel{
             g2d.drawLine(vertX, -200, vertX, 200);
             paintVert = false;
         }
+        g2d.setColor(Colors.markerColor);
         int x = 10;
         for (int i = start; i < end - 100; i += 100) {
             g2d.setStroke(new BasicStroke(2,
@@ -47,7 +49,7 @@ public class SoundLine extends JPanel{
         }
         g2d.setStroke(new BasicStroke(1,
                 BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
-        g2d.setColor(Color.BLUE);
+        g2d.setColor(Colors.backEqualizerColor);
         addSpectogram(g2d);
     }
 
@@ -58,7 +60,7 @@ public class SoundLine extends JPanel{
             end = shortAmplitudeArr.length - 2 * scale;
         for (int i = start; i < end; i += scale){
             int countPause = 0;            
-            g2d.setColor(Color.BLUE);
+            g2d.setColor(Colors.equalizerColor); 
             int y1 = 0;
             int y2 = 0;
             for (int j = i; j < i + scale; j++) {

@@ -12,7 +12,7 @@ import model.*;
 
 /**
  * Created with IntelliJ IDEA.
- * User: Р В РІР‚С”Р В РЎвЂ�Р В Р’В·Р В Р’В°
+ * User: Р В Р’В Р вЂ™Р’В Р В Р вЂ Р В РІР‚С™Р РЋРІР‚СњР В Р’В Р вЂ™Р’В Р В Р Р‹Р Р†Р вЂљРїС—Р…Р В Р’В Р вЂ™Р’В Р В РІР‚в„ўР вЂ™Р’В·Р В Р’В Р вЂ™Р’В Р В РІР‚в„ўР вЂ™Р’В°
  * Date: 26.10.13
  * Time: 16:16
  * To change this template use File | Settings | File Templates.
@@ -23,8 +23,8 @@ public class TextViewer  extends AbstractViewer {
     private JButton addConcButton;
     private Object marker;
     private TextModel textModel;    
-    private JTextField tfSentFrom;
-    private JTextField tfSentTo;
+    private JTextField tfSentOwn;
+    private JTextField tfSentConc;
     private int sentenseConc = 0;
 
     public TextViewer(TextModel textModel, Viewer viewer){
@@ -43,8 +43,8 @@ public class TextViewer  extends AbstractViewer {
 
         this.add(scroll);
         this.text.setText(textModel.getText());
-        
         JPanel panelConcordances = new JPanel();
+        panelConcordances.setBackground(Colors.concColor);
         initPanelConcordances(panelConcordances);
         this.add(panelConcordances);
 
@@ -65,26 +65,35 @@ public class TextViewer  extends AbstractViewer {
         
         ActionListener addConcListener = new TextViewer.addConcActionListener();
         addConcButton.addActionListener(addConcListener);
-        tfSentFrom = new JTextField("1");
-        tfSentFrom.setPreferredSize(new Dimension(50, 20));
-        tfSentTo = new JTextField("0");
-        tfSentTo.setPreferredSize(new Dimension(50, 20));
+        tfSentOwn = new JTextField("0");
+        tfSentOwn.setPreferredSize(new Dimension(50, 20));
+        tfSentConc = new JTextField("0");
+        tfSentConc.setPreferredSize(new Dimension(50, 20));
         panelConcordances.add(addConcButton);
-        panelConcordances.add(tfSentFrom);
-        panelConcordances.add(addConcButton);
-        panelConcordances.add(tfSentTo);
+        
+        if (textModel.getLanguage().getName() == "ru"){
+            panelConcordances.add(tfSentOwn);
+            panelConcordances.add(addConcButton);
+            panelConcordances.add(tfSentConc);
+        } else {
+            panelConcordances.add(tfSentConc);
+            panelConcordances.add(addConcButton);
+            panelConcordances.add(tfSentOwn);
+        }
     }
     
     public class addConcActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            int sent = new Integer(tfSentFrom.getText());
-            int pos = new Integer(tfSentTo.getText());
-            textModel.getConcordance().set(sent, pos);
-            System.out.println("Add " + sent + ":" + pos);
-            sentenseConc = sent+1;
-            tfSentFrom.setText(""+sentenseConc);
+            int senttenseOwn = new Integer(tfSentOwn.getText());
+            sentenseConc = new Integer(tfSentConc.getText());
+            textModel.getConcordance().set(sentenseConc, senttenseOwn);
+            System.out.println("Add " + sentenseConc + ":" + senttenseOwn);
         }
+    }
+    
+    public void setSentenseConc(int sentenseConc){
+        this.sentenseConc = sentenseConc;
     }
 
     @Override
@@ -95,19 +104,20 @@ public class TextViewer  extends AbstractViewer {
  //           scroll.getVerticalScrollBar().setValue(line);
             if (marker == null)
                 marker = text.getHighlighter().addHighlight(position, position+10,
-                        new DefaultHighlighter.DefaultHighlightPainter(Color.RED));
+                        new DefaultHighlighter.DefaultHighlightPainter(Colors.markerColor));
             else {
                 text.getHighlighter().changeHighlight(marker,position, position+10);  
             }
             int y = line*50000/text.getLineCount();
             int line_ = position/30;
             int y1 = line_*scroll.getHeight()/16;
-            int numSignsInLine = 40;
+            int numSignsInLine = 40;                    
             int heightLine = scroll.getHeight()/16;
             int y2 = position/numSignsInLine * heightLine;
             int y3 = line * text.getRows()*16/text.getLineCount();
             text.scrollRectToVisible(new Rectangle(0,(y+y1+y2)/3, 1, 10));
     //      System.out.println(text.getVisibleRect());
-        }catch (BadLocationException exc){};
+            tfSentOwn.setText("" + textModel.getCurrentSentence()); 
+       } catch (BadLocationException exc){};
     }
 }

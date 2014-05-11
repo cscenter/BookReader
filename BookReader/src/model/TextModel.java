@@ -54,15 +54,15 @@ public class TextModel extends AbstractModel{
 
     public String getSubstring(int position){
         int begin, end;
-        if(position > this.getSentences().length) return null;
-        if(position >= Search.DEVIATION){
+        if (position > this.getSentences().length) return null;
+        if (position >= Search.DEVIATION){
             begin = getSentences()[position - Search.DEVIATION];
-            if(position < getSentences().length)
+            if (position < getSentences().length)
                 end =  getSentences()[position+1];
             else end =  getSentences()[position];
-        }else{
+        } else {
             begin = 0;
-            if(getSentences().length > Search.DEVIATION + 1)
+            if (getSentences().length > Search.DEVIATION + 1)
                 end =  getSentences()[Search.DEVIATION + 1];
             else end = getSentences()[getSentences().length -1];
         }
@@ -70,19 +70,39 @@ public class TextModel extends AbstractModel{
     }
     
     public void setSentenceFromText(TextModel anotherModel){
-       this.currentSentence = anotherModel.getControlPoint(anotherModel.getCurrentSentence()).getValueSentence()+
-                              anotherModel.getCurrentSentence()-
-                              anotherModel.getControlPoint(anotherModel.getCurrentSentence()).getKeySentence();
+        if (this.useConc) {
+            this.currentSentence = getConcordance().get(anotherModel.getCurrentSentence());
+            return;
+        }
+        this.currentSentence = anotherModel.getControlPoint(anotherModel.getCurrentSentence()).getValueSentence()+
+                                anotherModel.getCurrentSentence()-
+                                anotherModel.getControlPoint(anotherModel.getCurrentSentence()).getKeySentence();
         String translate = null;
         try {
             translate = new Request(anotherModel.getLanguage().getName(),
                         this.getLanguage().getName(),
                         anotherModel.getSubstring(anotherModel.getCurrentSentence())).sendGet();
         } catch (ReaderException e) {
-            System.out.println(e.getMessage());
+           // System.out.println(e.getMessage());
+            this.currentSentence = getConcordance().get(anotherModel.getCurrentSentence());
         }
 
         this.currentSentence = search(translate, this);
+    }
+    
+    public void countConcordance(TextModel anotherModel){
+        String translate = null;
+        try {
+            for (int sent=0; sent<anotherModel.getSentences().length; sent++){
+                translate = new Request(anotherModel.getLanguage().getName(),
+                        this.getLanguage().getName(),
+                        anotherModel.getSubstring(sent)).sendGet();
+                concordance.set(sent, search(translate, this));
+            }
+        } catch (ReaderException e) {
+            e.showError();
+        }
+        
     }
     
     public Point getControlPoint(int sentence){

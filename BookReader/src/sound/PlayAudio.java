@@ -1,6 +1,5 @@
 package sound;
 import model.SoundModel;
-import viewer.Paint;
 import viewer.SoundLine;
 import viewer.SoundViewer;
 import javax.sound.sampled.*;

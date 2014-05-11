@@ -1,11 +1,14 @@
 package viewer;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Menu;
 import java.awt.MenuBar;
 import java.awt.MenuItem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.KeyEvent;
@@ -15,6 +18,7 @@ import java.util.logging.Logger;
 import model.*;
 import javax.swing.*;
 import javax.swing.KeyStroke;
+import javax.swing.border.BevelBorder;
 import reader.*;
 
 /**
@@ -31,11 +35,11 @@ public class Viewer{
     private SoundViewer audioPanel;
     private JLabel currPos;
     private Model model;
-    private String nameOfXMLFile;
+    private String nameOfXMLFile="conc1.xml";
     private float frameRate=1;
 
     public Viewer(final Model model, final String nameOfXMLFile) throws InterruptedException {
-        this.nameOfXMLFile = nameOfXMLFile;
+       // this.nameOfXMLFile = nameOfXMLFile;
         frame = new JFrame("SuperBook");
         this.model = model;
         frameRate = model.getAudioModel().getAudioFormat().getFrameRate();         
@@ -46,12 +50,12 @@ public class Viewer{
         addToolBar();
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,rusPanel,engPanel);
         splitPane.setDividerLocation(0.5);
-        splitPane.setResizeWeight(0.5);
+        splitPane.setResizeWeight(0.5);  
         JSplitPane verticalSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,splitPane,audioPanel);
         verticalSplitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,verticalSplitPane,currPos);
         frame.getContentPane().add(verticalSplitPane);
         frame.pack();
-
+        
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
     
@@ -65,7 +69,7 @@ public class Viewer{
                 if (option == JOptionPane.YES_OPTION) {
                     try {
                         XMLReader xml = new XMLReader();
-                        xml.write("conc1.xml", model);
+                        xml.write(nameOfXMLFile, model);
                     } catch (ReaderException ex) {
                         ex.showError();
                     }
@@ -81,7 +85,6 @@ public class Viewer{
     private void addToolBar(){
         Font font = new Font("Verdana", Font.PLAIN, 11); 
         JMenuBar menuBar = new JMenuBar();
-         
         JMenu fileMenu = new JMenu("File");
         fileMenu.setFont(font);
         fileMenu.setMnemonic(KeyEvent.VK_F);
@@ -169,42 +172,68 @@ public class Viewer{
         });
 
         menuBar.add(fileMenu);
+        
+        JMenu optionMenu = new JMenu("Options");
+        optionMenu.setFont(font);
+        JCheckBox checkConnect = new JCheckBox("Without connection", model.getEngModel().getUseConc());
+        checkConnect.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+                model.getEngModel().setUseConc(!model.getEngModel().getUseConc());
+                model.getRusModel().setUseConc(!model.getRusModel().getUseConc());
+            }
+        });
+        checkConnect.setFont(font);       
+        optionMenu.add(checkConnect);
+        JButton countItem = new JButton("Count all concordances");
+        countItem.setFont(font);    
+        countItem .addActionListener(new ActionListener() {          
+            
+            public void actionPerformed(ActionEvent e) {
+                model.getEngModel().countConcordance(model.getRusModel());
+                model.getRusModel().countConcordance(model.getEngModel());
+            }           
+        });
+        optionMenu.add(countItem);
+        menuBar.add(optionMenu);
         frame.setJMenuBar(menuBar);
     }
     
 
     public void update (AbstractViewer viewer){
-        int currentSentence = 0 ;
+        int rusCurrentSentence = 0 ;
+        int engCurrentSentence = 0 ;
         int currentSec = 0 ;
         if (viewer == rusPanel) {
-            currentSentence = model.getRusModel().findSentence(viewer.position);
-            model.getRusModel().setCurrentSentence(currentSentence);
-            model.getAudioModel().setCurrentSentence(currentSentence);
+            rusCurrentSentence = model.getRusModel().findSentence(viewer.position);
+            model.getRusModel().setCurrentSentence(rusCurrentSentence);
+            model.getAudioModel().setCurrentSentence(rusCurrentSentence);
             model.getEngModel().setSentenceFromText(model.getRusModel());
-            currentSec = model.getAudioModel().getConcordance().get(currentSentence);
-            audioPanel.update((int)(currentSec*frameRate));
+            currentSec = model.getAudioModel().getConcordance().get(rusCurrentSentence);
+            engCurrentSentence =  model.getEngModel().getCurrentSentence();
         } else if (viewer == engPanel){
-            currentSentence = model.getEngModel().findSentence(viewer.position);
-            model.getEngModel().setCurrentSentence(currentSentence);
+            engCurrentSentence = model.getEngModel().findSentence(viewer.position);
+            model.getEngModel().setCurrentSentence(engCurrentSentence);
             model.getRusModel().setSentenceFromText(model.getEngModel());
-            currentSentence = model.getRusModel().getCurrentSentence();
-            currentSec = model.getAudioModel().getConcordance().get(currentSentence);
-            model.getAudioModel().setCurrentSentence(currentSentence);
-            audioPanel.update((int)(currentSec*frameRate));
+            rusCurrentSentence = model.getRusModel().getCurrentSentence();
+            currentSec = model.getAudioModel().getConcordance().get(rusCurrentSentence);
+            model.getAudioModel().setCurrentSentence(rusCurrentSentence);
         } else if (viewer == audioPanel){
             currentSec = (int)(viewer.position/frameRate);
             System.out.println("viewer.position " + viewer.position);
             System.out.println("lenAmpl " + model.getAudioModel().getShortAmplitude().length);
-            currentSentence = model.getAudioModel().getConcordance().getSentence(currentSec);
-            model.getRusModel().setCurrentSentence(currentSentence);
+            rusCurrentSentence = model.getAudioModel().getConcordance().getSentence(currentSec);
+            model.getRusModel().setCurrentSentence(rusCurrentSentence);
             model.getEngModel().setSentenceFromText(model.getRusModel());
+            engCurrentSentence =  model.getEngModel().getCurrentSentence();
         }
-                
-        engPanel.update(model.getEngModel().getSentencePosition(model.getEngModel().getCurrentSentence()));
-        rusPanel.update(model.getRusModel().getSentencePosition(model.getRusModel().getCurrentSentence()));
+        audioPanel.update((int)(currentSec*frameRate));
+        engPanel.update(model.getEngModel().getSentencePosition(engCurrentSentence));
+        rusPanel.update(model.getRusModel().getSentencePosition(rusCurrentSentence));
+      //  rusPanel.setSentenseConc(engCurrentSentence);
+      //  engPanel.setSentenseConc(rusCurrentSentence);
         currPos.setText("Current position:" + 
-                        " rus = " + currentSentence + 
-                        ", eng = " + model.getEngModel().getCurrentSentence() + 
+                        " rus = " + rusCurrentSentence + 
+                        ", eng = " + engCurrentSentence + 
                         ", sec = " + currentSec);
     }
 }

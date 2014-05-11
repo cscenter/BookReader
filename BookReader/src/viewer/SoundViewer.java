@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.net.URL;
+import sun.awt.HorizBagLayout;
 
 public class SoundViewer extends AbstractViewer {
     private SoundModel audioModel;
@@ -44,8 +45,10 @@ public class SoundViewer extends AbstractViewer {
         this.setLayout(new BorderLayout());
         this.setPreferredSize(new Dimension(200, 250));
         JPanel panelButtons = new JPanel();
-        JPanel panelConcordances = new JPanel();
-
+        JPanel panelConcordances = new JPanel();        
+        JPanel panelLine = new JPanel();
+        panelLine.setLayout(new GridLayout(1,1));
+        panelLine.add(line);
         initButtons(panelButtons);
         initSlider();
         initPanelConcordances(panelConcordances);
@@ -68,10 +71,10 @@ public class SoundViewer extends AbstractViewer {
      //   c.insets = new Insets(40, 0, 0, 0);
         c.weightx = 0.5;
         c.weighty = 0.3;
-        this.add(line,c);
+        this.add(panelLine,c);
         c.weighty = 0;
         this.add(slider, c);
-        this.add(panelConcordances);
+        this.add(panelConcordances, c);
         frameRate = audioModel.getAudioFormat().getFrameRate();
     }
 
@@ -104,14 +107,15 @@ public class SoundViewer extends AbstractViewer {
     }
     
 
-    private void addButtonsToJPanel(JPanel buttons) {
-        buttons.add(playButton);
-        buttons.add(stopButton);
-        buttons.add(plusButton);
-        buttons.add(minusButton);
+    private void addButtonsToJPanel(JPanel panelButtons) {
+        panelButtons.add(playButton);
+        panelButtons.add(stopButton);
+        panelButtons.add(plusButton);
+        panelButtons.add(minusButton);
     }
     
     private void initPanelConcordances(JPanel panelConcordances){
+        panelConcordances.setBackground(Colors.concColor);
         addConcButton = new JButton();
         ImageIcon icon = new ImageIcon("resource/concTxtAudio.gif");
         addConcButton.setIcon(icon);
@@ -149,20 +153,10 @@ public class SoundViewer extends AbstractViewer {
         slider.setValue(position);
         slider.setExtent(10);
         int sec = (int)((float)(position)/frameRate);
-        tfSentTo.setText(""+ sec);
+        tfSentTo.setText("" + sec);
         audioModel.setCurrentSecond(sec);
         line.setEnd(position + WIDTH * line.getScale());
         line.repaint();
-    }
-
-    private ImageIcon createIcon(String path) {
-        URL imgURL = this.getClass().getResource(path);     
-        if (imgURL != null) {
-            return new ImageIcon(imgURL);
-        } else {
-            System.err.println("File not found " + path);
-            return null;
-        }
     }
 
     public class nextActionListener implements ActionListener {

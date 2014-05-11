@@ -17,7 +17,8 @@ public class AbstractModel {
     protected Integer[] pauses;
     protected Integer[] sentences;
     @XmlElement
-    private Concordance concordance;
+    protected Concordance concordance;
+    protected Boolean useConc = false;
     
     public Concordance getConcordance(){
         return concordance;
@@ -26,7 +27,14 @@ public class AbstractModel {
     public void setConcordance(Concordance concordance){
         this.concordance = concordance;
     }
-
+    
+    public Boolean getUseConc(){
+        return useConc;
+    }
+    
+    public void setUseConc(Boolean useConc){
+        this.useConc = useConc;
+    }
     
     public int getCurrentSentence() {
         return currentSentence;

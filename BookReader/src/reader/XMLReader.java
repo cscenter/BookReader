@@ -8,7 +8,7 @@ import javax.xml.bind.Unmarshaller;
 
 public class XMLReader {
     
-    public Model read(String fileName) throws ReaderException{
+    public Model read (String fileName) throws ReaderException{
         try {
             File file = new File(fileName);
             JAXBContext jaxbContext = JAXBContext.newInstance(Model.class);
@@ -23,7 +23,7 @@ public class XMLReader {
 	  }
     }
     
-    public void write(String fileName, Model model) throws ReaderException{
+    public void write (String fileName, Model model) throws ReaderException{
         try {
             File file = new File(fileName);
             System.out.println(file.getAbsolutePath());

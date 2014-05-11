@@ -58,8 +58,13 @@ public class Main {
         TextReader engReader = new TextReader();
         TextModel engModel = engReader.read(nameOfEngText, new English());
         
-        rusReader.setControlPoints(engModel);
-        engReader.setControlPoints(rusModel);
+        try {
+            rusReader.setControlPoints(engModel);
+            engReader.setControlPoints(rusModel);
+        } catch (ReaderException e){
+            rusModel.setUseConc(true);
+            engModel.setUseConc(true);
+        }
 
         XMLReader xmlReader = new XMLReader();
         Model m = xmlReader.read(nameOfXMLFile);
