@@ -13,13 +13,6 @@ import java.net.URLEncoder;
 import org.json.simple.JSONObject;
 
 
-/**
- * Created with IntelliJ IDEA.
- * User: Р вЂєР С‘Р В·Р В°
- * Date: 29.11.13
- * Time: 17:33
- * To change this template use File | Settings | File Templates.
- */
 public class Request {
     private static final Integer SUCCESS = 200;
     private static final String USER_AGENT = "Mozilla/5.0";

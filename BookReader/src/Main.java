@@ -71,7 +71,7 @@ public class Main {
         audioModel.setConcordance(m.getAudioModel().getConcordance());
                    
         Model model = new Model(audioModel, rusModel, engModel);
-        Viewer myViewer = new Viewer(model, nameOfXMLFile);      
+        Viewer myViewer = new Viewer(model);      
     }
     
     private static void printHelpInformation() {

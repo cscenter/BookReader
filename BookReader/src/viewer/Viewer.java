@@ -38,7 +38,7 @@ public class Viewer{
     private String nameOfXMLFile="conc1.xml";
     private float frameRate=1;
 
-    public Viewer(final Model model, final String nameOfXMLFile) throws InterruptedException {
+    public Viewer(final Model model) throws InterruptedException {
        // this.nameOfXMLFile = nameOfXMLFile;
         frame = new JFrame("SuperBook");
         this.model = model;

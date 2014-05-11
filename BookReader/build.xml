@@ -12,7 +12,7 @@
         </javac>
     </target>
 
-    <target name="jar">
+    <target name="jar" depends="compile">
         <mkdir dir="build/jar"/>
         <jar destfile="build/jar/BookReader.jar" basedir="build/classes">
             <manifest>
@@ -21,6 +21,10 @@
             </manifest>
         </jar>
     </target>
+	
+	<target name="run" depends="jar">
+		<java jar="build/jar/BookReader.jar" fork="true"/>
+	</target>
     
     <target name="jarSound">
         <mkdir dir="build/jar"/>
@@ -43,7 +47,7 @@
     </target>
 
     <target name="runSoundTest">
-        <java jar="build/jar/SoundTest.jar" fork="true"/>
+        <java jar="build/jar/SoundTest.jar" />
     </target>
 
 </project>

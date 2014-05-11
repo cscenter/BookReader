@@ -1,16 +1,9 @@
 package translate;
 
 import model.TextModel;
-
 import java.util.HashMap;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Р вЂєР С‘Р В·Р В°
- * Date: 30.11.13
- * Time: 14:32
- * To change this template use File | Settings | File Templates.
- */
+
 public class Search {
     public static final int DEVIATION = 5;
     public static final int RANGE = 50;
