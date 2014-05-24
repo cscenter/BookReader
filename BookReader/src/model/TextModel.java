@@ -22,7 +22,9 @@ public class TextModel extends AbstractModel{
     
     public TextModel(){}
     
-    public TextModel(String fileName){
+    public TextModel(String fileName){        
+        controlPoints = new ArrayList<Point>();
+        controlPoints.add(new Point(0,0));
         this.fileName = fileName;
         setConcordance(new Concordance());
     }
@@ -71,7 +73,8 @@ public class TextModel extends AbstractModel{
     
     public void setSentenceFromText(TextModel anotherModel){
         if (this.useConc) {
-            this.currentSentence = getConcordance().get(anotherModel.getCurrentSentence());
+         //   this.currentSentence = getConcordance().get(anotherModel.getCurrentSentence());
+            this.currentSentence = anotherModel.getConcordance().get(anotherModel.getCurrentSentence());
             return;
         }
         this.currentSentence = anotherModel.getControlPoint(anotherModel.getCurrentSentence()).getValueSentence()+
@@ -83,7 +86,7 @@ public class TextModel extends AbstractModel{
                         this.getLanguage().getName(),
                         anotherModel.getSubstring(anotherModel.getCurrentSentence())).sendGet();
         } catch (ReaderException e) {
-           // System.out.println(e.getMessage());
+            e.showError();
             this.currentSentence = getConcordance().get(anotherModel.getCurrentSentence());
         }
 

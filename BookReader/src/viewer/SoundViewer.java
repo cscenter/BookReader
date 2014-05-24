@@ -19,9 +19,9 @@ public class SoundViewer extends AbstractViewer {
     private JButton minusButton;
     private JButton addConcButton;
     private final int SPEED_CHANGE_SCALE = 20;
-    private final int WIDTH = 1800;
+    private final int WIDTH = 1000000;//1800;
     private float frameRate;
-    private int speedChangeY = 2000;
+    private int speedChangeY = 1000;
     private SoundLine line;
     private Thread thread = new Thread();
     private JSlider slider;

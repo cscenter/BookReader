@@ -1,10 +1,6 @@
 package viewer;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Menu;
-import java.awt.MenuBar;
-import java.awt.MenuItem;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
@@ -198,7 +194,7 @@ public class Viewer{
         frame.setJMenuBar(menuBar);
     }
     
-
+    
     public void update (AbstractViewer viewer){
         int rusCurrentSentence = 0 ;
         int engCurrentSentence = 0 ;
@@ -207,12 +203,14 @@ public class Viewer{
             rusCurrentSentence = model.getRusModel().findSentence(viewer.position);
             model.getRusModel().setCurrentSentence(rusCurrentSentence);
             model.getAudioModel().setCurrentSentence(rusCurrentSentence);
+            model.getEngModel().setUseConc(model.getRusModel().getUseConc());
             model.getEngModel().setSentenceFromText(model.getRusModel());
             currentSec = model.getAudioModel().getConcordance().get(rusCurrentSentence);
             engCurrentSentence =  model.getEngModel().getCurrentSentence();
         } else if (viewer == engPanel){
             engCurrentSentence = model.getEngModel().findSentence(viewer.position);
             model.getEngModel().setCurrentSentence(engCurrentSentence);
+            model.getRusModel().setUseConc(model.getEngModel().getUseConc());
             model.getRusModel().setSentenceFromText(model.getEngModel());
             rusCurrentSentence = model.getRusModel().getCurrentSentence();
             currentSec = model.getAudioModel().getConcordance().get(rusCurrentSentence);

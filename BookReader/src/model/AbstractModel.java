@@ -74,7 +74,8 @@ public class AbstractModel {
         int j;
         while(r-l>1){
             j = (r+l)/2;
-            if(sentences[j]>=position) r = j;
+            if (sentences[j] >= position) 
+                r = j;
             else  l = j;
         }
         return l;

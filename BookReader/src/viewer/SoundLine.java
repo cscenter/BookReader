@@ -36,15 +36,16 @@ public class SoundLine extends JPanel{
             g2d.drawLine(vertX, -200, vertX, 200);
             paintVert = false;
         }
-        g2d.setColor(Colors.markerColor);
         int x = 10;
-        for (int i = start; i < end - 100; i += 100) {
+        int shift = 180;
+        for (int i = start; i < end - 100; i += shift) {
+            g2d.setColor(Colors.markerColor);
             g2d.setStroke(new BasicStroke(2,
                     BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
             g2d.drawLine(x, -200, x, 200);
-            Integer integer = i;
-            g2d.drawString(integer.toString(), x, 2 * OFFSET_Y);
-            x += 100;
+            g2d.setColor(Colors.equalizerColor);
+            g2d.drawString(""+(i/audioModel.getAudioFormat().getFrameRate()), x, 2 * OFFSET_Y);
+            x += shift;
 
         }
         g2d.setStroke(new BasicStroke(1,

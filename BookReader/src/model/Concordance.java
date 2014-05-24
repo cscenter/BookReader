@@ -86,9 +86,11 @@ public class Concordance {
             if (get_(j) >= sec) r = j;
             else {
                 l = j;
-                currentSent = get_(j);
             }
         }
+        currentSent = l;
+        if (get(l+1) - sec < (sec - get(l))/3)
+            currentSent++;
         return currentSent;
     }    
 }

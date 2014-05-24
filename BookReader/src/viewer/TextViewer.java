@@ -10,17 +10,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import model.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Р В Р’В Р вЂ™Р’В Р В Р вЂ Р В РІР‚С™Р РЋРІР‚СњР В Р’В Р вЂ™Р’В Р В Р Р‹Р Р†Р вЂљРїС—Р…Р В Р’В Р вЂ™Р’В Р В РІР‚в„ўР вЂ™Р’В·Р В Р’В Р вЂ™Р’В Р В РІР‚в„ўР вЂ™Р’В°
- * Date: 26.10.13
- * Time: 16:16
- * To change this template use File | Settings | File Templates.
- */
+
 public class TextViewer  extends AbstractViewer {
     private JTextArea text;
     private JScrollPane scroll;
     private JButton addConcButton;
+    private JButton findConcButton;
+    private JButton translateButton;
     private Object marker;
     private TextModel textModel;    
     private JTextField tfSentOwn;
@@ -59,36 +55,63 @@ public class TextViewer  extends AbstractViewer {
     }
     
     private void initPanelConcordances(JPanel panelConcordances){
-        addConcButton = new JButton();
-        ImageIcon icon = new ImageIcon("resource/concTxtTxt.gif");
-        addConcButton.setIcon(icon);
+        addConcButton = new JButton(new ImageIcon("resource/concTxtTxt.gif"));
+        findConcButton = new JButton(new ImageIcon("resource/Find16.gif"));
+        translateButton = new JButton(new ImageIcon("resource/Search16.gif"));     
         
-        ActionListener addConcListener = new TextViewer.addConcActionListener();
-        addConcButton.addActionListener(addConcListener);
+        findConcButton.setMargin(new Insets(0, 0, 0, 0));
+        translateButton.setMargin(new Insets(0, 0, 0, 0)); 
+        Dimension sizeQuButton = new Dimension(18,18);        
+        findConcButton.setSize(sizeQuButton);
+        translateButton.setSize(sizeQuButton);
+                
+        addConcButton.addActionListener(new TextViewer.addConcActionListener());
+        findConcButton.addActionListener(new TextViewer.findConcActionListener());
+        translateButton.addActionListener(new TextViewer.translateActionListener());
+        
         tfSentOwn = new JTextField("0");
         tfSentOwn.setPreferredSize(new Dimension(50, 20));
         tfSentConc = new JTextField("0");
         tfSentConc.setPreferredSize(new Dimension(50, 20));
+        panelConcordances.add(findConcButton);
+        panelConcordances.add(translateButton);
+        panelConcordances.add(tfSentOwn);
         panelConcordances.add(addConcButton);
+        panelConcordances.add(tfSentConc);
         
-        if (textModel.getLanguage().getName() == "ru"){
-            panelConcordances.add(tfSentOwn);
-            panelConcordances.add(addConcButton);
-            panelConcordances.add(tfSentConc);
-        } else {
-            panelConcordances.add(tfSentConc);
-            panelConcordances.add(addConcButton);
-            panelConcordances.add(tfSentOwn);
+    }
+    
+    public class translateActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e){
+            int sentenseOwn = new Integer(tfSentOwn.getText());
+            System.out.println("&? " + sentenseOwn + ":" + sentenseConc + " " + textModel.getLanguage().getName());
+            position = textModel.getSentencePosition(sentenseOwn) + 5; 
+            textModel.setUseConc(Boolean.FALSE);
+            parent.update(TextViewer.this);
+            textModel.setUseConc(Boolean.TRUE);
         }
     }
     
+    public class findConcActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int sentenseOwn = new Integer(tfSentOwn.getText());
+            sentenseConc = textModel.getConcordance().get(sentenseOwn);
+            tfSentConc.setText("" + sentenseConc);
+            System.out.println("? " + sentenseOwn + ":" + sentenseConc + " " + textModel.getLanguage().getName());
+            position = textModel.getSentencePosition(sentenseOwn) + 5; 
+            parent.update(TextViewer.this);
+        }
+    }
+        
     public class addConcActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            int senttenseOwn = new Integer(tfSentOwn.getText());
+            int sentenseOwn = new Integer(tfSentOwn.getText());
             sentenseConc = new Integer(tfSentConc.getText());
-            textModel.getConcordance().set(sentenseConc, senttenseOwn);
-            System.out.println("Add " + sentenseConc + ":" + senttenseOwn);
+            textModel.getConcordance().set(sentenseOwn, sentenseConc);
+            System.out.println("Add " + sentenseOwn + ":" + sentenseConc + " " + textModel.getLanguage().getName());
         }
     }
     
@@ -101,7 +124,8 @@ public class TextViewer  extends AbstractViewer {
         try {
             int line =  text.getLineOfOffset(position);
             System.out.println("position: "+ position+ " caretpos: "+ text.getCaretPosition() +" line num: "+line);
- //           scroll.getVerticalScrollBar().setValue(line);
+         //   text.setCaretPosition(position+1);
+            //           scroll.getVerticalScrollBar().setValue(line);
             if (marker == null)
                 marker = text.getHighlighter().addHighlight(position, position+10,
                         new DefaultHighlighter.DefaultHighlightPainter(Colors.markerColor));
@@ -115,7 +139,8 @@ public class TextViewer  extends AbstractViewer {
             int heightLine = scroll.getHeight()/16;
             int y2 = position/numSignsInLine * heightLine;
             int y3 = line * text.getRows()*16/text.getLineCount();
-            text.scrollRectToVisible(new Rectangle(0,(y+y1+y2)/3, 1, 10));
+          
+    //        text.scrollRectToVisible(new Rectangle(0,(y+y1+y2)/3, 1, 10));
     //      System.out.println(text.getVisibleRect());
             tfSentOwn.setText("" + textModel.getCurrentSentence()); 
        } catch (BadLocationException exc){};
