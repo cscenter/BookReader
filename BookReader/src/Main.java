@@ -15,13 +15,13 @@ import sound.*;
 public class Main {
     
     private static String nameOfAudioFile = "resource/2.wav";
-    private static String nameOfRusText = "resource/test1.txt";
-    private static String nameOfEngText = "resource/test2.txt";
+    private static String nameOfRusText = "resource/ru.txt";
+    private static String nameOfEngText = "resource/en.txt";
     private static String nameOfXMLFile = "resource/Concordance.xml";
     
-    private static String defNameOfAudioFile = "../../resource/Rey.wav";
-    private static String defNameOfRusText = "../../resource/ReyBredbery.txt";
-    private static String defNameOfEngText = "../../resource/test2.txt";
+    private static String defNameOfAudioFile = "../../resource/2.wav";
+    private static String defNameOfRusText = "../../resource/ru.txt";
+    private static String defNameOfEngText = "../../resource/en.txt";
     private static String defNameOfXMLFile = "../../resource/Concordance.xml";
 
     private static void parseArgs(String[] args) throws ReaderException, InterruptedException {
@@ -62,13 +62,13 @@ public class Main {
             rusReader.setControlPoints(engModel);
             engReader.setControlPoints(rusModel);
         } catch (ReaderException e){
-            rusModel.setUseConc(true);
-            engModel.setUseConc(true);
         }
 
         XMLReader xmlReader = new XMLReader();
         Model m = xmlReader.read(nameOfXMLFile);
         audioModel.setConcordance(m.getAudioModel().getConcordance());
+        rusModel.setConcordance(m.getRusModel().getConcordance());
+        engModel.setConcordance(m.getEngModel().getConcordance());
                    
         Model model = new Model(audioModel, rusModel, engModel);
         Viewer myViewer = new Viewer(model);      

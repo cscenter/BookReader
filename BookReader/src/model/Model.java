@@ -7,7 +7,8 @@ import javax.xml.bind.annotation.*;
 public class Model {
     private TextModel rusModel;
     private TextModel engModel;
-    private SoundModel audioModel;
+    private SoundModel audioModel;    
+    private Boolean useConc = true;
 
     public Model(){}
     
@@ -15,6 +16,15 @@ public class Model {
         this.rusModel = rusModel;
         this.engModel = engModel;
         this.audioModel = audioModel;
+    }
+    
+    
+    public Boolean getUseConc(){
+        return useConc;
+    }
+    
+    public void setUseConc(Boolean useConc){
+        this.useConc = useConc;
     }
 
     public TextModel getRusModel(){

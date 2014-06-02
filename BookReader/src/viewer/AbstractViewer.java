@@ -6,7 +6,7 @@ import javax.swing.*;
 
 /**
  * Created with IntelliJ IDEA.
- * User: Лиза
+ * User: Р вЂєР С‘Р В·Р В°
  * Date: 08.11.13
  * Time: 17:48
  * To change this template use File | Settings | File Templates.
@@ -27,7 +27,11 @@ public abstract class AbstractViewer extends JPanel {
     public void setPosition(int position) {
         this.position = position;
     }
-
+     
+    public Viewer getViewer(){
+        return parent;
+    }
+    
     public abstract void update(int position);
     
 }

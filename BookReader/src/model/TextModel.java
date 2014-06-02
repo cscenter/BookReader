@@ -18,6 +18,7 @@ public class TextModel extends AbstractModel{
     private String fileName;
     private String text;
     private Language language;
+    private int anotherCurrentSentence=0;
     private ArrayList <Point> controlPoints;
     
     public TextModel(){}
@@ -50,8 +51,17 @@ public class TextModel extends AbstractModel{
     public void setControlPoints(ArrayList<Point> controlPoints) {
         this.controlPoints = controlPoints;
     }
+    
     public String getText() {
         return text;
+    }
+    
+    public void setAnotherCurrentSentence(int otherSent){
+        anotherCurrentSentence = otherSent;
+    }
+    
+    public int getAnotherCurrentSentence(){
+        return anotherCurrentSentence;
     }
 
     public String getSubstring(int position){
@@ -71,8 +81,8 @@ public class TextModel extends AbstractModel{
         return getText().substring(begin, end);
     }
     
-    public void setSentenceFromText(TextModel anotherModel){
-        if (this.useConc) {
+    public void setSentenceFromText(TextModel anotherModel, boolean useConc){
+        if (useConc) {
          //   this.currentSentence = getConcordance().get(anotherModel.getCurrentSentence());
             this.currentSentence = anotherModel.getConcordance().get(anotherModel.getCurrentSentence());
             return;
@@ -93,17 +103,12 @@ public class TextModel extends AbstractModel{
         this.currentSentence = search(translate, this);
     }
     
-    public void countConcordance(TextModel anotherModel){
-        String translate = null;
-        try {
-            for (int sent=0; sent<anotherModel.getSentences().length; sent++){
-                translate = new Request(anotherModel.getLanguage().getName(),
-                        this.getLanguage().getName(),
-                        anotherModel.getSubstring(sent)).sendGet();
-                concordance.set(sent, search(translate, this));
-            }
-        } catch (ReaderException e) {
-            e.showError();
+    public void countConcordance(TextModel anotherModel, boolean useConc){
+        for (int sent=0; sent<anotherModel.getSentences().length; sent++){
+            this.setCurrentSentence(sent);
+            anotherModel.setSentenceFromText(this, useConc);
+            int sentTranslate =  anotherModel.getCurrentSentence();
+            this.getConcordance().set(sent, sentTranslate);
         }
         
     }

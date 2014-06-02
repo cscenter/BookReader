@@ -21,7 +21,8 @@ public class TextViewer  extends AbstractViewer {
     private TextModel textModel;    
     private JTextField tfSentOwn;
     private JTextField tfSentConc;
-    private int sentenseConc = 0;
+    private int sentenseConc=0;    
+    private boolean scrollUpdate=false;
 
     public TextViewer(TextModel textModel, Viewer viewer){
         super(viewer);
@@ -47,6 +48,8 @@ public class TextViewer  extends AbstractViewer {
         this.text.addCaretListener(new CaretListener() {
             @Override
             public void caretUpdate(CaretEvent e) {
+                if (scrollUpdate)
+                    return;
                 JTextArea editArea = (JTextArea) e.getSource();
                 position = editArea.getCaretPosition();
                 parent.update(TextViewer.this);
@@ -87,9 +90,9 @@ public class TextViewer  extends AbstractViewer {
             int sentenseOwn = new Integer(tfSentOwn.getText());
             System.out.println("&? " + sentenseOwn + ":" + sentenseConc + " " + textModel.getLanguage().getName());
             position = textModel.getSentencePosition(sentenseOwn) + 5; 
-            textModel.setUseConc(Boolean.FALSE);
+            parent.getModel().setUseConc(Boolean.FALSE);
             parent.update(TextViewer.this);
-            textModel.setUseConc(Boolean.TRUE);
+            parent.getModel().setUseConc(Boolean.TRUE);
         }
     }
     
@@ -124,24 +127,24 @@ public class TextViewer  extends AbstractViewer {
         try {
             int line =  text.getLineOfOffset(position);
             System.out.println("position: "+ position+ " caretpos: "+ text.getCaretPosition() +" line num: "+line);
-         //   text.setCaretPosition(position+1);
-            //           scroll.getVerticalScrollBar().setValue(line);
+            int sent = textModel.getCurrentSentence();
+            int positionShift = textModel.getSentences()[sent+1];
+            System.out.println("positionShift: "+positionShift);
+            if (position > 0)
+                position += 2;
+//            marker = text.getHighlighter().addHighlight(position, positionShift,
+//                        new DefaultHighlighter.DefaultHighlightPainter(Colors.getSentColor(sent)));
             if (marker == null)
-                marker = text.getHighlighter().addHighlight(position, position+10,
-                        new DefaultHighlighter.DefaultHighlightPainter(Colors.markerColor));
+                marker = text.getHighlighter().addHighlight(position, positionShift,
+                        new DefaultHighlighter.DefaultHighlightPainter(Colors.markerColorLight));
             else {
-                text.getHighlighter().changeHighlight(marker,position, position+10);  
-            }
-            int y = line*50000/text.getLineCount();
-            int line_ = position/30;
-            int y1 = line_*scroll.getHeight()/16;
-            int numSignsInLine = 40;                    
-            int heightLine = scroll.getHeight()/16;
-            int y2 = position/numSignsInLine * heightLine;
-            int y3 = line * text.getRows()*16/text.getLineCount();
-          
-    //        text.scrollRectToVisible(new Rectangle(0,(y+y1+y2)/3, 1, 10));
-    //      System.out.println(text.getVisibleRect());
+                text.getHighlighter().changeHighlight(marker,position, positionShift);  
+            }            
+            scrollUpdate = true;
+         //   text.setCaretPosition(Math.min(positionShift+20, text.getTabSize()-1));  
+            text.setCaretPosition(positionShift+20);
+            scrollUpdate = false;
+            tfSentConc.setText("" + textModel.getAnotherCurrentSentence()); 
             tfSentOwn.setText("" + textModel.getCurrentSentence()); 
        } catch (BadLocationException exc){};
     }

@@ -123,13 +123,15 @@ public class Viewer{
             public void actionPerformed(ActionEvent e) {
                 JFileChooser dialog = new JFileChooser();
                 dialog.showOpenDialog(frame);
-                File file =dialog.getSelectedFile();
+                File file = dialog.getSelectedFile();
                 String nameOfXMLFile = file.getPath();
                 XMLReader xmlReader;
                 try {
                     xmlReader = new XMLReader();
                     Model m = xmlReader.read(nameOfXMLFile);
                     model.getAudioModel().setConcordance(m.getAudioModel().getConcordance());
+                    model.getRusModel().setConcordance(m.getRusModel().getConcordance());
+                    model.getEngModel().setConcordance(m.getEngModel().getConcordance());
                 } catch (ReaderException ex) {
                     ex.showError();
                 }
@@ -171,11 +173,10 @@ public class Viewer{
         
         JMenu optionMenu = new JMenu("Options");
         optionMenu.setFont(font);
-        JCheckBox checkConnect = new JCheckBox("Without connection", model.getEngModel().getUseConc());
+        JCheckBox checkConnect = new JCheckBox("Without connection", model.getUseConc());
         checkConnect.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
-                model.getEngModel().setUseConc(!model.getEngModel().getUseConc());
-                model.getRusModel().setUseConc(!model.getRusModel().getUseConc());
+                model.setUseConc(!model.getUseConc());
             }
         });
         checkConnect.setFont(font);       
@@ -185,8 +186,8 @@ public class Viewer{
         countItem .addActionListener(new ActionListener() {          
             
             public void actionPerformed(ActionEvent e) {
-                model.getEngModel().countConcordance(model.getRusModel());
-                model.getRusModel().countConcordance(model.getEngModel());
+                model.getEngModel().countConcordance(model.getRusModel(), model.getUseConc());
+                model.getRusModel().countConcordance(model.getEngModel(), model.getUseConc());
             }           
         });
         optionMenu.add(countItem);
@@ -203,35 +204,41 @@ public class Viewer{
             rusCurrentSentence = model.getRusModel().findSentence(viewer.position);
             model.getRusModel().setCurrentSentence(rusCurrentSentence);
             model.getAudioModel().setCurrentSentence(rusCurrentSentence);
-            model.getEngModel().setUseConc(model.getRusModel().getUseConc());
-            model.getEngModel().setSentenceFromText(model.getRusModel());
+            model.getEngModel().setSentenceFromText(model.getRusModel(),model.getUseConc());
             currentSec = model.getAudioModel().getConcordance().get(rusCurrentSentence);
             engCurrentSentence =  model.getEngModel().getCurrentSentence();
+            audioPanel.update((int)(currentSec*frameRate));
+       
         } else if (viewer == engPanel){
             engCurrentSentence = model.getEngModel().findSentence(viewer.position);
             model.getEngModel().setCurrentSentence(engCurrentSentence);
-            model.getRusModel().setUseConc(model.getEngModel().getUseConc());
-            model.getRusModel().setSentenceFromText(model.getEngModel());
+            model.getRusModel().setSentenceFromText(model.getEngModel(),model.getUseConc());
             rusCurrentSentence = model.getRusModel().getCurrentSentence();
             currentSec = model.getAudioModel().getConcordance().get(rusCurrentSentence);
             model.getAudioModel().setCurrentSentence(rusCurrentSentence);
+            audioPanel.update((int)(currentSec*frameRate));
+       
         } else if (viewer == audioPanel){
             currentSec = (int)(viewer.position/frameRate);
             System.out.println("viewer.position " + viewer.position);
             System.out.println("lenAmpl " + model.getAudioModel().getShortAmplitude().length);
             rusCurrentSentence = model.getAudioModel().getConcordance().getSentence(currentSec);
+            System.out.println("rusCurrentSentence " + rusCurrentSentence);
             model.getRusModel().setCurrentSentence(rusCurrentSentence);
-            model.getEngModel().setSentenceFromText(model.getRusModel());
+            model.getEngModel().setSentenceFromText(model.getRusModel(), model.getUseConc());
             engCurrentSentence =  model.getEngModel().getCurrentSentence();
         }
-        audioPanel.update((int)(currentSec*frameRate));
+        model.getEngModel().setAnotherCurrentSentence(rusCurrentSentence);
+        model.getRusModel().setAnotherCurrentSentence(engCurrentSentence);
         engPanel.update(model.getEngModel().getSentencePosition(engCurrentSentence));
         rusPanel.update(model.getRusModel().getSentencePosition(rusCurrentSentence));
-      //  rusPanel.setSentenseConc(engCurrentSentence);
-      //  engPanel.setSentenseConc(rusCurrentSentence);
         currPos.setText("Current position:" + 
                         " rus = " + rusCurrentSentence + 
                         ", eng = " + engCurrentSentence + 
                         ", sec = " + currentSec);
+    }
+    
+    public Model getModel(){
+        return model;
     }
 }

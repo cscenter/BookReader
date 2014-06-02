@@ -89,8 +89,6 @@ public class Concordance {
             }
         }
         currentSent = l;
-        if (get(l+1) - sec < (sec - get(l))/3)
-            currentSent++;
         return currentSent;
     }    
 }

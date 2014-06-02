@@ -49,7 +49,8 @@ public class PlayAudio {
                     soundLine.setStart(clip.getFramePosition());
                     soundLine.setEnd(clip.getFramePosition() + 1600);
                     soundViewer.update(clip.getFramePosition());
-                    //soundLine.repaint();
+                    soundViewer.getViewer().update(soundViewer);
+                    soundLine.repaint();
                 }
                 clip.close();
             }

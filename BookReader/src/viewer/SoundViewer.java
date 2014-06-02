@@ -204,8 +204,9 @@ public class SoundViewer extends AbstractViewer {
             JSlider source = (JSlider)e.getSource();
             line.setStart(source.getValue());
             line.setEnd(source.getValue() + WIDTH);
-            line.repaint();
-
+            line.repaint();                        
+            position = source.getValue();
+ //           parent.update(SoundViewer.this);
         }
     }
 
@@ -265,7 +266,7 @@ public class SoundViewer extends AbstractViewer {
             tfSentFrom.setText(""+sentenseConc);
         }
     }
-
+    
 }
 
 
