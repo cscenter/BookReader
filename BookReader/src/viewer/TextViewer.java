@@ -121,6 +121,10 @@ public class TextViewer  extends AbstractViewer {
     public void setSentenseConc(int sentenseConc){
         this.sentenseConc = sentenseConc;
     }
+    
+    public void  setModel(TextModel textModel){
+        this.textModel = textModel;
+    }
 
     @Override
     public void update(int position) {

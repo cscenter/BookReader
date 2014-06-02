@@ -91,11 +91,30 @@ public class Viewer{
          
         JMenuItem textFileItem = new JMenuItem("Text file");
         textFileItem.setFont(font);
-        newMenu.add(textFileItem);
+      //  newMenu.add(textFileItem);
+        textFileItem.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser dialog = new JFileChooser();
+                dialog.showOpenDialog(frame);
+                File file = dialog.getSelectedFile();
+                String nameOfText = file.getPath();
+                try {
+                    TextReader textReader = new TextReader();
+                    TextModel rusModel = textReader.read(nameOfText, new Russian());
+                    model.setRusModel(rusModel);
+                    rusPanel.setModel(rusModel);
+                    rusPanel.repaint();
+                } catch (ReaderException ex) {
+                    ex.showError();
+                }
+            }
+        });    
          
         JMenuItem audioFileItem = new JMenuItem("Audio file");
         audioFileItem.setFont(font);
-        newMenu.add(audioFileItem);
+      //  newMenu.add(audioFileItem);
         audioFileItem.addActionListener(new ActionListener() {
 
             @Override
