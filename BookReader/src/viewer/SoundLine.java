@@ -40,7 +40,7 @@ public class SoundLine extends JPanel{
             g2d.setStroke(new BasicStroke(4,
                     BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
             g2d.drawLine(vertX, -200, vertX, 200);            
-            g2d.drawString(""+((vertX+start)/frameRate), vertX, 2 * OFFSET_Y);
+            g2d.drawString(""+((vertX*scale+start)/frameRate), vertX, 2 * OFFSET_Y);
             paintVert = false;
             g2d.setStroke(new BasicStroke(2,
                     BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
@@ -81,11 +81,17 @@ public class SoundLine extends JPanel{
         for (int i = start; i < end; i += scale){
             if (sent+1 < conc.size() && conc.get(sent+1).getValueSentence()*frameRate < i){
                 sent++;
+                g2d.setColor(Colors.getSentColor(sent));
                 int shift = 2;
-                g2d.setColor(Colors.lineColor);
+              //  g2d.setColor(Colors.concColor);
+                g2d.setStroke(new BasicStroke(4,
+                    BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
                 g2d.drawString(""+sent, distance+shift, OFFSET_Y/2);
                 g2d.drawLine(distance, -200, distance, 200);
                 g2d.drawString(""+(i/frameRate), distance+shift, 2 * OFFSET_Y);
+                g2d.setStroke(new BasicStroke(1,
+                    BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
+    
             }
 //            g2d.setStroke(new BasicStroke(2,
 //                BasicStroke.CAP_ROUND, BasicStroke.JOIN_BEVEL));
@@ -109,6 +115,9 @@ public class SoundLine extends JPanel{
             g2d.setColor(Colors.getSentColor(sent));
             g2d.drawLine(distance+shiftX, ((int) (y1 * SCALE_Y) + OFFSET_Y+shiftY),
                     distance + 1+shiftX, ((int) (y2 * SCALE_Y) + OFFSET_Y+shiftY));
+            g2d.setColor(Colors.equalizerColor);
+            g2d.drawLine(distance+2*shiftX, ((int) (y1 * SCALE_Y) + OFFSET_Y+2*shiftY),
+                    distance + 1+2*shiftX, ((int) (y2 * SCALE_Y) + OFFSET_Y+2*shiftY));
             
             distance += 1;
         }
@@ -134,6 +143,10 @@ public class SoundLine extends JPanel{
 
     public int getStart(){
         return start;
+    }
+    
+    public int getEnd(){
+        return end;
     }
 
     public void setStart(int value){

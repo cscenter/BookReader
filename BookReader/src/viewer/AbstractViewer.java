@@ -4,13 +4,6 @@ import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: Р вЂєР С‘Р В·Р В°
- * Date: 08.11.13
- * Time: 17:48
- * To change this template use File | Settings | File Templates.
- */
 public abstract class AbstractViewer extends JPanel {
     protected int position;
     protected Viewer parent;

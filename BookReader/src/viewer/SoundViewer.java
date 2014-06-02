@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import sun.awt.HorizBagLayout;
 
 public class SoundViewer extends AbstractViewer {
@@ -20,7 +21,7 @@ public class SoundViewer extends AbstractViewer {
     private JButton addConcButton;
     private final int SPEED_CHANGE_SCALE = 20;
     private final int WIDTH = 1000000;//1800;
-    private float frameRate;
+    private double frameRate;
     private int speedChangeY = 1000;
     private SoundLine line;
     private Thread thread = new Thread();
@@ -184,10 +185,11 @@ public class SoundViewer extends AbstractViewer {
     public class mouseAdapter extends MouseAdapter {
         public void mouseClicked(MouseEvent e) {
             line.setVertX(getMousePosition().x);
+            position = line.getStart() + getMousePosition().x*line.getScale();
+            tfSentTo.setText("" + (int)(position/frameRate));
             line.repaint();
-            position = line.getStart() + getMousePosition().x;
             parent.update(SoundViewer.this);
-        }
+        }        
     }
 
     public class plusActionListener implements ActionListener {
@@ -264,6 +266,7 @@ public class SoundViewer extends AbstractViewer {
             System.out.println("Add " + sent + ":" + pos);
             sentenseConc = sent+1;
             tfSentFrom.setText(""+sentenseConc);
+            line.repaint();
         }
     }
     
