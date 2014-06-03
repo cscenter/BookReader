@@ -104,13 +104,12 @@ public class TextModel extends AbstractModel{
     }
     
     public void countConcordance(TextModel anotherModel, boolean useConc){
-        for (int sent=0; sent<anotherModel.getSentences().length; sent++){
+        for (int sent=0; sent+1<getSentences().length; sent++){
             this.setCurrentSentence(sent);
-            anotherModel.setSentenceFromText(this, useConc);
+            anotherModel.setSentenceFromText(this, false);
             int sentTranslate =  anotherModel.getCurrentSentence();
             this.getConcordance().set(sent, sentTranslate);
         }
-        
     }
     
     public Point getControlPoint(int sentence){
